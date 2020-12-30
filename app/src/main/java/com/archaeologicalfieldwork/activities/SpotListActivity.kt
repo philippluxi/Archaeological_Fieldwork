@@ -3,6 +3,7 @@ package com.archaeologicalfieldwork.activities
 import android.os.Bundle
 import android.os.PersistableBundle
 import android.view.LayoutInflater
+import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
@@ -24,9 +25,17 @@ class SpotListActivity : AppCompatActivity() {
         setContentView(R.layout.activity_spot_list)
         app = application as MainApp
 
+        toolbar.title = title
+        setSupportActionBar(toolbar)
+
         val layoutManager = LinearLayoutManager(this)
         recyclerView.layoutManager = layoutManager
         recyclerView.adapter = SpotAdapter(app.spots)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.menu_main, menu)
+        return super.onCreateOptionsMenu(menu)
     }
 }
 
