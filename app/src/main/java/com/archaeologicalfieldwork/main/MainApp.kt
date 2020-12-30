@@ -12,5 +12,8 @@ class MainApp : Application(), AnkoLogger {
     override fun onCreate() {
         super.onCreate()
         info("Archaelogical Fieldwork started")
+        spots.add(SpotModel("One", "About one..."))
+        spots.add(SpotModel("Two", "About two..."))
+        spots.add(SpotModel("Three", "About three..."))
     }
 }
