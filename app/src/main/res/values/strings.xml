@@ -1,3 +1,9 @@
 <resources>
-  <string name="app_name">Archaeological Fieldwork</string>
+    <!--General-->
+    <string name="app_name">Archaeological Fieldwork</string>
+
+    <!--Spot Activity-->
+    <string name="button_addSpot">Add Spot</string>
+    <string name="hint_SpotTitle">Spot Title</string>
+
 </resources>
