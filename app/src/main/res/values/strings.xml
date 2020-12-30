@@ -2,6 +2,10 @@
     <!--General-->
     <string name="app_name">Archaeological Fieldwork</string>
 
+    <!-- Toolbar-->
+    <string name="menu_addSpot">Add</string>
+    <string name="menu_cancelNewSpot">Cancel</string>
+
     <!--Spot Activity-->
     <string name="button_addSpot">Add Spot</string>
     <string name="hint_SpotTitle">Spot Title</string>
