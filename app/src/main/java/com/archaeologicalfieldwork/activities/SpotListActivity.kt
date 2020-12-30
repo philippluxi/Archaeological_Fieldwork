@@ -28,7 +28,7 @@ class SpotListActivity : AppCompatActivity() {
 
         val layoutManager = LinearLayoutManager(this)
         recyclerView.layoutManager = layoutManager
-        recyclerView.adapter = SpotAdapter(app.spots)
+        recyclerView.adapter = SpotAdapter(app.spots.findAll())
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

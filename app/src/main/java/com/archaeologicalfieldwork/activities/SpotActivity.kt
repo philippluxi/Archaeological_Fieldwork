@@ -27,15 +27,13 @@ class SpotActivity : AppCompatActivity(), AnkoLogger {
         app = application as MainApp
 
         btnAddSpot.setOnClickListener() {
-            spot.title = spotTitle_Card.text.toString()
-            spot.desription = spotDescription_Card.text.toString()
+            spot.title = spotTitle.text.toString()
+            spot.desription = spotDescription.text.toString()
 
             if (spot.title.isNotEmpty()) {
-                app.spots.add(spot.copy())
+                app.spots.create(spot.copy())
                 info("add Button pressed: ${spot}")
-                for (i in app.spots.indices) {
-                    info("Spot [$i]: ${app.spots[i]}")
-                }
+                app.spots.logAll()
                 setResult(AppCompatActivity.RESULT_OK)
                 finish()
             } else {
