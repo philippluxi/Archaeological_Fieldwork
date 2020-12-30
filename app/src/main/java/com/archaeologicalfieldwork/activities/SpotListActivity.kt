@@ -11,10 +11,11 @@ import com.archaeologicalfieldwork.main.MainApp
 import com.archaeologicalfieldwork.models.SpotModel
 import kotlinx.android.synthetic.main.activity_spot_list.*
 import kotlinx.android.synthetic.main.card_spot.view.*
+import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.startActivityForResult
 
 
-class SpotListActivity : AppCompatActivity() {
+class SpotListActivity : AppCompatActivity(), SpotListener {
 
     lateinit var app: MainApp
 
@@ -28,7 +29,7 @@ class SpotListActivity : AppCompatActivity() {
 
         val layoutManager = LinearLayoutManager(this)
         recyclerView.layoutManager = layoutManager
-        recyclerView.adapter = SpotAdapter(app.spots.findAll())
+        recyclerView.adapter = SpotAdapter(app.spots.findAll(), this)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -41,5 +42,9 @@ class SpotListActivity : AppCompatActivity() {
             R.id.item_add -> startActivityForResult<SpotActivity>(0)
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun onSpotClick(spot: SpotModel) {
+        startActivityForResult(intentFor<SpotActivity>(), 0)
     }
 }
