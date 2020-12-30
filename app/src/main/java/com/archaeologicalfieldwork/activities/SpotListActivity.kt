@@ -43,32 +43,3 @@ class SpotListActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 }
-
-class SpotAdapter constructor(private var spots: List<SpotModel>) :
-    RecyclerView.Adapter<SpotAdapter.MainHolder>() {
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainHolder {
-        return MainHolder(
-            LayoutInflater.from(parent?.context).inflate(
-                R.layout.card_spot,
-                parent,
-                false
-            )
-        )
-    }
-
-    override fun onBindViewHolder(holder: MainHolder, position: Int) {
-        val spot = spots[holder.adapterPosition]
-        holder.bind(spot)
-    }
-
-    override fun getItemCount(): Int = spots.size
-
-    class MainHolder constructor(itemView: View) : RecyclerView.ViewHolder(itemView) {
-
-        fun bind(spot: SpotModel) {
-            itemView.spotTitle.text = spot.title
-            itemView.spotDescription.text = spot.desription
-        }
-    }
-}

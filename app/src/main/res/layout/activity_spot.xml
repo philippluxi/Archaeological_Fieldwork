@@ -40,7 +40,7 @@
           android:orientation="vertical">
 
         <EditText
-            android:id="@+id/spotTitle"
+            android:id="@+id/spotTitle_Card"
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:layout_margin="8dp"
@@ -54,7 +54,7 @@
             android:textSize="14sp" />
 
         <EditText
-            android:id="@+id/spotDescription"
+            android:id="@+id/spotDescription_Card"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"

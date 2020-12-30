@@ -27,8 +27,8 @@ class SpotActivity : AppCompatActivity(), AnkoLogger {
         app = application as MainApp
 
         btnAddSpot.setOnClickListener() {
-            spot.title = spotTitle.text.toString()
-            spot.desription = spotDescription.text.toString()
+            spot.title = spotTitle_Card.text.toString()
+            spot.desription = spotDescription_Card.text.toString()
 
             if (spot.title.isNotEmpty()) {
                 app.spots.add(spot.copy())
