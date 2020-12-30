@@ -5,5 +5,5 @@
     <!--Spot Activity-->
     <string name="button_addSpot">Add Spot</string>
     <string name="hint_SpotTitle">Spot Title</string>
-
+    <string name="hint_SpotDescription">Spot Description</string>
 </resources>
