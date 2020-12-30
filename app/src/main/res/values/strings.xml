@@ -4,6 +4,7 @@
 
     <!-- Toolbar-->
     <string name="menu_addSpot">Add</string>
+    <string name="menu_cancelNewSpot">Cancel</string>
 
     <!--Spot Activity-->
     <string name="button_addSpot">Add Spot</string>
