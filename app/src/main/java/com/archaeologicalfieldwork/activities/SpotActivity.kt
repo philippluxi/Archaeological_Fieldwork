@@ -26,6 +26,15 @@ class SpotActivity : AppCompatActivity(), AnkoLogger {
 
         app = application as MainApp
 
+        // Retrieve passed Spot info via Parcelize
+        if (intent.hasExtra("spot_edit")) {
+            info("Detected Intent Extra")
+            spot = intent.extras?.getParcelable<SpotModel>("spot_edit")!!
+            spotTitle.setText(spot.title)
+            spotDescription.setText(spot.desription)
+        }
+
+        // Handle Add Button Press
         btnAddSpot.setOnClickListener() {
             spot.title = spotTitle.text.toString()
             spot.desription = spotDescription.text.toString()

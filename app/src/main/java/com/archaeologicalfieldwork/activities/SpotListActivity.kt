@@ -11,11 +11,13 @@ import com.archaeologicalfieldwork.main.MainApp
 import com.archaeologicalfieldwork.models.SpotModel
 import kotlinx.android.synthetic.main.activity_spot_list.*
 import kotlinx.android.synthetic.main.card_spot.view.*
+import org.jetbrains.anko.AnkoLogger
+import org.jetbrains.anko.info
 import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.startActivityForResult
 
 
-class SpotListActivity : AppCompatActivity(), SpotListener {
+class SpotListActivity : AppCompatActivity(), SpotListener, AnkoLogger {
 
     lateinit var app: MainApp
 
@@ -45,6 +47,6 @@ class SpotListActivity : AppCompatActivity(), SpotListener {
     }
 
     override fun onSpotClick(spot: SpotModel) {
-        startActivityForResult(intentFor<SpotActivity>(), 0)
+        startActivityForResult(intentFor<SpotActivity>().putExtra("spot_edit", spot), 0)
     }
 }
