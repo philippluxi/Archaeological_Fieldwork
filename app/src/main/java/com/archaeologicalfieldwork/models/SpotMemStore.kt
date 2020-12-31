@@ -1,8 +1,8 @@
 package com.archaeologicalfieldwork.models
 
-import org.jetbrains.anko.AnkoLogger
-import org.jetbrains.anko.info
 import java.util.ArrayList
+import org.jetbrains.anko.info
+import org.jetbrains.anko.AnkoLogger
 
 var lastId = 0L
 
@@ -30,7 +30,6 @@ class SpotMemStore : SpotStore, AnkoLogger {
             foundSpot.title = spot.title
             foundSpot.desription = spot.desription
         }
-
     }
 
     fun logAll() {

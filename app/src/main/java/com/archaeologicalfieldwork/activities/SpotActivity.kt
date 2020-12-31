@@ -35,7 +35,7 @@ class SpotActivity : AppCompatActivity(), AnkoLogger {
             spotTitle.setText(spot.title)
             spotDescription.setText(spot.desription)
 
-            btnAddSpot.setText(R.string.save_spot)
+            btnAddSpot.setText(R.string.button_save_spot)
         }
 
         // Handle Add Button Press
