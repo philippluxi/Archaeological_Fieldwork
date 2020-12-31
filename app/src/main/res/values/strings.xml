@@ -1,3 +1,16 @@
 <resources>
-  <string name="app_name">Archaeological Fieldwork</string>
+    <!--General-->
+    <string name="app_name">Archaeological Fieldwork</string>
+
+    <!-- Toolbar-->
+    <string name="menu_addSpot">Add</string>
+    <string name="menu_cancelNewSpot">Cancel</string>
+
+    <!--Spot Activity-->
+    <string name="button_addSpot">Add Spot</string>
+    <string name="button_save_spot">Save Spot</string>
+    <string name="hint_SpotTitle">Spot Title</string>
+    <string name="hint_SpotDescription">Spot Description</string>
+    <string name="enter_spot_title">Please enter a Spot Title</string>
+
 </resources>
