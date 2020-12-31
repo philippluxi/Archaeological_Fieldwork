@@ -9,6 +9,7 @@ import org.jetbrains.anko.info
 import org.jetbrains.anko.toast
 import org.jetbrains.anko.AnkoLogger
 import com.archaeologicalfieldwork.R
+import com.archaeologicalfieldwork.helpers.showImagePicker
 import com.archaeologicalfieldwork.main.MainApp
 import com.archaeologicalfieldwork.models.SpotModel
 
@@ -17,6 +18,8 @@ class SpotActivity : AppCompatActivity(), AnkoLogger {
     var spot = SpotModel()
     lateinit var app: MainApp
     var edit = false
+
+    val IMAGE_REQUEST = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,6 +59,11 @@ class SpotActivity : AppCompatActivity(), AnkoLogger {
                 setResult(AppCompatActivity.RESULT_OK)
                 finish()
             }
+        }
+
+        //Handle Add Image Button Press
+        btnChooseImage.setOnClickListener {
+            showImagePicker(this, IMAGE_REQUEST)
         }
     }
 
