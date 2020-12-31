@@ -1,5 +1,6 @@
 package com.archaeologicalfieldwork.activities
 
+import android.content.Intent
 import android.os.Bundle
 import android.os.PersistableBundle
 import android.view.*
@@ -48,5 +49,10 @@ class SpotListActivity : AppCompatActivity(), SpotListener, AnkoLogger {
 
     override fun onSpotClick(spot: SpotModel) {
         startActivityForResult(intentFor<SpotActivity>().putExtra("spot_edit", spot), 0)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        recyclerView.adapter?.notifyDataSetChanged()
+        super.onActivityResult(requestCode, resultCode, data)
     }
 }

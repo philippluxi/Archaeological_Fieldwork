@@ -10,4 +10,6 @@
     <string name="button_addSpot">Add Spot</string>
     <string name="hint_SpotTitle">Spot Title</string>
     <string name="hint_SpotDescription">Spot Description</string>
+    <string name="enter_spot_title">Please enter a Spot Title</string>
+    <string name="save_spot">Save Spot</string>
 </resources>

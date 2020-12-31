@@ -16,6 +16,7 @@ class SpotActivity : AppCompatActivity(), AnkoLogger {
 
     var spot = SpotModel()
     lateinit var app: MainApp
+    var edit = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,10 +29,13 @@ class SpotActivity : AppCompatActivity(), AnkoLogger {
 
         // Retrieve passed Spot info via Parcelize
         if (intent.hasExtra("spot_edit")) {
-            info("Detected Intent Extra")
+            edit = true
+
             spot = intent.extras?.getParcelable<SpotModel>("spot_edit")!!
             spotTitle.setText(spot.title)
             spotDescription.setText(spot.desription)
+
+            btnAddSpot.setText(R.string.save_spot)
         }
 
         // Handle Add Button Press
@@ -39,14 +43,18 @@ class SpotActivity : AppCompatActivity(), AnkoLogger {
             spot.title = spotTitle.text.toString()
             spot.desription = spotDescription.text.toString()
 
-            if (spot.title.isNotEmpty()) {
-                app.spots.create(spot.copy())
+            if (spot.title.isEmpty()) {
+                toast(R.string.enter_spot_title)
+            } else {
+                if (edit) {
+                    app.spots.update(spot.copy())
+                } else {
+                    app.spots.create(spot.copy())
+                }
                 info("add Button pressed: ${spot}")
                 app.spots.logAll()
                 setResult(AppCompatActivity.RESULT_OK)
                 finish()
-            } else {
-                toast("Please Enter a title")
             }
         }
     }
