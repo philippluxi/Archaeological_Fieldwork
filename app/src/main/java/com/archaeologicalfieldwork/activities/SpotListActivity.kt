@@ -2,20 +2,16 @@ package com.archaeologicalfieldwork.activities
 
 import android.content.Intent
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.view.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import kotlinx.android.synthetic.main.activity_spot_list.*
+import org.jetbrains.anko.AnkoLogger
+import org.jetbrains.anko.intentFor
+import org.jetbrains.anko.startActivityForResult
 import com.archaeologicalfieldwork.R
 import com.archaeologicalfieldwork.main.MainApp
 import com.archaeologicalfieldwork.models.SpotModel
-import kotlinx.android.synthetic.main.activity_spot_list.*
-import kotlinx.android.synthetic.main.card_spot.view.*
-import org.jetbrains.anko.AnkoLogger
-import org.jetbrains.anko.info
-import org.jetbrains.anko.intentFor
-import org.jetbrains.anko.startActivityForResult
 
 
 class SpotListActivity : AppCompatActivity(), SpotListener, AnkoLogger {
@@ -41,7 +37,7 @@ class SpotListActivity : AppCompatActivity(), SpotListener, AnkoLogger {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item?.itemId) {
+        when (item.itemId) {
             R.id.item_add -> startActivityForResult<SpotActivity>(0)
         }
         return super.onOptionsItemSelected(item)

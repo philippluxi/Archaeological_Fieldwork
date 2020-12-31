@@ -1,12 +1,12 @@
 package com.archaeologicalfieldwork.activities
 
-import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.LayoutInflater
 import androidx.recyclerview.widget.RecyclerView
+import kotlinx.android.synthetic.main.card_spot.view.*
 import com.archaeologicalfieldwork.R
 import com.archaeologicalfieldwork.models.SpotModel
-import kotlinx.android.synthetic.main.card_spot.view.*
 
 interface SpotListener {
     fun onSpotClick(spot: SpotModel)
