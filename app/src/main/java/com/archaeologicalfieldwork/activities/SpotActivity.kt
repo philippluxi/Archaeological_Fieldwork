@@ -14,6 +14,7 @@ import com.archaeologicalfieldwork.helpers.readImage
 import com.archaeologicalfieldwork.helpers.readImageFromPath
 import com.archaeologicalfieldwork.helpers.showImagePicker
 import com.archaeologicalfieldwork.main.MainApp
+import com.archaeologicalfieldwork.models.Location
 import com.archaeologicalfieldwork.models.SpotModel
 import org.jetbrains.anko.intentFor
 
@@ -76,7 +77,8 @@ class SpotActivity : AppCompatActivity(), AnkoLogger {
 
         // Handle Set Location Button Press
         btnSetLocation.setOnClickListener {
-            startActivity(intentFor<MapActivity>())
+            val location = Location(48.983307948993094, 12.105706251194382, 16f)
+            startActivity(intentFor<MapActivity>().putExtra("location", location))
         }
     }
 
