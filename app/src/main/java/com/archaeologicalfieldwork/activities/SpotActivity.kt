@@ -8,6 +8,7 @@ import android.view.MenuItem
 import kotlinx.android.synthetic.main.activity_spot.*
 import org.jetbrains.anko.info
 import org.jetbrains.anko.toast
+import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.AnkoLogger
 import com.archaeologicalfieldwork.R
 import com.archaeologicalfieldwork.helpers.readImage
@@ -16,7 +17,6 @@ import com.archaeologicalfieldwork.helpers.showImagePicker
 import com.archaeologicalfieldwork.main.MainApp
 import com.archaeologicalfieldwork.models.Location
 import com.archaeologicalfieldwork.models.SpotModel
-import org.jetbrains.anko.intentFor
 
 class SpotActivity : AppCompatActivity(), AnkoLogger {
 
