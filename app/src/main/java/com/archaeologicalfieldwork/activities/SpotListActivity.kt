@@ -1,8 +1,8 @@
 package com.archaeologicalfieldwork.activities
 
-import android.content.Intent
-import android.os.Bundle
 import android.view.*
+import android.os.Bundle
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_spot_list.*
@@ -10,9 +10,9 @@ import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.startActivityForResult
 import com.archaeologicalfieldwork.R
+import org.jetbrains.anko.startActivity
 import com.archaeologicalfieldwork.main.MainApp
 import com.archaeologicalfieldwork.models.SpotModel
-import org.jetbrains.anko.startActivity
 
 class SpotListActivity : AppCompatActivity(), SpotListener, AnkoLogger {
 

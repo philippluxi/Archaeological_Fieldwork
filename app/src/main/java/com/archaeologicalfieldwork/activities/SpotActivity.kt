@@ -1,22 +1,22 @@
 package com.archaeologicalfieldwork.activities
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_spot.*
 import org.jetbrains.anko.info
 import org.jetbrains.anko.toast
 import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.AnkoLogger
 import com.archaeologicalfieldwork.R
-import com.archaeologicalfieldwork.helpers.readImage
-import com.archaeologicalfieldwork.helpers.readImageFromPath
-import com.archaeologicalfieldwork.helpers.showImagePicker
 import com.archaeologicalfieldwork.main.MainApp
 import com.archaeologicalfieldwork.models.Location
 import com.archaeologicalfieldwork.models.SpotModel
+import com.archaeologicalfieldwork.helpers.readImage
+import com.archaeologicalfieldwork.helpers.showImagePicker
+import com.archaeologicalfieldwork.helpers.readImageFromPath
 
 class SpotActivity : AppCompatActivity(), AnkoLogger {
 
@@ -24,6 +24,7 @@ class SpotActivity : AppCompatActivity(), AnkoLogger {
     lateinit var app: MainApp
     var edit = false
 
+    // Request Codes
     val IMAGE_REQUEST = 1
     val LOCATION_REQUEST = 2
 
@@ -47,7 +48,6 @@ class SpotActivity : AppCompatActivity(), AnkoLogger {
             if (spot.image != null) {
                 btnChooseImage.setText(R.string.change_spot_image)
             }
-
             btnAddSpot.setText(R.string.button_save_spot)
         }
 

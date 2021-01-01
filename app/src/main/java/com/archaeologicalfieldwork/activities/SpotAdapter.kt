@@ -6,8 +6,8 @@ import android.view.LayoutInflater
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.card_spot.view.*
 import com.archaeologicalfieldwork.R
-import com.archaeologicalfieldwork.helpers.readImageFromPath
 import com.archaeologicalfieldwork.models.SpotModel
+import com.archaeologicalfieldwork.helpers.readImageFromPath
 
 interface SpotListener {
     fun onSpotClick(spot: SpotModel)

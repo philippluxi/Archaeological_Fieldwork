@@ -1,19 +1,16 @@
 package com.archaeologicalfieldwork.activities
 
-import android.app.Application
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import kotlinx.android.synthetic.main.activity_spot_maps.*
 import com.google.android.gms.maps.GoogleMap
-import com.archaeologicalfieldwork.R
-import com.archaeologicalfieldwork.helpers.readImageFromPath
-import com.archaeologicalfieldwork.main.MainApp
-import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
+import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.model.MarkerOptions
-
-import kotlinx.android.synthetic.main.activity_spot_maps.*
-
+import com.archaeologicalfieldwork.R
+import com.archaeologicalfieldwork.main.MainApp
+import com.archaeologicalfieldwork.helpers.readImageFromPath
 
 class SpotMapsActivity : AppCompatActivity(), GoogleMap.OnMarkerClickListener {
 
@@ -32,7 +29,6 @@ class SpotMapsActivity : AppCompatActivity(), GoogleMap.OnMarkerClickListener {
             map = it
             configureMap()
         }
-
     }
 
     fun configureMap() {
