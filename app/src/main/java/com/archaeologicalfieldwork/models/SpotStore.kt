@@ -4,4 +4,5 @@ interface SpotStore {
     fun findAll(): List<SpotModel>
     fun create(spot: SpotModel)
     fun update(spot: SpotModel)
+    fun delete(spot: SpotModel)
 }

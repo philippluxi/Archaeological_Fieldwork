@@ -1,6 +1,7 @@
 package com.archaeologicalfieldwork.main
 
 import android.app.Application
+import com.archaeologicalfieldwork.models.SpotJSONStore
 import org.jetbrains.anko.info
 import org.jetbrains.anko.AnkoLogger
 import com.archaeologicalfieldwork.models.SpotMemStore
@@ -12,7 +13,7 @@ class MainApp : Application(), AnkoLogger {
 
     override fun onCreate() {
         super.onCreate()
-        spots = SpotMemStore()
+        spots = SpotJSONStore(applicationContext)
         info("Archaelogical Fieldwork started")
     }
 }

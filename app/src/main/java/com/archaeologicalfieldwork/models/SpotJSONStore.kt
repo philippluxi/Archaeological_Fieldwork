@@ -7,6 +7,7 @@ import com.google.gson.reflect.TypeToken
 import org.jetbrains.anko.AnkoLogger
 import java.util.*
 import com.archaeologicalfieldwork.helpers.*
+import kotlin.collections.ArrayList
 
 val JSON_FILE = "spots.json"
 val gsonBuilder = GsonBuilder().setPrettyPrinting().create()
@@ -38,9 +39,23 @@ class SpotJSONStore : SpotStore, AnkoLogger {
         serialize()
     }
 
-
     override fun update(spot: SpotModel) {
-        // todo
+        val spotList = findAll() as ArrayList<SpotModel>
+        var foundSpot: SpotModel? = spotList.find { s -> s.id == spot.id }
+        if (foundSpot != null) {
+            foundSpot.title = spot.title
+            foundSpot.description = spot.description
+            foundSpot.image = spot.image
+            foundSpot.lat = spot.lat
+            foundSpot.lng = spot.lng
+            foundSpot.zoom = spot.zoom
+        }
+        serialize()
+    }
+
+    override fun delete(spot: SpotModel) {
+        spots.remove(spot)
+        serialize()
     }
 
     private fun serialize() {
