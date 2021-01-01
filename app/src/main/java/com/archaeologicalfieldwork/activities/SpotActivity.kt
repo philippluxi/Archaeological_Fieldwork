@@ -1,5 +1,6 @@
 package com.archaeologicalfieldwork.activities
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
@@ -9,6 +10,9 @@ import org.jetbrains.anko.info
 import org.jetbrains.anko.toast
 import org.jetbrains.anko.AnkoLogger
 import com.archaeologicalfieldwork.R
+import com.archaeologicalfieldwork.helpers.readImage
+import com.archaeologicalfieldwork.helpers.readImageFromPath
+import com.archaeologicalfieldwork.helpers.showImagePicker
 import com.archaeologicalfieldwork.main.MainApp
 import com.archaeologicalfieldwork.models.SpotModel
 
@@ -17,6 +21,8 @@ class SpotActivity : AppCompatActivity(), AnkoLogger {
     var spot = SpotModel()
     lateinit var app: MainApp
     var edit = false
+
+    val IMAGE_REQUEST = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,6 +40,10 @@ class SpotActivity : AppCompatActivity(), AnkoLogger {
             spot = intent.extras?.getParcelable<SpotModel>("spot_edit")!!
             spotTitle.setText(spot.title)
             spotDescription.setText(spot.desription)
+            spotImage.setImageBitmap(readImageFromPath(this, spot.image))
+            if (spot.image != null) {
+                btnChooseImage.setText(R.string.change_spot_image)
+            }
 
             btnAddSpot.setText(R.string.button_save_spot)
         }
@@ -57,6 +67,11 @@ class SpotActivity : AppCompatActivity(), AnkoLogger {
                 finish()
             }
         }
+
+        //Handle Add Image Button Press
+        btnChooseImage.setOnClickListener {
+            showImagePicker(this, IMAGE_REQUEST)
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -71,5 +86,18 @@ class SpotActivity : AppCompatActivity(), AnkoLogger {
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        when (requestCode) {
+            IMAGE_REQUEST -> {
+                if (data != null) {
+                    spot.image = data.getData().toString()
+                    spotImage.setImageBitmap((readImage(this, resultCode, data)))
+                    btnChooseImage.setText(R.string.change_spot_image)
+                }
+            }
+        }
     }
 }

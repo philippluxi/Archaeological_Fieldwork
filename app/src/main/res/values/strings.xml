@@ -7,10 +7,14 @@
     <string name="menu_cancelNewSpot">Cancel</string>
 
     <!--Spot Activity-->
-    <string name="button_addSpot">Add Spot</string>
+    <string name="button_add_spot">Add Spot</string>
     <string name="button_save_spot">Save Spot</string>
     <string name="hint_SpotTitle">Spot Title</string>
     <string name="hint_SpotDescription">Spot Description</string>
     <string name="enter_spot_title">Please enter a Spot Title</string>
+    <!--Image Handling-->
+    <string name="button_add_image">Add Image</string>
+    <string name="select_spot_image">Select Spot image</string>
+    <string name="change_spot_image">Change Image</string>
 
 </resources>

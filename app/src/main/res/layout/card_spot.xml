@@ -10,18 +10,29 @@
         android:layout_height="wrap_content"
         android:padding="16dp">
 
+        <ImageView
+            android:id="@+id/imageIcon"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginEnd="16dp"
+            android:contentDescription="@string/change_spot_image" />
+
         <TextView
             android:id="@+id/spotTitle_Card"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:textSize="30sp" />
+            android:textSize="30sp"
+            android:layout_toEndOf="@+id/imageIcon" />
 
         <TextView
             android:id="@+id/spotDescription_Card"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/spotTitle_Card" />
+            android:layout_below="@id/spotTitle_Card"
+            android:layout_toEndOf="@+id/imageIcon" />
 
     </RelativeLayout>
 </androidx.cardview.widget.CardView>
