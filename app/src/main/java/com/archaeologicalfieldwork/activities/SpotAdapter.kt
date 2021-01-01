@@ -39,7 +39,7 @@ class SpotAdapter constructor(
 
         fun bind(spot: SpotModel, listener: SpotListener) {
             itemView.spotTitle_Card.text = spot.title
-            itemView.spotDescription_Card.text = spot.desription
+            itemView.spotDescription_Card.text = spot.description
             itemView.imageIcon.setImageBitmap(readImageFromPath(itemView.context, spot.image))
             itemView.setOnClickListener { listener.onSpotClick(spot) }
         }

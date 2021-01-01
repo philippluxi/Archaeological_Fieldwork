@@ -42,7 +42,7 @@ class SpotActivity : AppCompatActivity(), AnkoLogger {
 
             spot = intent.extras?.getParcelable<SpotModel>("spot_edit")!!
             spotTitle.setText(spot.title)
-            spotDescription.setText(spot.desription)
+            spotDescription.setText(spot.description)
             spotImage.setImageBitmap(readImageFromPath(this, spot.image))
             if (spot.image != null) {
                 btnChooseImage.setText(R.string.change_spot_image)
@@ -54,7 +54,7 @@ class SpotActivity : AppCompatActivity(), AnkoLogger {
         // Handle Add Button Press
         btnAddSpot.setOnClickListener() {
             spot.title = spotTitle.text.toString()
-            spot.desription = spotDescription.text.toString()
+            spot.description = spotDescription.text.toString()
 
             if (spot.title.isEmpty()) {
                 toast(R.string.enter_spot_title)
@@ -65,7 +65,6 @@ class SpotActivity : AppCompatActivity(), AnkoLogger {
                     app.spots.create(spot.copy())
                 }
                 info("add Button pressed: ${spot}")
-                app.spots.logAll()
                 setResult(AppCompatActivity.RESULT_OK)
                 finish()
             }
@@ -93,11 +92,18 @@ class SpotActivity : AppCompatActivity(), AnkoLogger {
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_new_spot, menu)
+        if (edit && menu != null) {
+            menu.getItem(0).isVisible = true
+        }
         return super.onCreateOptionsMenu(menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
+            R.id.item_delete -> {
+                app.spots.delete(spot)
+                finish()
+            }
             R.id.item_cancel -> {
                 finish()
             }
