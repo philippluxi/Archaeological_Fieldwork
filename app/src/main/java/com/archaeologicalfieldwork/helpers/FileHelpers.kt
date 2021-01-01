@@ -1,7 +1,7 @@
 package com.archaeologicalfieldwork.helpers
 
-import android.content.Context
 import android.util.Log
+import android.content.Context
 import java.io.*
 
 fun write(context: Context, fileName: String, data: String) {

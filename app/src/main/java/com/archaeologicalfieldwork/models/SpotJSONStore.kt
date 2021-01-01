@@ -1,13 +1,13 @@
 package com.archaeologicalfieldwork.models
 
 import android.content.Context
+import kotlin.collections.ArrayList
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 import org.jetbrains.anko.AnkoLogger
 import java.util.*
 import com.archaeologicalfieldwork.helpers.*
-import kotlin.collections.ArrayList
 
 val JSON_FILE = "spots.json"
 val gsonBuilder = GsonBuilder().setPrettyPrinting().create()
