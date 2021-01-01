@@ -14,7 +14,9 @@ import com.archaeologicalfieldwork.helpers.readImage
 import com.archaeologicalfieldwork.helpers.readImageFromPath
 import com.archaeologicalfieldwork.helpers.showImagePicker
 import com.archaeologicalfieldwork.main.MainApp
+import com.archaeologicalfieldwork.models.Location
 import com.archaeologicalfieldwork.models.SpotModel
+import org.jetbrains.anko.intentFor
 
 class SpotActivity : AppCompatActivity(), AnkoLogger {
 
@@ -23,6 +25,7 @@ class SpotActivity : AppCompatActivity(), AnkoLogger {
     var edit = false
 
     val IMAGE_REQUEST = 1
+    val LOCATION_REQUEST = 2
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -68,9 +71,23 @@ class SpotActivity : AppCompatActivity(), AnkoLogger {
             }
         }
 
-        //Handle Add Image Button Press
+        // Handle Add Image Button Press
         btnChooseImage.setOnClickListener {
             showImagePicker(this, IMAGE_REQUEST)
+        }
+
+        // Handle Set Location Button Press
+        btnSetLocation.setOnClickListener {
+            val location = Location(48.983307948993094, 12.105706251194382, 16f)
+            if (spot.zoom != 0F) {
+                location.lat = spot.lat
+                location.lng = spot.lng
+                location.zoom = spot.zoom
+            }
+            startActivityForResult(
+                intentFor<MapActivity>().putExtra("location", location),
+                LOCATION_REQUEST
+            )
         }
     }
 
@@ -96,6 +113,14 @@ class SpotActivity : AppCompatActivity(), AnkoLogger {
                     spot.image = data.getData().toString()
                     spotImage.setImageBitmap((readImage(this, resultCode, data)))
                     btnChooseImage.setText(R.string.change_spot_image)
+                }
+            }
+            LOCATION_REQUEST -> {
+                if (data != null) {
+                    val location = data.extras?.getParcelable<Location>("location")!!
+                    spot.lat = location.lat
+                    spot.lng = location.lng
+                    spot.zoom = location.zoom
                 }
             }
         }

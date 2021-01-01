@@ -16,5 +16,8 @@
     <string name="button_add_image">Add Image</string>
     <string name="select_spot_image">Select Spot image</string>
     <string name="change_spot_image">Change Image</string>
+    <!--Set Location-->
+    <string name="button_set_location">Set Location</string>
+    <string name="title_activity_map">Map</string>
 
 </resources>
