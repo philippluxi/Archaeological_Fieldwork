@@ -1,8 +1,8 @@
 package com.archaeologicalfieldwork.activities
 
-import android.content.Intent
-import android.os.Bundle
 import android.view.*
+import android.os.Bundle
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_spot_list.*
@@ -10,9 +10,9 @@ import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.startActivityForResult
 import com.archaeologicalfieldwork.R
+import org.jetbrains.anko.startActivity
 import com.archaeologicalfieldwork.main.MainApp
 import com.archaeologicalfieldwork.models.SpotModel
-
 
 class SpotListActivity : AppCompatActivity(), SpotListener, AnkoLogger {
 
@@ -28,7 +28,16 @@ class SpotListActivity : AppCompatActivity(), SpotListener, AnkoLogger {
 
         val layoutManager = LinearLayoutManager(this)
         recyclerView.layoutManager = layoutManager
-        recyclerView.adapter = SpotAdapter(app.spots.findAll(), this)
+        loadSpots()
+    }
+
+    private fun loadSpots() {
+        showSpots(app.spots.findAll())
+    }
+
+    fun showSpots(spots: List<SpotModel>) {
+        recyclerView.adapter = SpotAdapter(spots, this)
+        recyclerView.adapter?.notifyDataSetChanged()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -39,6 +48,7 @@ class SpotListActivity : AppCompatActivity(), SpotListener, AnkoLogger {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.item_add -> startActivityForResult<SpotActivity>(0)
+            R.id.item_map -> startActivity<SpotMapsActivity>()
         }
         return super.onOptionsItemSelected(item)
     }
@@ -48,7 +58,8 @@ class SpotListActivity : AppCompatActivity(), SpotListener, AnkoLogger {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        recyclerView.adapter?.notifyDataSetChanged()
+        loadSpots()
         super.onActivityResult(requestCode, resultCode, data)
     }
+
 }

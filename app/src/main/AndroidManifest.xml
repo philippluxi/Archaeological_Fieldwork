@@ -12,7 +12,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
+        <activity
+            android:name=".activities.SpotMapsActivity"
+            android:label="@string/title_spot_maps_activity"></activity>
         <activity android:name=".activities.SpotActivity" />
         <activity android:name=".activities.SpotListActivity">
             <intent-filter>
@@ -22,15 +24,13 @@
             </intent-filter>
         </activity>
 
-
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
 
         <activity
             android:name=".activities.MapActivity"
-            android:label="@string/title_activity_map"></activity>
-
+            android:label="@string/title_activity_map" />
     </application>
 
 </manifest>

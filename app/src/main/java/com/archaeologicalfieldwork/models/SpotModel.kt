@@ -7,7 +7,7 @@ import kotlinx.android.parcel.Parcelize
 data class SpotModel(
     var id: Long = 0,
     var title: String = "",
-    var desription: String = "",
+    var description: String = "",
     var image: String = "",
     var lat: Double = 0.0,
     var lng: Double = 0.0,
