@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.maps.GoogleMap
 import com.archaeologicalfieldwork.R
+import com.archaeologicalfieldwork.helpers.readImageFromPath
 import com.archaeologicalfieldwork.main.MainApp
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.model.LatLng
@@ -47,8 +48,12 @@ class SpotMapsActivity : AppCompatActivity(), GoogleMap.OnMarkerClickListener {
     }
 
     override fun onMarkerClick(marker: Marker): Boolean {
-        currentTitle.text = marker.title
-        return false
+        val tag = marker.tag as Long
+        val spot = app.spots.findById(tag)
+        currentTitle.text = spot!!.title
+        currentDescription.text = spot!!.description
+        currentImage.setImageBitmap(readImageFromPath(this, spot.image))
+        return true
     }
 
     override fun onDestroy() {
