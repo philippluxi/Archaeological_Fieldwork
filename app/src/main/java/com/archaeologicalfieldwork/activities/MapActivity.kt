@@ -1,12 +1,9 @@
 package com.archaeologicalfieldwork.activities
 
 import android.app.Activity
-import android.content.ActivityNotFoundException
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.archaeologicalfieldwork.R
-import com.archaeologicalfieldwork.models.Location
 
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -15,6 +12,9 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
+
+import com.archaeologicalfieldwork.R
+import com.archaeologicalfieldwork.models.Location
 
 class MapActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerDragListener,
     GoogleMap.OnMarkerClickListener {

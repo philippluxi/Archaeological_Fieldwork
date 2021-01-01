@@ -1,14 +1,14 @@
 package com.archaeologicalfieldwork.helpers
 
-import android.app.Activity
-import android.content.Context
-import android.content.Intent
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.net.Uri
+import android.app.Activity
+import android.content.Intent
+import android.content.Context
+import android.graphics.Bitmap
 import android.provider.MediaStore
-import com.archaeologicalfieldwork.R
+import android.graphics.BitmapFactory
 import java.io.IOException
+import com.archaeologicalfieldwork.R
 
 
 fun showImagePicker(parent: Activity, id: Int) {
