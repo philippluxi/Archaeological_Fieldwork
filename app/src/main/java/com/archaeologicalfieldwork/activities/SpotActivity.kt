@@ -41,6 +41,9 @@ class SpotActivity : AppCompatActivity(), AnkoLogger {
             spotTitle.setText(spot.title)
             spotDescription.setText(spot.desription)
             spotImage.setImageBitmap(readImageFromPath(this, spot.image))
+            if (spot.image != null) {
+                btnChooseImage.setText(R.string.change_spot_image)
+            }
 
             btnAddSpot.setText(R.string.button_save_spot)
         }
@@ -92,6 +95,7 @@ class SpotActivity : AppCompatActivity(), AnkoLogger {
                 if (data != null) {
                     spot.image = data.getData().toString()
                     spotImage.setImageBitmap((readImage(this, resultCode, data)))
+                    btnChooseImage.setText(R.string.change_spot_image)
                 }
             }
         }
