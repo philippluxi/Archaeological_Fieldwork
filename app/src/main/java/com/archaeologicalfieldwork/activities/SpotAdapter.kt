@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.card_spot.view.*
 import com.archaeologicalfieldwork.R
+import com.archaeologicalfieldwork.helpers.readImageFromPath
 import com.archaeologicalfieldwork.models.SpotModel
 
 interface SpotListener {
@@ -39,6 +40,7 @@ class SpotAdapter constructor(
         fun bind(spot: SpotModel, listener: SpotListener) {
             itemView.spotTitle_Card.text = spot.title
             itemView.spotDescription_Card.text = spot.desription
+            itemView.imageIcon.setImageBitmap(readImageFromPath(itemView.context, spot.image))
             itemView.setOnClickListener { listener.onSpotClick(spot) }
         }
     }
