@@ -72,6 +72,10 @@ class SpotActivity : AppCompatActivity(), AnkoLogger {
         btnChooseImage.setOnClickListener {
             showImagePicker(this, IMAGE_REQUEST)
         }
+
+        btnSetLocation.setOnClickListener {
+            info("Set Location pressed")
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
