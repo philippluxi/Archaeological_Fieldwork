@@ -26,5 +26,8 @@
     <!--MapView-->
     <string name="menu_showMap">Show Map</string>
     <string name="title_spot_maps_activity">Map</string>
+    <string name="spot_currentImage_placeholder">Spot Image</string>
+    <string name="spot_title_placeholder">Title</string>
+    <string name="spot_description_placeholder">Description</string>
 
 </resources>
