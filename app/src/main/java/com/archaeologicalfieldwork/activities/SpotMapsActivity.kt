@@ -8,12 +8,13 @@ import com.archaeologicalfieldwork.R
 import com.archaeologicalfieldwork.main.MainApp
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 
 import kotlinx.android.synthetic.main.activity_spot_maps.*
 
 
-class SpotMapsActivity : AppCompatActivity() {
+class SpotMapsActivity : AppCompatActivity(), GoogleMap.OnMarkerClickListener {
 
     lateinit var app: MainApp
     lateinit var map: GoogleMap
@@ -35,12 +36,19 @@ class SpotMapsActivity : AppCompatActivity() {
 
     fun configureMap() {
         map.uiSettings.isZoomControlsEnabled = true
+        map.setOnMarkerClickListener(this)
+
         app.spots.findAll().forEach {
             val loc = LatLng(it.lat, it.lng)
             val options = MarkerOptions().title(it.title).position(loc)
             map.addMarker(options).tag = it.id
             map.moveCamera(CameraUpdateFactory.newLatLngZoom(loc, it.zoom))
         }
+    }
+
+    override fun onMarkerClick(marker: Marker): Boolean {
+        currentTitle.text = marker.title
+        return false
     }
 
     override fun onDestroy() {
