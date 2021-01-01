@@ -18,5 +18,6 @@
     <string name="change_spot_image">Change Image</string>
     <!--Set Location-->
     <string name="button_set_location">Set Location</string>
+    <string name="title_activity_map">Map</string>
 
 </resources>

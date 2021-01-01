@@ -15,6 +15,7 @@ import com.archaeologicalfieldwork.helpers.readImageFromPath
 import com.archaeologicalfieldwork.helpers.showImagePicker
 import com.archaeologicalfieldwork.main.MainApp
 import com.archaeologicalfieldwork.models.SpotModel
+import org.jetbrains.anko.intentFor
 
 class SpotActivity : AppCompatActivity(), AnkoLogger {
 
@@ -68,13 +69,14 @@ class SpotActivity : AppCompatActivity(), AnkoLogger {
             }
         }
 
-        //Handle Add Image Button Press
+        // Handle Add Image Button Press
         btnChooseImage.setOnClickListener {
             showImagePicker(this, IMAGE_REQUEST)
         }
 
+        // Handle Set Location Button Press
         btnSetLocation.setOnClickListener {
-            info("Set Location pressed")
+            startActivity(intentFor<MapActivity>())
         }
     }
 
