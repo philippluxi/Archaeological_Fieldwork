@@ -12,6 +12,7 @@ import org.jetbrains.anko.startActivityForResult
 import com.archaeologicalfieldwork.R
 import com.archaeologicalfieldwork.main.MainApp
 import com.archaeologicalfieldwork.models.SpotModel
+import org.jetbrains.anko.startActivity
 
 class SpotListActivity : AppCompatActivity(), SpotListener, AnkoLogger {
 
@@ -47,6 +48,7 @@ class SpotListActivity : AppCompatActivity(), SpotListener, AnkoLogger {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.item_add -> startActivityForResult<SpotActivity>(0)
+            R.id.item_map -> startActivity<SpotMapsActivity>()
         }
         return super.onOptionsItemSelected(item)
     }

@@ -18,6 +18,11 @@ class SpotMemStore : SpotStore, AnkoLogger {
         return spots
     }
 
+    override fun findById(id: Long): SpotModel? {
+        val foundSpot: SpotModel? = spots.find { it.id == id }
+        return foundSpot
+    }
+
     override fun create(spot: SpotModel) {
         spot.id = getId()
         spots.add(spot)
