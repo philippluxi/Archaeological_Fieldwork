@@ -65,7 +65,6 @@ class SpotActivity : AppCompatActivity(), AnkoLogger {
                     app.spots.create(spot.copy())
                 }
                 info("add Button pressed: ${spot}")
-                app.spots.logAll()
                 setResult(AppCompatActivity.RESULT_OK)
                 finish()
             }

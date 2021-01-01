@@ -13,7 +13,6 @@ import com.archaeologicalfieldwork.R
 import com.archaeologicalfieldwork.main.MainApp
 import com.archaeologicalfieldwork.models.SpotModel
 
-
 class SpotListActivity : AppCompatActivity(), SpotListener, AnkoLogger {
 
     lateinit var app: MainApp
@@ -28,7 +27,16 @@ class SpotListActivity : AppCompatActivity(), SpotListener, AnkoLogger {
 
         val layoutManager = LinearLayoutManager(this)
         recyclerView.layoutManager = layoutManager
-        recyclerView.adapter = SpotAdapter(app.spots.findAll(), this)
+        loadSpots()
+    }
+
+    private fun loadSpots() {
+        showSpots(app.spots.findAll())
+    }
+
+    fun showSpots(spots: List<SpotModel>) {
+        recyclerView.adapter = SpotAdapter(spots, this)
+        recyclerView.adapter?.notifyDataSetChanged()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -48,7 +56,8 @@ class SpotListActivity : AppCompatActivity(), SpotListener, AnkoLogger {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        recyclerView.adapter?.notifyDataSetChanged()
+        loadSpots()
         super.onActivityResult(requestCode, resultCode, data)
     }
+
 }
