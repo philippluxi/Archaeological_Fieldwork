@@ -15,7 +15,7 @@
             android:name=".activities.SpotMapsActivity"
             android:label="@string/title_spot_maps_activity" />
         <activity android:name=".activities.SpotView" />
-        <activity android:name=".activities.SpotListActivity">
+        <activity android:name=".activities.SpotListView">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
