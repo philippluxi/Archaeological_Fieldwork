@@ -6,20 +6,15 @@ import com.archaeologicalfieldwork.helpers.showImagePicker
 import com.archaeologicalfieldwork.main.MainApp
 import com.archaeologicalfieldwork.models.Location
 import com.archaeologicalfieldwork.models.SpotModel
-import com.archaeologicalfieldwork.views.location.EditLocationView
+import com.archaeologicalfieldwork.views.*
 
-class SpotPresenter(val view: SpotView) {
+class SpotPresenter(view: BaseView) : BasePresenter(view) {
     var spot = SpotModel()
-    var location = Location(48.983307948993094, 12.105706251194382, 16f)
-    var app: MainApp
+    var defaultLocation = Location(48.983307948993094, 12.105706251194382, 16f)
+
     var edit = false
 
-    // Request Codes
-    val IMAGE_REQUEST = 1
-    val LOCATION_REQUEST = 2
-
     init {
-        app = view.application as MainApp
         if (view.intent.hasExtra("spot_edit")) {
             edit = true
             spot = view.intent.extras?.getParcelable<SpotModel>("spot_edit")!!
@@ -35,38 +30,45 @@ class SpotPresenter(val view: SpotView) {
         } else {
             app.spots.create(spot)
         }
-        view.finish()
+        view?.finish()
     }
 
     fun doCancel() {
-        view.finish()
+        view?.finish()
     }
 
     fun doDelete() {
         app.spots.delete(spot)
-        view.finish()
+        view?.finish()
     }
 
     fun doSelectImage() {
-        showImagePicker(view, IMAGE_REQUEST)
+        view?.let {
+            showImagePicker(view!!, IMAGE_REQUEST)
+        }
     }
 
     fun doSetLocation() {
-        if (spot.zoom != 0f) {
-            location.lat = spot.lat
-            location.lng = spot.lng
-            location.zoom = spot.zoom
+        if (edit == false) {
+            view?.navigateTo(VIEW.LOCATION, LOCATION_REQUEST, "location", defaultLocation)
+        } else {
+            view?.navigateTo(
+                VIEW.LOCATION,
+                LOCATION_REQUEST,
+                "location",
+                Location(spot.lat, spot.lng, spot.zoom)
+            )
         }
-        view.startActivityForResult(view.intentFor<EditLocationView>().putExtra("location", location), LOCATION_REQUEST)
     }
-    fun doActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
+
+    override fun doActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
         when (requestCode) {
             IMAGE_REQUEST -> {
                 spot.image = data.data.toString()
-                view.showSpot(spot)
+                view?.showSpot(spot)
             }
             LOCATION_REQUEST -> {
-                location = data.extras?.getParcelable<Location>("location")!!
+                val location = data.extras?.getParcelable<Location>("location")!!
                 spot.lat = location.lat
                 spot.lng = location.lng
                 spot.zoom = location.zoom
