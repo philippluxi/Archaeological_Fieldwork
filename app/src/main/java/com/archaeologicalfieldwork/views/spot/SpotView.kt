@@ -25,15 +25,6 @@ class SpotView : AppCompatActivity(), AnkoLogger {
 
         presenter = SpotPresenter(this)
 
-        // Handle Add Button Press
-        btnAddSpot.setOnClickListener {
-            if (spotTitle.text.toString().isEmpty()) {
-                toast(R.string.enter_spot_title)
-            } else {
-                presenter.doAddOrSave(spotTitle.text.toString(), spotDescription.text.toString())
-            }
-        }
-
         // Handle Add Image Button Press
         btnChooseImage.setOnClickListener { presenter.doSelectImage() }
 
@@ -48,7 +39,6 @@ class SpotView : AppCompatActivity(), AnkoLogger {
         if (spot.image != null) {
             btnChooseImage.setText(R.string.change_spot_image)
         }
-        btnAddSpot.setText(R.string.button_save_spot)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -59,6 +49,13 @@ class SpotView : AppCompatActivity(), AnkoLogger {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
+            R.id.item_save -> {
+                if (spotTitle.text.toString().isEmpty()) {
+                    toast(R.string.enter_spot_title)
+                } else {
+                    presenter.doAddOrSave(spotTitle.text.toString(), spotDescription.text.toString())
+                }
+            }
             R.id.item_delete -> {
                 presenter.doDelete()
             }
