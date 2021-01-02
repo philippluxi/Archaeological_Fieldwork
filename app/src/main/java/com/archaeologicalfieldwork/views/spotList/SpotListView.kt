@@ -7,8 +7,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_spot_list.*
 import com.archaeologicalfieldwork.R
-import com.archaeologicalfieldwork.activities.SpotAdapter
-import com.archaeologicalfieldwork.activities.SpotListener
 import com.archaeologicalfieldwork.models.SpotModel
 
 class SpotListView : AppCompatActivity(), SpotListener {

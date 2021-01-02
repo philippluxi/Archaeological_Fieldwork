@@ -1,7 +1,7 @@
 package com.archaeologicalfieldwork.views.spotList
 
 
-import com.archaeologicalfieldwork.activities.SpotMapsActivity
+import com.archaeologicalfieldwork.activities.SpotMapView
 import com.archaeologicalfieldwork.views.spot.SpotView
 import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.startActivity
@@ -28,6 +28,6 @@ class SpotListPresenter(val view: SpotListView) {
     }
 
     fun doShowSpotsMap() {
-        view.startActivity<SpotMapsActivity>()
+        view.startActivity<SpotMapView>()
     }
 }
