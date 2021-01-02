@@ -7,19 +7,15 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
 import com.archaeologicalfieldwork.main.MainApp
+import com.archaeologicalfieldwork.models.SpotModel
+import com.archaeologicalfieldwork.views.BasePresenter
+import com.archaeologicalfieldwork.views.BaseView
 
-class SpotMapPresenter(val view: SpotMapView) {
+class SpotMapPresenter(view: BaseView) : BasePresenter(view) {
 
-    var app: MainApp
-
-    init {
-        app = view.application as MainApp
-    }
-
-    fun doPopulateMap(map: GoogleMap) {
+    fun doPopulateMap(map: GoogleMap, spots: List<SpotModel>) {
         map.uiSettings.setZoomControlsEnabled(true)
-        map.setOnMarkerClickListener(view)
-        app.spots.findAll().forEach {
+        spots.forEach {
             val loc = LatLng(it.lat, it.lng)
             val options = MarkerOptions().title(it.title).position(loc)
             map.addMarker(options).tag = it.id
@@ -30,6 +26,10 @@ class SpotMapPresenter(val view: SpotMapView) {
     fun doMarkerSelected(marker: Marker) {
         val tag = marker.tag as Long
         val spot = app.spots.findById(tag)
-        if (spot != null) view.showSpot(spot)
+        if (spot != null) view?.showSpot(spot)
+    }
+
+    fun loadSpots(){
+        view?.showSpots(app.spots.findAll())
     }
 }

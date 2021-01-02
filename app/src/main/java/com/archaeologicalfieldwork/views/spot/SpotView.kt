@@ -11,8 +11,9 @@ import org.jetbrains.anko.AnkoLogger
 import com.archaeologicalfieldwork.R
 import com.archaeologicalfieldwork.models.SpotModel
 import com.archaeologicalfieldwork.helpers.readImageFromPath
+import com.archaeologicalfieldwork.views.*
 
-class SpotView : AppCompatActivity(), AnkoLogger {
+class SpotView : BaseView(), AnkoLogger {
 
     lateinit var presenter: SpotPresenter
     var spot = SpotModel()
@@ -20,10 +21,10 @@ class SpotView : AppCompatActivity(), AnkoLogger {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_spot)
-        toolbarAdd.title = title
-        setSupportActionBar(toolbarAdd)
 
-        presenter = SpotPresenter(this)
+        init(toolbarAdd)
+
+        presenter = initPresenter(SpotPresenter(this)) as SpotPresenter
 
         // Handle Add Image Button Press
         btnChooseImage.setOnClickListener { presenter.doSelectImage() }
@@ -32,7 +33,7 @@ class SpotView : AppCompatActivity(), AnkoLogger {
         btnSetLocation.setOnClickListener { presenter.doSetLocation() }
     }
 
-    fun showSpot(spot: SpotModel) {
+    override fun showSpot(spot: SpotModel) {
         spotTitle.setText(spot.title)
         spotDescription.setText(spot.description)
         spotImage.setImageBitmap(readImageFromPath(this, spot.image))
@@ -43,7 +44,6 @@ class SpotView : AppCompatActivity(), AnkoLogger {
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_new_spot, menu)
-        if (presenter.edit) menu.getItem(0).setVisible(true)
         return super.onCreateOptionsMenu(menu)
     }
 
@@ -53,7 +53,10 @@ class SpotView : AppCompatActivity(), AnkoLogger {
                 if (spotTitle.text.toString().isEmpty()) {
                     toast(R.string.enter_spot_title)
                 } else {
-                    presenter.doAddOrSave(spotTitle.text.toString(), spotDescription.text.toString())
+                    presenter.doAddOrSave(
+                        spotTitle.text.toString(),
+                        spotDescription.text.toString()
+                    )
                 }
             }
             R.id.item_delete -> {
@@ -71,5 +74,9 @@ class SpotView : AppCompatActivity(), AnkoLogger {
         if (data != null) {
             presenter.doActivityResult(requestCode, resultCode, data)
         }
+    }
+
+    override fun onBackPressed() {
+        presenter.doCancel()
     }
 }

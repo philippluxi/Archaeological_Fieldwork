@@ -9,27 +9,36 @@ import com.archaeologicalfieldwork.R
 
 import com.archaeologicalfieldwork.helpers.readImageFromPath
 import com.archaeologicalfieldwork.models.SpotModel
+import com.archaeologicalfieldwork.views.BaseView
 
-class SpotMapView : AppCompatActivity(), GoogleMap.OnMarkerClickListener {
+class SpotMapView : BaseView(), GoogleMap.OnMarkerClickListener {
 
     lateinit var presenter: SpotMapPresenter
+    lateinit var map: GoogleMap
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_spot_maps)
-        setSupportActionBar(toolbar)
-        presenter = SpotMapPresenter(this)
+        super.init(toolbar)
 
-        mapView.onCreate(savedInstanceState);
+        presenter = initPresenter(SpotMapPresenter(this)) as SpotMapPresenter
+
+        mapView.onCreate(savedInstanceState)
         mapView.getMapAsync {
-            presenter.doPopulateMap(it)
+            map = it
+            map.setOnMarkerClickListener(this)
+            presenter.loadSpots()
         }
     }
 
-    fun showSpot(spot: SpotModel) {
+    override fun showSpot(spot: SpotModel) {
         currentTitle.text = spot.title
         currentDescription.text = spot.description
         currentImage.setImageBitmap(readImageFromPath(this, spot.image))
+    }
+
+    override fun showSpots(spots: List<SpotModel>) {
+        presenter.doPopulateMap(map,spots)
     }
 
     override fun onMarkerClick(marker: Marker): Boolean {
