@@ -6,17 +6,16 @@
 
     <application
         android:name=".main.MainApp"
-        android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".activities.SpotMapsActivity"
-            android:label="@string/title_spot_maps_activity"></activity>
-        <activity android:name=".activities.SpotActivity" />
-        <activity android:name=".activities.SpotListActivity">
+            android:name=".views.map.SpotMapView"
+            android:label="@string/title_spot_maps_activity" />
+        <activity android:name=".views.spot.SpotView" />
+        <activity android:name=".views.spotList.SpotListView">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -29,7 +28,7 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".activities.MapActivity"
+            android:name=".views.location.EditLocationView"
             android:label="@string/title_activity_map" />
     </application>
 

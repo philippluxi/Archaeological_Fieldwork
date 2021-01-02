@@ -6,6 +6,7 @@
     <string name="menu_addSpot">Add</string>
     <string name="menu_cancelNewSpot">Cancel</string>
     <string name="menu_deleteSpot">Delete</string>
+    <string name="menu_saveSpot">Save</string>
 
     <!--Spot Activity-->
     <string name="button_add_spot">Add Spot</string>
