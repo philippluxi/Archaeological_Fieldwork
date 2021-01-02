@@ -1,33 +1,29 @@
 package com.archaeologicalfieldwork.views.spotList
 
 
-import com.archaeologicalfieldwork.views.map.SpotMapView
-import com.archaeologicalfieldwork.views.spot.SpotView
 import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.startActivityForResult
 import com.archaeologicalfieldwork.main.MainApp
 import com.archaeologicalfieldwork.models.SpotModel
+import com.archaeologicalfieldwork.views.*
 
-class SpotListPresenter(val view: SpotListView) {
 
-    var app: MainApp
-
-    init {
-        app = view.application as MainApp
-    }
-
-    fun getSpots() = app.spots.findAll()
+class SpotListPresenter(view: BaseView) : BasePresenter(view) {
 
     fun doaddSpot() {
-        view.startActivityForResult<SpotView>(0)
+        view?.navigateTo(VIEW.SPOT)
     }
 
     fun doeditSpot(spot: SpotModel) {
-        view.startActivityForResult(view.intentFor<SpotView>().putExtra("spot_edit", spot), 0)
+        view?.navigateTo(VIEW.SPOT, 0, "spot_edit", spot)
     }
 
     fun doShowSpotsMap() {
-        view.startActivity<SpotMapView>()
+        view?.navigateTo(VIEW.MAPS)
+    }
+
+    fun loadSpots() {
+        view?.showSpots(app.spots.findAll())
     }
 }

@@ -8,22 +8,26 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_spot_list.*
 import com.archaeologicalfieldwork.R
 import com.archaeologicalfieldwork.models.SpotModel
+import com.archaeologicalfieldwork.views.BaseView
 
-class SpotListView : AppCompatActivity(), SpotListener {
+class SpotListView : BaseView(), SpotListener {
 
     lateinit var presenter: SpotListPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_spot_list)
-        toolbar.title = title
         setSupportActionBar(toolbar)
 
-        presenter = SpotListPresenter(this)
+        presenter = initPresenter(SpotListPresenter(this)) as SpotListPresenter
+
         val layoutManager = LinearLayoutManager(this)
         recyclerView.layoutManager = layoutManager
-        recyclerView.adapter =
-            SpotAdapter(presenter.getSpots(), this)
+        presenter.loadSpots()
+    }
+
+    override fun showSpots(spots: List<SpotModel>) {
+        recyclerView.adapter = SpotAdapter(spots, this)
         recyclerView.adapter?.notifyDataSetChanged()
     }
 
@@ -45,7 +49,7 @@ class SpotListView : AppCompatActivity(), SpotListener {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        recyclerView.adapter?.notifyDataSetChanged()
+        presenter.loadSpots()
         super.onActivityResult(requestCode, resultCode, data)
     }
 }
