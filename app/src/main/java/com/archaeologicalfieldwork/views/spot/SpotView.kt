@@ -27,10 +27,16 @@ class SpotView : BaseView(), AnkoLogger {
         presenter = initPresenter(SpotPresenter(this)) as SpotPresenter
 
         // Handle Add Image Button Press
-        btnChooseImage.setOnClickListener { presenter.doSelectImage() }
+        btnChooseImage.setOnClickListener {
+            presenter.cacheSpot(spotTitle.text.toString(),spotDescription.text.toString())
+            presenter.doSelectImage()
+        }
 
         // Handle Set Location Button Press
-        btnSetLocation.setOnClickListener { presenter.doSetLocation() }
+        btnSetLocation.setOnClickListener {
+            presenter.cacheSpot(spotTitle.text.toString(),spotDescription.text.toString())
+            presenter.doSetLocation()
+        }
     }
 
     override fun showSpot(spot: SpotModel) {

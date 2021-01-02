@@ -33,6 +33,11 @@ class SpotPresenter(view: BaseView) : BasePresenter(view) {
         view?.finish()
     }
 
+    fun cacheSpot (title: String, description: String) {
+        spot.title = title
+        spot.description = description
+    }
+
     fun doCancel() {
         view?.finish()
     }
