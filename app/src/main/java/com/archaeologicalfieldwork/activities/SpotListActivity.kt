@@ -47,14 +47,14 @@ class SpotListActivity : AppCompatActivity(), SpotListener, AnkoLogger {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.item_add -> startActivityForResult<SpotActivity>(0)
+            R.id.item_add -> startActivityForResult<SpotView>(0)
             R.id.item_map -> startActivity<SpotMapsActivity>()
         }
         return super.onOptionsItemSelected(item)
     }
 
     override fun onSpotClick(spot: SpotModel) {
-        startActivityForResult(intentFor<SpotActivity>().putExtra("spot_edit", spot), 0)
+        startActivityForResult(intentFor<SpotView>().putExtra("spot_edit", spot), 0)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
