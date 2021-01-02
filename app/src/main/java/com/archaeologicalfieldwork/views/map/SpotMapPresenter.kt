@@ -1,4 +1,4 @@
-package com.archaeologicalfieldwork.activities
+package com.archaeologicalfieldwork.views.map
 
 
 import com.google.android.gms.maps.CameraUpdateFactory

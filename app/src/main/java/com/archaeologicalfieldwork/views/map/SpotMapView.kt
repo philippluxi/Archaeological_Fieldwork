@@ -1,4 +1,4 @@
-package com.archaeologicalfieldwork.activities
+package com.archaeologicalfieldwork.views.map
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

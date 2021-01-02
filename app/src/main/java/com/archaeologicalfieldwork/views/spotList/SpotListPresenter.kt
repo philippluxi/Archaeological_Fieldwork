@@ -1,7 +1,7 @@
 package com.archaeologicalfieldwork.views.spotList
 
 
-import com.archaeologicalfieldwork.activities.SpotMapView
+import com.archaeologicalfieldwork.views.map.SpotMapView
 import com.archaeologicalfieldwork.views.spot.SpotView
 import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.startActivity
