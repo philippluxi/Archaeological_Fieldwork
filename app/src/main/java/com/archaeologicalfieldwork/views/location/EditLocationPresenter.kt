@@ -1,4 +1,4 @@
-package com.archaeologicalfieldwork.activities
+package com.archaeologicalfieldwork.views.location
 
 import android.app.Activity
 import android.content.Intent

@@ -14,8 +14,8 @@
         <activity
             android:name=".activities.SpotMapsActivity"
             android:label="@string/title_spot_maps_activity" />
-        <activity android:name=".activities.SpotView" />
-        <activity android:name=".activities.SpotListView">
+        <activity android:name=".views.spot.SpotView" />
+        <activity android:name=".views.spotList.SpotListView">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -28,7 +28,7 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".activities.EditLocationView"
+            android:name=".views.location.EditLocationView"
             android:label="@string/title_activity_map" />
     </application>
 

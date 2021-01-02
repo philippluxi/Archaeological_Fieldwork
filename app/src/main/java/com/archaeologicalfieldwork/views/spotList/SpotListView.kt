@@ -1,4 +1,4 @@
-package com.archaeologicalfieldwork.activities
+package com.archaeologicalfieldwork.views.spotList
 
 import android.content.Intent
 import android.os.Bundle
@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_spot_list.*
 import com.archaeologicalfieldwork.R
 import com.archaeologicalfieldwork.activities.SpotAdapter
-import com.archaeologicalfieldwork.activities.SpotListPresenter
 import com.archaeologicalfieldwork.activities.SpotListener
 import com.archaeologicalfieldwork.models.SpotModel
 

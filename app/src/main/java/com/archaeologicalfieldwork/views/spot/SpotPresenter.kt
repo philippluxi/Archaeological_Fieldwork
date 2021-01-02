@@ -1,4 +1,4 @@
-package com.archaeologicalfieldwork.activities
+package com.archaeologicalfieldwork.views.spot
 
 import android.content.Intent
 import org.jetbrains.anko.intentFor
@@ -6,6 +6,7 @@ import com.archaeologicalfieldwork.helpers.showImagePicker
 import com.archaeologicalfieldwork.main.MainApp
 import com.archaeologicalfieldwork.models.Location
 import com.archaeologicalfieldwork.models.SpotModel
+import com.archaeologicalfieldwork.views.location.EditLocationView
 
 class SpotPresenter(val view: SpotView) {
     var spot = SpotModel()
