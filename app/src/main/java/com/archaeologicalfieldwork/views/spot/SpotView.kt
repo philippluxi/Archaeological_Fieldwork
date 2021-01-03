@@ -12,11 +12,16 @@ import com.archaeologicalfieldwork.R
 import com.archaeologicalfieldwork.models.SpotModel
 import com.archaeologicalfieldwork.helpers.readImageFromPath
 import com.archaeologicalfieldwork.views.*
+import com.google.android.gms.maps.GoogleMap
+import kotlinx.android.synthetic.main.activity_spot.btnChooseImage
+import kotlinx.android.synthetic.main.activity_spot_maps.*
 
 class SpotView : BaseView(), AnkoLogger {
 
     lateinit var presenter: SpotPresenter
     var spot = SpotModel()
+
+    lateinit var map: GoogleMap
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,26 +31,30 @@ class SpotView : BaseView(), AnkoLogger {
 
         presenter = initPresenter(SpotPresenter(this)) as SpotPresenter
 
+        // Setup MapView
+        spotLocation.onCreate(savedInstanceState)
+        spotLocation.getMapAsync {
+            map = it
+            presenter.doConfigureMap(map)
+            it.setOnMapClickListener { presenter.doSetLocation() }
+        }
+
         // Handle Add Image Button Press
         btnChooseImage.setOnClickListener {
             presenter.cacheSpot(spotTitle.text.toString(),spotDescription.text.toString())
             presenter.doSelectImage()
         }
-
-        // Handle Set Location Button Press
-        btnSetLocation.setOnClickListener {
-            presenter.cacheSpot(spotTitle.text.toString(),spotDescription.text.toString())
-            presenter.doSetLocation()
-        }
     }
 
     override fun showSpot(spot: SpotModel) {
-        spotTitle.setText(spot.title)
-        spotDescription.setText(spot.description)
+        if (spotTitle.text.isEmpty()) spotTitle.setText(spot.title)
+        if (spotDescription.text.isEmpty()) spotDescription.setText(spot.description)
         spotImage.setImageBitmap(readImageFromPath(this, spot.image))
         if (spot.image != null) {
             btnChooseImage.setText(R.string.change_spot_image)
         }
+        lat.setText("%.6f".format(spot.lat))
+        lng.setText("%.6f".format(spot.lng))
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -85,5 +94,31 @@ class SpotView : BaseView(), AnkoLogger {
 
     override fun onBackPressed() {
         presenter.doCancel()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        spotLocation.onDestroy()
+    }
+
+    override fun onLowMemory() {
+        super.onLowMemory()
+        spotLocation.onLowMemory()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        spotLocation.onPause()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        spotLocation.onResume()
+        presenter.doResartLocationUpdates()
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        spotLocation.onSaveInstanceState(outState)
     }
 }
