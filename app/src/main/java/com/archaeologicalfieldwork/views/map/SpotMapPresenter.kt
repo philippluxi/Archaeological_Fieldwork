@@ -1,15 +1,13 @@
 package com.archaeologicalfieldwork.views.map
 
-
-import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
+import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.model.MarkerOptions
-import com.archaeologicalfieldwork.main.MainApp
+import com.archaeologicalfieldwork.views.BaseView
 import com.archaeologicalfieldwork.models.SpotModel
 import com.archaeologicalfieldwork.views.BasePresenter
-import com.archaeologicalfieldwork.views.BaseView
 
 class SpotMapPresenter(view: BaseView) : BasePresenter(view) {
 
@@ -29,7 +27,7 @@ class SpotMapPresenter(view: BaseView) : BasePresenter(view) {
         if (spot != null) view?.showSpot(spot)
     }
 
-    fun loadSpots(){
+    fun loadSpots() {
         view?.showSpots(app.spots.findAll())
     }
 }

@@ -1,18 +1,15 @@
 package com.archaeologicalfieldwork.views
 
-
 import android.content.Intent
-
 import android.os.Parcelable
-import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.appcompat.app.AppCompatActivity
 import org.jetbrains.anko.AnkoLogger
-
 import com.archaeologicalfieldwork.models.SpotModel
-import com.archaeologicalfieldwork.views.location.EditLocationView
-import com.archaeologicalfieldwork.views.map.SpotMapView
 import com.archaeologicalfieldwork.views.spot.SpotView
+import com.archaeologicalfieldwork.views.map.SpotMapView
 import com.archaeologicalfieldwork.views.spotList.SpotListView
+import com.archaeologicalfieldwork.views.location.EditLocationView
 
 val IMAGE_REQUEST = 1
 val LOCATION_REQUEST = 2
@@ -62,7 +59,9 @@ open abstract class BaseView() : AppCompatActivity(), AnkoLogger {
         }
     }
 
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
+    override fun onRequestPermissionsResult(
+        requestCode: Int, permissions: Array<String>, grantResults: IntArray
+    ) {
         basePresenter?.doRequestPermissionsResult(requestCode, permissions, grantResults)
     }
 

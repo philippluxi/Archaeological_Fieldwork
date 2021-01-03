@@ -4,17 +4,15 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_spot.*
+import kotlinx.android.synthetic.main.activity_spot.btnChooseImage
 import org.jetbrains.anko.toast
 import org.jetbrains.anko.AnkoLogger
 import com.archaeologicalfieldwork.R
-import com.archaeologicalfieldwork.models.SpotModel
-import com.archaeologicalfieldwork.helpers.readImageFromPath
 import com.archaeologicalfieldwork.views.*
 import com.google.android.gms.maps.GoogleMap
-import kotlinx.android.synthetic.main.activity_spot.btnChooseImage
-import kotlinx.android.synthetic.main.activity_spot_maps.*
+import com.archaeologicalfieldwork.models.SpotModel
+import com.archaeologicalfieldwork.helpers.readImageFromPath
 
 class SpotView : BaseView(), AnkoLogger {
 
@@ -41,7 +39,7 @@ class SpotView : BaseView(), AnkoLogger {
 
         // Handle Add Image Button Press
         btnChooseImage.setOnClickListener {
-            presenter.cacheSpot(spotTitle.text.toString(),spotDescription.text.toString())
+            presenter.cacheSpot(spotTitle.text.toString(), spotDescription.text.toString())
             presenter.doSelectImage()
         }
     }

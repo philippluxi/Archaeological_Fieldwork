@@ -1,15 +1,14 @@
 package com.archaeologicalfieldwork.views.location
 
-import android.app.Activity
 import android.content.Intent
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
+import com.archaeologicalfieldwork.views.BaseView
 import com.archaeologicalfieldwork.models.Location
 import com.archaeologicalfieldwork.views.BasePresenter
-import com.archaeologicalfieldwork.views.BaseView
 
 class EditLocationPresenter(view: BaseView) : BasePresenter(view) {
 

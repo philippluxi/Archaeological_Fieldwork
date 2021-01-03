@@ -1,15 +1,13 @@
 package com.archaeologicalfieldwork.views.map
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
+import kotlinx.android.synthetic.main.activity_spot_maps.*
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.Marker
-import kotlinx.android.synthetic.main.activity_spot_maps.*
 import com.archaeologicalfieldwork.R
-
-import com.archaeologicalfieldwork.helpers.readImageFromPath
-import com.archaeologicalfieldwork.models.SpotModel
 import com.archaeologicalfieldwork.views.BaseView
+import com.archaeologicalfieldwork.models.SpotModel
+import com.archaeologicalfieldwork.helpers.readImageFromPath
 
 class SpotMapView : BaseView(), GoogleMap.OnMarkerClickListener {
 
@@ -38,7 +36,7 @@ class SpotMapView : BaseView(), GoogleMap.OnMarkerClickListener {
     }
 
     override fun showSpots(spots: List<SpotModel>) {
-        presenter.doPopulateMap(map,spots)
+        presenter.doPopulateMap(map, spots)
     }
 
     override fun onMarkerClick(marker: Marker): Boolean {

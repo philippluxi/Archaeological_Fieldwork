@@ -3,12 +3,11 @@ package com.archaeologicalfieldwork.views.spotList
 import android.content.Intent
 import android.os.Bundle
 import android.view.*
-import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_spot_list.*
 import com.archaeologicalfieldwork.R
-import com.archaeologicalfieldwork.models.SpotModel
 import com.archaeologicalfieldwork.views.BaseView
+import com.archaeologicalfieldwork.models.SpotModel
 
 class SpotListView : BaseView(), SpotListener {
 
