@@ -1,54 +1,46 @@
-package com.archaeologicalfieldwork.activities
+package com.archaeologicalfieldwork.views.map
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_spot_maps.*
 import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
-import com.google.android.gms.maps.CameraUpdateFactory
-import com.google.android.gms.maps.model.MarkerOptions
 import com.archaeologicalfieldwork.R
-import com.archaeologicalfieldwork.main.MainApp
+import com.archaeologicalfieldwork.views.BaseView
+import com.archaeologicalfieldwork.models.SpotModel
 import com.archaeologicalfieldwork.helpers.readImageFromPath
 
-class SpotMapsActivity : AppCompatActivity(), GoogleMap.OnMarkerClickListener {
+class SpotMapView : BaseView(), GoogleMap.OnMarkerClickListener {
 
-    lateinit var app: MainApp
+    lateinit var presenter: SpotMapPresenter
     lateinit var map: GoogleMap
 
     override fun onCreate(savedInstanceState: Bundle?) {
-
-        app = application as MainApp
-
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_spot_maps)
-        setSupportActionBar(toolbar)
+        super.init(toolbar)
+
+        presenter = initPresenter(SpotMapPresenter(this)) as SpotMapPresenter
+
         mapView.onCreate(savedInstanceState)
         mapView.getMapAsync {
             map = it
-            configureMap()
+            map.setOnMarkerClickListener(this)
+            presenter.loadSpots()
         }
     }
 
-    fun configureMap() {
-        map.uiSettings.isZoomControlsEnabled = true
-        map.setOnMarkerClickListener(this)
+    override fun showSpot(spot: SpotModel) {
+        currentTitle.text = spot.title
+        currentDescription.text = spot.description
+        currentImage.setImageBitmap(readImageFromPath(this, spot.image))
+    }
 
-        app.spots.findAll().forEach {
-            val loc = LatLng(it.lat, it.lng)
-            val options = MarkerOptions().title(it.title).position(loc)
-            map.addMarker(options).tag = it.id
-            map.moveCamera(CameraUpdateFactory.newLatLngZoom(loc, it.zoom))
-        }
+    override fun showSpots(spots: List<SpotModel>) {
+        presenter.doPopulateMap(map, spots)
     }
 
     override fun onMarkerClick(marker: Marker): Boolean {
-        val tag = marker.tag as Long
-        val spot = app.spots.findById(tag)
-        currentTitle.text = spot!!.title
-        currentDescription.text = spot!!.description
-        currentImage.setImageBitmap(readImageFromPath(this, spot.image))
+        presenter.doMarkerSelected(marker)
         return true
     }
 

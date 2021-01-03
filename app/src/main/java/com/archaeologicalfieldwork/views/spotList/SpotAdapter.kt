@@ -1,4 +1,4 @@
-package com.archaeologicalfieldwork.activities
+package com.archaeologicalfieldwork.views.spotList
 
 import android.view.View
 import android.view.ViewGroup
