@@ -3,6 +3,7 @@ package com.archaeologicalfieldwork.views.spot
 import android.annotation.SuppressLint
 import android.content.Intent
 import com.archaeologicalfieldwork.helpers.checkLocationPermissions
+import com.archaeologicalfieldwork.helpers.createDefaultLocationRequest
 import com.archaeologicalfieldwork.helpers.isPermissionGranted
 import org.jetbrains.anko.intentFor
 import com.archaeologicalfieldwork.helpers.showImagePicker
@@ -11,6 +12,8 @@ import com.archaeologicalfieldwork.models.Location
 import com.archaeologicalfieldwork.models.SpotModel
 import com.archaeologicalfieldwork.views.*
 import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationCallback
+import com.google.android.gms.location.LocationResult
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -20,6 +23,7 @@ import com.google.android.gms.maps.model.MarkerOptions
 class SpotPresenter(view: BaseView) : BasePresenter(view) {
     var locationService: FusedLocationProviderClient =
         LocationServices.getFusedLocationProviderClient(view)
+    val locationRequest = createDefaultLocationRequest()
     var map: GoogleMap? = null
 
     var spot = SpotModel()
@@ -97,6 +101,21 @@ class SpotPresenter(view: BaseView) : BasePresenter(view) {
         map?.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(spot.lat, spot.lng), spot.zoom))
 
         view?.showSpot(spot)
+    }
+
+    @SuppressLint("MissingPermission")
+    fun doResartLocationUpdates() {
+        var locationCallback = object : LocationCallback() {
+            override fun onLocationResult(locationResult: LocationResult?) {
+                if (locationResult != null && locationResult.locations != null) {
+                    val l = locationResult.locations.last()
+                    locationUpdate(l.latitude, l.longitude)
+                }
+            }
+        }
+        if (!edit) {
+            locationService.requestLocationUpdates(locationRequest, locationCallback, null)
+        }
     }
 
     override fun doRequestPermissionsResult(

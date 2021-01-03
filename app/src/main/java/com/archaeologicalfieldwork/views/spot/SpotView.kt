@@ -36,6 +36,7 @@ class SpotView : BaseView(), AnkoLogger {
         spotLocation.getMapAsync {
             map = it
             presenter.doConfigureMap(map)
+            it.setOnMapClickListener { presenter.doSetLocation() }
         }
 
         // Handle Add Image Button Press
@@ -43,21 +44,17 @@ class SpotView : BaseView(), AnkoLogger {
             presenter.cacheSpot(spotTitle.text.toString(),spotDescription.text.toString())
             presenter.doSelectImage()
         }
-
-        // Handle Set Location Button Press
-        btnSetLocation.setOnClickListener {
-            presenter.cacheSpot(spotTitle.text.toString(),spotDescription.text.toString())
-            presenter.doSetLocation()
-        }
     }
 
     override fun showSpot(spot: SpotModel) {
-        spotTitle.setText(spot.title)
-        spotDescription.setText(spot.description)
+        if (spotTitle.text.isEmpty()) spotTitle.setText(spot.title)
+        if (spotDescription.text.isEmpty()) spotDescription.setText(spot.description)
         spotImage.setImageBitmap(readImageFromPath(this, spot.image))
         if (spot.image != null) {
             btnChooseImage.setText(R.string.change_spot_image)
         }
+        lat.setText("%.6f".format(spot.lat))
+        lng.setText("%.6f".format(spot.lng))
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -117,6 +114,7 @@ class SpotView : BaseView(), AnkoLogger {
     override fun onResume() {
         super.onResume()
         spotLocation.onResume()
+        presenter.doResartLocationUpdates()
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
