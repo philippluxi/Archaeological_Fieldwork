@@ -1,5 +1,6 @@
 package com.archaeologicalfieldwork.views.spot
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import com.archaeologicalfieldwork.helpers.checkLocationPermissions
 import com.archaeologicalfieldwork.helpers.isPermissionGranted
@@ -17,11 +18,12 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 
 class SpotPresenter(view: BaseView) : BasePresenter(view) {
-    var locationService: FusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(view)
+    var locationService: FusedLocationProviderClient =
+        LocationServices.getFusedLocationProviderClient(view)
     var map: GoogleMap? = null
 
     var spot = SpotModel()
-    var defaultLocation = Location(48.983307948993094, 12.105706251194382, 16f)
+    var defaultLocation = Location(50.983307948993094, 12.105706251194382, 16f)
     var edit = false
 
     init {
@@ -31,10 +33,8 @@ class SpotPresenter(view: BaseView) : BasePresenter(view) {
             view.showSpot(spot)
         } else {
             if (checkLocationPermissions(view)) {
-                // todo get the current location
+                doSetCurrentLocation()
             }
-            spot.lat = defaultLocation.lat
-            spot.lng = defaultLocation.lng
         }
     }
 
@@ -54,7 +54,7 @@ class SpotPresenter(view: BaseView) : BasePresenter(view) {
         view?.finish()
     }
 
-    fun cacheSpot (title: String, description: String) {
+    fun cacheSpot(title: String, description: String) {
         spot.title = title
         spot.description = description
     }
@@ -75,15 +75,13 @@ class SpotPresenter(view: BaseView) : BasePresenter(view) {
     }
 
     fun doSetLocation() {
-        if (edit == false) {
-            view?.navigateTo(VIEW.LOCATION, LOCATION_REQUEST, "location", defaultLocation)
-        } else {
-            view?.navigateTo(
-                VIEW.LOCATION,
-                LOCATION_REQUEST,
-                "location",
-                Location(spot.lat, spot.lng, spot.zoom)
-            )
+        view?.navigateTo(VIEW.LOCATION, LOCATION_REQUEST, "location", Location(spot.lat, spot.lng, spot.zoom))
+    }
+
+    @SuppressLint("MissingPermission")
+    fun doSetCurrentLocation() {
+        locationService.lastLocation.addOnSuccessListener {
+            locationUpdate(it.latitude, it.longitude)
         }
     }
 
@@ -101,12 +99,17 @@ class SpotPresenter(view: BaseView) : BasePresenter(view) {
         view?.showSpot(spot)
     }
 
-    override fun doRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
+    override fun doRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<String>,
+        grantResults: IntArray
+    ) {
         if (isPermissionGranted(requestCode, grantResults)) {
-            // todo get the current location
-        } else {
-            // permissions denied, so use the default location
-            locationUpdate(defaultLocation.lat, defaultLocation.lng)
+            if (isPermissionGranted(requestCode, grantResults)) {
+                doSetCurrentLocation()
+            } else {
+                locationUpdate(defaultLocation.lat, defaultLocation.lng)
+            }
         }
     }
 
