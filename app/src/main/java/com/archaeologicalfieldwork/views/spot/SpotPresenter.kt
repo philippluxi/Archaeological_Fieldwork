@@ -7,19 +7,31 @@ import com.archaeologicalfieldwork.main.MainApp
 import com.archaeologicalfieldwork.models.Location
 import com.archaeologicalfieldwork.models.SpotModel
 import com.archaeologicalfieldwork.views.*
+import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MarkerOptions
 
 class SpotPresenter(view: BaseView) : BasePresenter(view) {
     var spot = SpotModel()
     var defaultLocation = Location(48.983307948993094, 12.105706251194382, 16f)
-
     var edit = false
+    var map: GoogleMap? = null
 
     init {
         if (view.intent.hasExtra("spot_edit")) {
             edit = true
             spot = view.intent.extras?.getParcelable<SpotModel>("spot_edit")!!
             view.showSpot(spot)
+        } else {
+            spot.lat = defaultLocation.lat
+            spot.lng = defaultLocation.lng
         }
+    }
+
+    fun doConfigureMap(m: GoogleMap) {
+        map = m
+        locationUpdate(spot.lat, spot.lng)
     }
 
     fun doAddOrSave(title: String, description: String) {
@@ -66,6 +78,20 @@ class SpotPresenter(view: BaseView) : BasePresenter(view) {
         }
     }
 
+    fun locationUpdate(lat: Double, lng: Double) {
+        spot.lat = lat
+        spot.lng = lng
+        spot.zoom = 15f
+        map?.clear()
+        map?.uiSettings?.isZoomGesturesEnabled = true
+
+        val options = MarkerOptions().title(spot.title).position(LatLng(spot.lat, spot.lng))
+        map?.addMarker(options)
+        map?.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(spot.lat, spot.lng), spot.zoom))
+
+        view?.showSpot(spot)
+    }
+
     override fun doActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
         when (requestCode) {
             IMAGE_REQUEST -> {
@@ -77,6 +103,7 @@ class SpotPresenter(view: BaseView) : BasePresenter(view) {
                 spot.lat = location.lat
                 spot.lng = location.lng
                 spot.zoom = location.zoom
+                locationUpdate(spot.lat, spot.lng)
             }
         }
     }

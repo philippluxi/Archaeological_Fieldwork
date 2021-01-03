@@ -12,11 +12,16 @@ import com.archaeologicalfieldwork.R
 import com.archaeologicalfieldwork.models.SpotModel
 import com.archaeologicalfieldwork.helpers.readImageFromPath
 import com.archaeologicalfieldwork.views.*
+import com.google.android.gms.maps.GoogleMap
+import kotlinx.android.synthetic.main.activity_spot.btnChooseImage
+import kotlinx.android.synthetic.main.activity_spot_maps.*
 
 class SpotView : BaseView(), AnkoLogger {
 
     lateinit var presenter: SpotPresenter
     var spot = SpotModel()
+
+    lateinit var map: GoogleMap
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,6 +30,13 @@ class SpotView : BaseView(), AnkoLogger {
         init(toolbarAdd)
 
         presenter = initPresenter(SpotPresenter(this)) as SpotPresenter
+
+        // Setup MapView
+        spotLocation.onCreate(savedInstanceState)
+        spotLocation.getMapAsync {
+            map = it
+            presenter.doConfigureMap(map)
+        }
 
         // Handle Add Image Button Press
         btnChooseImage.setOnClickListener {
@@ -85,5 +97,30 @@ class SpotView : BaseView(), AnkoLogger {
 
     override fun onBackPressed() {
         presenter.doCancel()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        spotLocation.onDestroy()
+    }
+
+    override fun onLowMemory() {
+        super.onLowMemory()
+        spotLocation.onLowMemory()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        spotLocation.onPause()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        spotLocation.onResume()
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        spotLocation.onSaveInstanceState(outState)
     }
 }
