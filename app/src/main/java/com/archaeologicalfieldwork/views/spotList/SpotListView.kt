@@ -16,7 +16,7 @@ class SpotListView : BaseView(), SpotListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_spot_list)
-        setSupportActionBar(toolbar)
+        super.init(toolbar, false)
 
         presenter = initPresenter(SpotListPresenter(this)) as SpotListPresenter
 
