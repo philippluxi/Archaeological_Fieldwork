@@ -1,4 +1,4 @@
-package com.archaeologicalfieldwork.models
+package com.archaeologicalfieldwork.models.json
 
 import android.content.Context
 import kotlin.collections.ArrayList
@@ -8,6 +8,8 @@ import com.google.gson.reflect.TypeToken
 import org.jetbrains.anko.AnkoLogger
 import java.util.*
 import com.archaeologicalfieldwork.helpers.*
+import com.archaeologicalfieldwork.models.SpotModel
+import com.archaeologicalfieldwork.models.SpotStore
 
 val JSON_FILE = "spots.json"
 val gsonBuilder = GsonBuilder().setPrettyPrinting().create()

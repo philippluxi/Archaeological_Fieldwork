@@ -25,7 +25,7 @@ class SpotView : BaseView(), AnkoLogger {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_spot)
 
-        init(toolbarAdd)
+        init(toolbarAdd, true)
 
         presenter = initPresenter(SpotPresenter(this)) as SpotPresenter
 

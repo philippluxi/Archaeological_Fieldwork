@@ -4,7 +4,7 @@ import android.app.Application
 import org.jetbrains.anko.info
 import org.jetbrains.anko.AnkoLogger
 import com.archaeologicalfieldwork.models.SpotStore
-import com.archaeologicalfieldwork.models.SpotJSONStore
+import com.archaeologicalfieldwork.models.json.SpotJSONStore
 
 class MainApp : Application(), AnkoLogger {
 

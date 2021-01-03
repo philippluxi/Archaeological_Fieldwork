@@ -2,6 +2,13 @@
     <!--General-->
     <string name="app_name">Archaeological Fieldwork</string>
 
+    <!--Activity Titles-->
+    <string name="title_activity_spot_list">Spots</string>
+    <string name="title_activity_spot">Spot</string>
+    <string name="title_activity_location">Spot Location</string>
+    <string name="title_activity_map">Map</string>
+    <string name="title_spot_maps_activity">Set Location</string>
+
     <!-- Toolbar-->
     <string name="menu_addSpot">Add</string>
     <string name="menu_cancelNewSpot">Cancel</string>
@@ -22,11 +29,9 @@
 
     <!--Set Location-->
     <string name="button_set_location">Set Location</string>
-    <string name="title_activity_map">Map</string>
 
     <!--MapView-->
     <string name="menu_showMap">Show Map</string>
-    <string name="title_spot_maps_activity">Map</string>
     <string name="spot_currentImage_placeholder">Spot Image</string>
     <string name="spot_title_placeholder">Title</string>
     <string name="spot_description_placeholder">Description</string>

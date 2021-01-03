@@ -17,7 +17,7 @@ class SpotMapView : BaseView(), GoogleMap.OnMarkerClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_spot_maps)
-        super.init(toolbar)
+        super.init(toolbar, true)
 
         presenter = initPresenter(SpotMapPresenter(this)) as SpotMapPresenter
 
