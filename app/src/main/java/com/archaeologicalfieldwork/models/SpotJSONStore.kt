@@ -59,7 +59,7 @@ class SpotJSONStore : SpotStore, AnkoLogger {
     }
 
     override fun delete(spot: SpotModel) {
-        val foundSpot: SpotModel? = spots.find {it.id == spot.id}
+        val foundSpot: SpotModel? = spots.find { it.id == spot.id }
         spots.remove(foundSpot)
         serialize()
     }
