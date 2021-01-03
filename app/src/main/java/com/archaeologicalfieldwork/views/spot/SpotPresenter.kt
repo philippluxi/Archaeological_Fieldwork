@@ -1,22 +1,28 @@
 package com.archaeologicalfieldwork.views.spot
 
 import android.content.Intent
+import com.archaeologicalfieldwork.helpers.checkLocationPermissions
+import com.archaeologicalfieldwork.helpers.isPermissionGranted
 import org.jetbrains.anko.intentFor
 import com.archaeologicalfieldwork.helpers.showImagePicker
 import com.archaeologicalfieldwork.main.MainApp
 import com.archaeologicalfieldwork.models.Location
 import com.archaeologicalfieldwork.models.SpotModel
 import com.archaeologicalfieldwork.views.*
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 
 class SpotPresenter(view: BaseView) : BasePresenter(view) {
+    var locationService: FusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(view)
+    var map: GoogleMap? = null
+
     var spot = SpotModel()
     var defaultLocation = Location(48.983307948993094, 12.105706251194382, 16f)
     var edit = false
-    var map: GoogleMap? = null
 
     init {
         if (view.intent.hasExtra("spot_edit")) {
@@ -24,6 +30,9 @@ class SpotPresenter(view: BaseView) : BasePresenter(view) {
             spot = view.intent.extras?.getParcelable<SpotModel>("spot_edit")!!
             view.showSpot(spot)
         } else {
+            if (checkLocationPermissions(view)) {
+                // todo get the current location
+            }
             spot.lat = defaultLocation.lat
             spot.lng = defaultLocation.lng
         }
@@ -90,6 +99,15 @@ class SpotPresenter(view: BaseView) : BasePresenter(view) {
         map?.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(spot.lat, spot.lng), spot.zoom))
 
         view?.showSpot(spot)
+    }
+
+    override fun doRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
+        if (isPermissionGranted(requestCode, grantResults)) {
+            // todo get the current location
+        } else {
+            // permissions denied, so use the default location
+            locationUpdate(defaultLocation.lat, defaultLocation.lng)
+        }
     }
 
     override fun doActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
