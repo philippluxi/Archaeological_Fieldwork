@@ -25,6 +25,7 @@ class SpotPresenter(view: BaseView) : BasePresenter(view) {
     var spot = SpotModel()
     var defaultLocation = Location(50.983307948993094, 12.105706251194382, 16f)
     var edit = false
+    var locationManualyChanged = false
 
     init {
         if (view.intent.hasExtra("spot_edit")) {
@@ -79,6 +80,7 @@ class SpotPresenter(view: BaseView) : BasePresenter(view) {
     }
 
     fun doSetLocation() {
+        locationManualyChanged = true
         view?.navigateTo(
             VIEW.LOCATION,
             LOCATION_REQUEST,
@@ -112,7 +114,9 @@ class SpotPresenter(view: BaseView) : BasePresenter(view) {
             override fun onLocationResult(locationResult: LocationResult?) {
                 if (locationResult != null && locationResult.locations != null) {
                     val l = locationResult.locations.last()
-                    locationUpdate(Location(l.latitude, l.longitude))
+                    if (!locationManualyChanged) {
+                        locationUpdate(Location(l.latitude, l.longitude))
+                    }
                 }
             }
         }

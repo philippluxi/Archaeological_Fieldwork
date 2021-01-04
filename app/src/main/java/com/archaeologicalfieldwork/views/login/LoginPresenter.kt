@@ -42,6 +42,10 @@ class LoginPresenter(view: BaseView) : BasePresenter(view) {
         view?.showProgress()
         auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(view!!) { task ->
             if (task.isSuccessful) {
+                fireStore!!.fetchSpots {
+                    view?.hideProgress()
+                    view?.navigateTo(VIEW.LIST)
+                }
                 view?.hideProgress()
                 view?.navigateTo(VIEW.LIST)
             } else {
