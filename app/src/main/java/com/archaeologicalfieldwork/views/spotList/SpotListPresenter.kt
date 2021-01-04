@@ -20,6 +20,10 @@ class SpotListPresenter(view: BaseView) : BasePresenter(view) {
         view?.navigateTo(VIEW.MAPS)
     }
 
+    fun doLogout() {
+        view?.navigateTo(VIEW.LOGIN)
+    }
+
     fun loadSpots() {
         doAsync {
             val spots = app.spots.findAll()

@@ -11,12 +11,13 @@ import com.archaeologicalfieldwork.views.spot.SpotView
 import com.archaeologicalfieldwork.views.map.SpotMapView
 import com.archaeologicalfieldwork.views.spotList.SpotListView
 import com.archaeologicalfieldwork.views.location.EditLocationView
+import com.archaeologicalfieldwork.views.login.LoginView
 
 val IMAGE_REQUEST = 1
 val LOCATION_REQUEST = 2
 
 enum class VIEW {
-    LOCATION, SPOT, MAPS, LIST
+    LOCATION, SPOT, MAPS, LIST, LOGIN
 }
 
 open abstract class BaseView() : AppCompatActivity(), AnkoLogger {
@@ -30,6 +31,7 @@ open abstract class BaseView() : AppCompatActivity(), AnkoLogger {
             VIEW.SPOT -> intent = Intent(this, SpotView::class.java)
             VIEW.MAPS -> intent = Intent(this, SpotMapView::class.java)
             VIEW.LIST -> intent = Intent(this, SpotListView::class.java)
+            VIEW.LOGIN -> intent = Intent(this, LoginView::class.java)
         }
         if (key != "") {
             intent.putExtra(key, value)

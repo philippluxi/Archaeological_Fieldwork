@@ -39,6 +39,7 @@ class SpotListView : BaseView(), SpotListener {
         when (item.itemId) {
             R.id.item_add -> presenter.doaddSpot()
             R.id.item_map -> presenter.doShowSpotsMap()
+            R.id.item_logout ->presenter.doLogout()
         }
         return super.onOptionsItemSelected(item)
     }

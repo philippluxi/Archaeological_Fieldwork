@@ -15,6 +15,8 @@
     <string name="menu_cancelNewSpot">Cancel</string>
     <string name="menu_deleteSpot">Delete</string>
     <string name="menu_saveSpot">Save</string>
+    <string name="menu_showMap">Show Map</string>
+    <string name="menu_logout">Logout</string>
 
     <!--Spot Activity-->
     <string name="button_add_spot">Add Spot</string>
@@ -32,7 +34,6 @@
     <string name="button_set_location">Set Location</string>
 
     <!--MapView-->
-    <string name="menu_showMap">Show Map</string>
     <string name="spot_currentImage_placeholder">Spot Image</string>
     <string name="spot_title_placeholder">Title</string>
     <string name="spot_description_placeholder">Description</string>
