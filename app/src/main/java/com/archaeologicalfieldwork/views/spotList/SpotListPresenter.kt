@@ -2,6 +2,8 @@ package com.archaeologicalfieldwork.views.spotList
 
 import com.archaeologicalfieldwork.views.*
 import com.archaeologicalfieldwork.models.SpotModel
+import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.uiThread
 
 
 class SpotListPresenter(view: BaseView) : BasePresenter(view) {
@@ -19,6 +21,11 @@ class SpotListPresenter(view: BaseView) : BasePresenter(view) {
     }
 
     fun loadSpots() {
-        view?.showSpots(app.spots.findAll())
+        doAsync {
+            val spots = app.spots.findAll()
+            uiThread {
+                view?.showSpots(spots)
+            }
+        }
     }
 }

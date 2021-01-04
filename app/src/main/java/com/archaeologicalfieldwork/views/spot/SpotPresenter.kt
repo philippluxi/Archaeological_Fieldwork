@@ -13,6 +13,8 @@ import com.google.android.gms.maps.model.MarkerOptions
 import com.archaeologicalfieldwork.views.*
 import com.archaeologicalfieldwork.models.*
 import com.archaeologicalfieldwork.helpers.*
+import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.uiThread
 
 class SpotPresenter(view: BaseView) : BasePresenter(view) {
     var locationService: FusedLocationProviderClient =
@@ -44,12 +46,16 @@ class SpotPresenter(view: BaseView) : BasePresenter(view) {
     fun doAddOrSave(title: String, description: String) {
         spot.title = title
         spot.description = description
-        if (edit) {
-            app.spots.update(spot)
-        } else {
-            app.spots.create(spot)
+        doAsync {
+            if (edit) {
+                app.spots.update(spot)
+            } else {
+                app.spots.create(spot)
+            }
+            uiThread {
+                view?.finish()
+            }
         }
-        view?.finish()
     }
 
     fun cacheSpot(title: String, description: String) {
