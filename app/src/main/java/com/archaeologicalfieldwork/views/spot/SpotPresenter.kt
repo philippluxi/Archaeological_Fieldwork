@@ -40,7 +40,7 @@ class SpotPresenter(view: BaseView) : BasePresenter(view) {
 
     fun doConfigureMap(m: GoogleMap) {
         map = m
-        locationUpdate(spot.lat, spot.lng)
+        locationUpdate(spot.location)
     }
 
     fun doAddOrSave(title: String, description: String) {
@@ -83,27 +83,25 @@ class SpotPresenter(view: BaseView) : BasePresenter(view) {
             VIEW.LOCATION,
             LOCATION_REQUEST,
             "location",
-            Location(spot.lat, spot.lng, spot.zoom)
+            Location(spot.location.lat, spot.location.lng, spot.location.zoom)
         )
     }
 
     @SuppressLint("MissingPermission")
     fun doSetCurrentLocation() {
         locationService.lastLocation.addOnSuccessListener {
-            locationUpdate(it.latitude, it.longitude)
+            locationUpdate(Location(it.latitude, it.longitude))
         }
     }
 
-    fun locationUpdate(lat: Double, lng: Double) {
-        spot.lat = lat
-        spot.lng = lng
-        spot.zoom = 15f
+    fun locationUpdate(location: Location) {
+        spot.location = location
         map?.clear()
         map?.uiSettings?.isZoomGesturesEnabled = true
 
-        val options = MarkerOptions().title(spot.title).position(LatLng(spot.lat, spot.lng))
+        val options = MarkerOptions().title(spot.title).position(LatLng(spot.location.lat, spot.location.lng))
         map?.addMarker(options)
-        map?.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(spot.lat, spot.lng), spot.zoom))
+        map?.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(spot.location.lat, spot.location.lng), spot.location.zoom))
 
         view?.showSpot(spot)
     }
@@ -114,7 +112,7 @@ class SpotPresenter(view: BaseView) : BasePresenter(view) {
             override fun onLocationResult(locationResult: LocationResult?) {
                 if (locationResult != null && locationResult.locations != null) {
                     val l = locationResult.locations.last()
-                    locationUpdate(l.latitude, l.longitude)
+                    locationUpdate(Location(l.latitude, l.longitude))
                 }
             }
         }
@@ -128,14 +126,12 @@ class SpotPresenter(view: BaseView) : BasePresenter(view) {
         permissions: Array<String>,
         grantResults: IntArray
     ) {
-        if (isPermissionGranted(requestCode, grantResults)) {
             if (isPermissionGranted(requestCode, grantResults)) {
                 doSetCurrentLocation()
             } else {
-                locationUpdate(defaultLocation.lat, defaultLocation.lng)
+                locationUpdate(Location(defaultLocation.lat, defaultLocation.lng))
             }
         }
-    }
 
     override fun doActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
         when (requestCode) {
@@ -145,10 +141,8 @@ class SpotPresenter(view: BaseView) : BasePresenter(view) {
             }
             LOCATION_REQUEST -> {
                 val location = data.extras?.getParcelable<Location>("location")!!
-                spot.lat = location.lat
-                spot.lng = location.lng
-                spot.zoom = location.zoom
-                locationUpdate(spot.lat, spot.lng)
+                spot.location = location
+                locationUpdate(location)
             }
         }
     }

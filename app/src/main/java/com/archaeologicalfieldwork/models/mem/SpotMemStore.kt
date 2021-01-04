@@ -37,9 +37,7 @@ class SpotMemStore : SpotStore, AnkoLogger {
             foundSpot.title = spot.title
             foundSpot.description = spot.description
             foundSpot.image = spot.image
-            foundSpot.lat = spot.lat
-            foundSpot.lng = spot.lng
-            foundSpot.zoom = spot.zoom
+            foundSpot.location = spot.location
             logAll()
         }
     }

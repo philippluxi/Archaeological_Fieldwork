@@ -13,6 +13,7 @@ import com.archaeologicalfieldwork.views.*
 import com.google.android.gms.maps.GoogleMap
 import com.archaeologicalfieldwork.models.SpotModel
 import com.archaeologicalfieldwork.helpers.readImageFromPath
+import com.archaeologicalfieldwork.models.Location
 
 class SpotView : BaseView(), AnkoLogger {
 
@@ -51,8 +52,12 @@ class SpotView : BaseView(), AnkoLogger {
         if (spot.image != null) {
             btnChooseImage.setText(R.string.change_spot_image)
         }
-        lat.setText("%.6f".format(spot.lat))
-        lng.setText("%.6f".format(spot.lng))
+        this.showLocation(spot.location)
+    }
+
+    override fun showLocation (loc : Location) {
+        lat.setText("%.6f".format(loc.lat))
+        lng.setText("%.6f".format(loc.lng))
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
