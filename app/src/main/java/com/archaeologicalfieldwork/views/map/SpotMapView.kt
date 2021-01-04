@@ -8,6 +8,7 @@ import com.archaeologicalfieldwork.R
 import com.archaeologicalfieldwork.views.BaseView
 import com.archaeologicalfieldwork.models.SpotModel
 import com.archaeologicalfieldwork.helpers.readImageFromPath
+import com.bumptech.glide.Glide
 
 class SpotMapView : BaseView(), GoogleMap.OnMarkerClickListener {
 
@@ -32,7 +33,7 @@ class SpotMapView : BaseView(), GoogleMap.OnMarkerClickListener {
     override fun showSpot(spot: SpotModel) {
         currentTitle.text = spot.title
         currentDescription.text = spot.description
-        currentImage.setImageBitmap(readImageFromPath(this, spot.image))
+        Glide.with(this).load(spot.image).into(currentImage)
     }
 
     override fun showSpots(spots: List<SpotModel>) {

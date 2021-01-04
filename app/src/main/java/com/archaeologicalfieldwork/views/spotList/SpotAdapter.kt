@@ -8,6 +8,7 @@ import kotlinx.android.synthetic.main.card_spot.view.*
 import com.archaeologicalfieldwork.R
 import com.archaeologicalfieldwork.models.SpotModel
 import com.archaeologicalfieldwork.helpers.readImageFromPath
+import com.bumptech.glide.Glide
 
 interface SpotListener {
     fun onSpotClick(spot: SpotModel)
@@ -40,7 +41,7 @@ class SpotAdapter constructor(
         fun bind(spot: SpotModel, listener: SpotListener) {
             itemView.spotTitle_Card.text = spot.title
             itemView.spotDescription_Card.text = spot.description
-            itemView.imageIcon.setImageBitmap(readImageFromPath(itemView.context, spot.image))
+            Glide.with(itemView.context).load(spot.image).into(itemView.imageIcon)
             itemView.setOnClickListener { listener.onSpotClick(spot) }
         }
     }

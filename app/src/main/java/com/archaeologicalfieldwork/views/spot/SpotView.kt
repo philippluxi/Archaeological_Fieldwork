@@ -14,6 +14,7 @@ import com.google.android.gms.maps.GoogleMap
 import com.archaeologicalfieldwork.models.SpotModel
 import com.archaeologicalfieldwork.helpers.readImageFromPath
 import com.archaeologicalfieldwork.models.Location
+import com.bumptech.glide.Glide
 
 class SpotView : BaseView(), AnkoLogger {
 
@@ -48,7 +49,7 @@ class SpotView : BaseView(), AnkoLogger {
     override fun showSpot(spot: SpotModel) {
         if (spotTitle.text.isEmpty()) spotTitle.setText(spot.title)
         if (spotDescription.text.isEmpty()) spotDescription.setText(spot.description)
-        spotImage.setImageBitmap(readImageFromPath(this, spot.image))
+        Glide.with(this).load(spot.image).into(spotImage)
         if (spot.image != null) {
             btnChooseImage.setText(R.string.change_spot_image)
         }
