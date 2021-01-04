@@ -23,6 +23,7 @@ class SpotListPresenter(view: BaseView) : BasePresenter(view) {
 
     fun doLogout() {
         FirebaseAuth.getInstance().signOut()
+        app.spots.clear()
         view?.navigateTo(VIEW.LOGIN)
     }
 
