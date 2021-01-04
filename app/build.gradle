@@ -1,6 +1,8 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+// Needed for Rooms
+apply plugin: "kotlin-kapt"
 
 android {
   compileSdkVersion 30
@@ -47,4 +49,8 @@ dependencies {
 
   // Get current location
   implementation "com.google.android.gms:play-services-location:17.1.0"
+
+  // Rooms
+  implementation 'androidx.room:room-runtime:2.1.0'
+  kapt 'androidx.room:room-compiler:2.1.0'
 }
