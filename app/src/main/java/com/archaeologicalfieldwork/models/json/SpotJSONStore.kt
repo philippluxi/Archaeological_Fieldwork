@@ -73,4 +73,8 @@ class SpotJSONStore : SpotStore, AnkoLogger {
         val jsonString = read(context, JSON_FILE)
         spots = Gson().fromJson(jsonString, listType)
     }
+
+    override fun clear() {
+        spots.clear()
+    }
 }
