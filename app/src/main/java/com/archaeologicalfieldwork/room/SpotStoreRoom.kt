@@ -35,5 +35,8 @@ class SpotStoreRoom(val context: Context) : SpotStore {
     override fun delete(spot: SpotModel) {
         dao.deleteSpot(spot)
     }
+
+    override fun clear() {
+    }
 }
 

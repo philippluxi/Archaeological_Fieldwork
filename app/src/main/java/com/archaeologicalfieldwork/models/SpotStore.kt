@@ -6,4 +6,5 @@ interface SpotStore {
     fun create(spot: SpotModel)
     fun update(spot: SpotModel)
     fun delete(spot: SpotModel)
+    fun clear()
 }

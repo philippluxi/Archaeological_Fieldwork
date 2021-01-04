@@ -46,6 +46,10 @@ class SpotMemStore : SpotStore, AnkoLogger {
         spots.remove(spot)
     }
 
+    override fun clear() {
+        spots.clear()
+    }
+
     fun logAll() {
         spots.forEach { info("${it}") }
     }
