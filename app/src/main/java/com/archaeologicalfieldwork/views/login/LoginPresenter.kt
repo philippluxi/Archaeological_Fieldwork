@@ -1,23 +1,39 @@
-package com.archaeologicalfieldwork.views.login
 
+import com.google.firebase.auth.FirebaseAuth
+import org.jetbrains.anko.toast
+import com.archaeologicalfieldwork.models.firebase.SpotFireStore
 import com.archaeologicalfieldwork.views.BasePresenter
 import com.archaeologicalfieldwork.views.BaseView
 import com.archaeologicalfieldwork.views.VIEW
-import com.google.firebase.auth.FirebaseAuth
-import org.jetbrains.anko.toast
 
 class LoginPresenter(view: BaseView) : BasePresenter(view) {
+
     var auth: FirebaseAuth = FirebaseAuth.getInstance()
+    var fireStore: SpotFireStore? = null
+
+    init {
+        if (app.spots is SpotFireStore) {
+            fireStore = app.spots as SpotFireStore
+        }
+    }
 
     fun doLogin(email: String, password: String) {
         view?.showProgress()
         auth.signInWithEmailAndPassword(email, password).addOnCompleteListener(view!!) { task ->
             if (task.isSuccessful) {
-                view?.navigateTo(VIEW.LIST)
+                if (fireStore != null) {
+                    fireStore!!.fetchSpots {
+                        view?.hideProgress()
+                        view?.navigateTo(VIEW.LIST)
+                    }
+                } else {
+                    view?.hideProgress()
+                    view?.navigateTo(VIEW.LIST)
+                }
             } else {
-                view?.toast("Login Failed: ${task.exception?.message}")
+                view?.hideProgress()
+                view?.toast("Sign Up Failed: ${task.exception?.message}")
             }
-            view?.hideProgress()
         }
     }
 
@@ -25,11 +41,18 @@ class LoginPresenter(view: BaseView) : BasePresenter(view) {
         view?.showProgress()
         auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(view!!) { task ->
             if (task.isSuccessful) {
+                view?.hideProgress()
                 view?.navigateTo(VIEW.LIST)
             } else {
+                view?.hideProgress()
                 view?.toast("Sign Up Failed: ${task.exception?.message}")
             }
-            view?.hideProgress()
         }
+    }
+
+    fun doLogout() {
+        FirebaseAuth.getInstance().signOut()
+        app.spots.clear()
+        view?.navigateTo(VIEW.LOGIN)
     }
 }
