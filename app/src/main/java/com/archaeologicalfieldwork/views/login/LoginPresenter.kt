@@ -1,3 +1,4 @@
+package com.archaeologicalfieldwork.views.login
 
 import com.google.firebase.auth.FirebaseAuth
 import org.jetbrains.anko.toast

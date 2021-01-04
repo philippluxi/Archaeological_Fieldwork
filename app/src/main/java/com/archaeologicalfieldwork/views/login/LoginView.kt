@@ -1,6 +1,5 @@
 package com.archaeologicalfieldwork.views.login
 
-import LoginPresenter
 import android.os.Bundle
 import android.view.View
 import kotlinx.android.synthetic.main.activity_login.*
