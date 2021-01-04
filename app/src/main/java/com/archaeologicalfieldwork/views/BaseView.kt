@@ -12,6 +12,7 @@ import com.archaeologicalfieldwork.views.map.SpotMapView
 import com.archaeologicalfieldwork.views.spotList.SpotListView
 import com.archaeologicalfieldwork.views.location.EditLocationView
 import com.archaeologicalfieldwork.views.login.LoginView
+import com.google.firebase.auth.FirebaseAuth
 
 val IMAGE_REQUEST = 1
 val LOCATION_REQUEST = 2
@@ -48,6 +49,10 @@ open abstract class BaseView() : AppCompatActivity(), AnkoLogger {
         toolbar.title = title
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(upEnabled)
+        val user = FirebaseAuth.getInstance().currentUser
+        if (user != null) {
+            toolbar.title = "${title}: ${user.email}"
+        }
     }
 
     override fun onDestroy() {

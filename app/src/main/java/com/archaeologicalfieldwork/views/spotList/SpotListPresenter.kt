@@ -2,6 +2,7 @@ package com.archaeologicalfieldwork.views.spotList
 
 import com.archaeologicalfieldwork.views.*
 import com.archaeologicalfieldwork.models.SpotModel
+import com.google.firebase.auth.FirebaseAuth
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 
@@ -21,6 +22,7 @@ class SpotListPresenter(view: BaseView) : BasePresenter(view) {
     }
 
     fun doLogout() {
+        FirebaseAuth.getInstance().signOut()
         view?.navigateTo(VIEW.LOGIN)
     }
 
