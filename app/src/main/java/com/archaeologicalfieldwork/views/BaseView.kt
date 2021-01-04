@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Parcelable
 import androidx.appcompat.widget.Toolbar
 import androidx.appcompat.app.AppCompatActivity
+import com.archaeologicalfieldwork.models.Location
 import org.jetbrains.anko.AnkoLogger
 import com.archaeologicalfieldwork.models.SpotModel
 import com.archaeologicalfieldwork.views.spot.SpotView
@@ -70,5 +71,5 @@ open abstract class BaseView() : AppCompatActivity(), AnkoLogger {
     open fun showSpots(spots: List<SpotModel>) {}
     open fun showProgress() {}
     open fun hideProgress() {}
-    open fun showLocation(latitude : Double, longitude : Double) {}
+    open fun showLocation(location: Location) {}
 }
