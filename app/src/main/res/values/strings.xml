@@ -7,7 +7,8 @@
     <string name="title_activity_spot">Spot</string>
     <string name="title_activity_location">Spot Location</string>
     <string name="title_activity_map">Map</string>
-    <string name="title_spot_maps_activity">Set Location</string>
+    <string name="title_activity_spot_maps">Set Location</string>
+    <string name="title_activity_login"> SignUp / Login</string>
 
     <!-- Toolbar-->
     <string name="menu_addSpot">Add</string>
