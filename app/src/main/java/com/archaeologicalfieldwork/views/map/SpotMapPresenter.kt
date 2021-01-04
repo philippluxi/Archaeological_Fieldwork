@@ -8,6 +8,8 @@ import com.google.android.gms.maps.model.MarkerOptions
 import com.archaeologicalfieldwork.views.BaseView
 import com.archaeologicalfieldwork.models.SpotModel
 import com.archaeologicalfieldwork.views.BasePresenter
+import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.uiThread
 
 class SpotMapPresenter(view: BaseView) : BasePresenter(view) {
 
@@ -23,11 +25,20 @@ class SpotMapPresenter(view: BaseView) : BasePresenter(view) {
 
     fun doMarkerSelected(marker: Marker) {
         val tag = marker.tag as Long
-        val spot = app.spots.findById(tag)
-        if (spot != null) view?.showSpot(spot)
+        doAsync {
+            val spot = app.spots.findById(tag)
+            uiThread {
+                if (spot != null) view?.showSpot(spot)
+            }
+        }
     }
 
     fun loadSpots() {
-        view?.showSpots(app.spots.findAll())
+        doAsync {
+            val spots = app.spots.findAll()
+            uiThread {
+                view?.showSpots(spots)
+            }
+        }
     }
 }
