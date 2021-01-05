@@ -2,6 +2,13 @@
     <!--General-->
     <string name="app_name">Archaeological Fieldwork</string>
 
+
+    <!--Splashscreen-->
+    <string name="title_splashscreen">Spots</string>
+    <string name="splash_subtitle">Archaeological Fieldwork, 2020</string>
+
+
+
     <!--Activity Titles-->
     <string name="title_activity_spot_list">Spots</string>
     <string name="title_activity_spot">Spot</string>
