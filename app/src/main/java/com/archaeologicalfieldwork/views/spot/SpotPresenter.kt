@@ -2,6 +2,13 @@ package com.archaeologicalfieldwork.views.spot
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import com.archaeologicalfieldwork.helpers.checkLocationPermissions
+import com.archaeologicalfieldwork.helpers.createDefaultLocationRequest
+import com.archaeologicalfieldwork.helpers.isPermissionGranted
+import com.archaeologicalfieldwork.helpers.showImagePicker
+import com.archaeologicalfieldwork.models.Location
+import com.archaeologicalfieldwork.models.SpotModel
+import com.archaeologicalfieldwork.views.*
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationResult
@@ -10,9 +17,6 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
-import com.archaeologicalfieldwork.views.*
-import com.archaeologicalfieldwork.models.*
-import com.archaeologicalfieldwork.helpers.*
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 

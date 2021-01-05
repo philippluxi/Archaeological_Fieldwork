@@ -2,10 +2,10 @@ package com.archaeologicalfieldwork.views.login
 
 import android.os.Bundle
 import android.view.View
-import kotlinx.android.synthetic.main.activity_login.*
-import org.jetbrains.anko.toast
 import com.archaeologicalfieldwork.R
 import com.archaeologicalfieldwork.views.BaseView
+import kotlinx.android.synthetic.main.activity_login.*
+import org.jetbrains.anko.toast
 
 class LoginView : BaseView() {
 

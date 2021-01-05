@@ -1,14 +1,13 @@
 package com.archaeologicalfieldwork.views.spotList
 
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.LayoutInflater
 import androidx.recyclerview.widget.RecyclerView
-import kotlinx.android.synthetic.main.card_spot.view.*
 import com.archaeologicalfieldwork.R
 import com.archaeologicalfieldwork.models.SpotModel
-import com.archaeologicalfieldwork.helpers.readImageFromPath
 import com.bumptech.glide.Glide
+import kotlinx.android.synthetic.main.card_spot.view.*
 
 interface SpotListener {
     fun onSpotClick(spot: SpotModel)
@@ -21,7 +20,7 @@ class SpotAdapter constructor(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainHolder {
         return MainHolder(
-            LayoutInflater.from(parent?.context).inflate(
+            LayoutInflater.from(parent.context).inflate(
                 R.layout.card_spot,
                 parent,
                 false

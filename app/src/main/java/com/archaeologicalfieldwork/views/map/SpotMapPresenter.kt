@@ -1,13 +1,13 @@
 package com.archaeologicalfieldwork.views.map
 
+import com.archaeologicalfieldwork.models.SpotModel
+import com.archaeologicalfieldwork.views.BasePresenter
+import com.archaeologicalfieldwork.views.BaseView
+import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
-import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.model.MarkerOptions
-import com.archaeologicalfieldwork.views.BaseView
-import com.archaeologicalfieldwork.models.SpotModel
-import com.archaeologicalfieldwork.views.BasePresenter
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 
@@ -26,7 +26,7 @@ class SpotMapPresenter(view: BaseView) : BasePresenter(view) {
     fun doMarkerSelected(marker: Marker) {
         val spot = marker.tag as SpotModel
         doAsync {
-           uiThread {
+            uiThread {
                 if (spot != null) view?.showSpot(spot)
             }
         }

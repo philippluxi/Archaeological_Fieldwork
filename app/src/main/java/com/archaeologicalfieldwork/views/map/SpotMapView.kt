@@ -1,14 +1,13 @@
 package com.archaeologicalfieldwork.views.map
 
 import android.os.Bundle
-import kotlinx.android.synthetic.main.activity_spot_maps.*
+import com.archaeologicalfieldwork.R
+import com.archaeologicalfieldwork.models.SpotModel
+import com.archaeologicalfieldwork.views.BaseView
+import com.bumptech.glide.Glide
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.Marker
-import com.archaeologicalfieldwork.R
-import com.archaeologicalfieldwork.views.BaseView
-import com.archaeologicalfieldwork.models.SpotModel
-import com.archaeologicalfieldwork.helpers.readImageFromPath
-import com.bumptech.glide.Glide
+import kotlinx.android.synthetic.main.activity_spot_maps.*
 
 class SpotMapView : BaseView(), GoogleMap.OnMarkerClickListener {
 
