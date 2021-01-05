@@ -69,8 +69,12 @@ class SpotPresenter(view: BaseView) : BasePresenter(view) {
     }
 
     fun doDelete() {
-        app.spots.delete(spot)
-        view?.finish()
+        doAsync {
+            app.spots.delete(spot)
+            uiThread {
+                view?.finish()
+            }
+        }
     }
 
     fun doSelectImage() {
@@ -101,9 +105,17 @@ class SpotPresenter(view: BaseView) : BasePresenter(view) {
         map?.clear()
         map?.uiSettings?.isZoomGesturesEnabled = true
 
-        val options = MarkerOptions().title(spot.title).position(LatLng(spot.location.lat, spot.location.lng))
+        val options =
+            MarkerOptions().title(spot.title).position(LatLng(spot.location.lat, spot.location.lng))
         map?.addMarker(options)
-        map?.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(spot.location.lat, spot.location.lng), spot.location.zoom))
+        map?.moveCamera(
+            CameraUpdateFactory.newLatLngZoom(
+                LatLng(
+                    spot.location.lat,
+                    spot.location.lng
+                ), spot.location.zoom
+            )
+        )
 
         view?.showSpot(spot)
     }
@@ -130,12 +142,12 @@ class SpotPresenter(view: BaseView) : BasePresenter(view) {
         permissions: Array<String>,
         grantResults: IntArray
     ) {
-            if (isPermissionGranted(requestCode, grantResults)) {
-                doSetCurrentLocation()
-            } else {
-                locationUpdate(Location(defaultLocation.lat, defaultLocation.lng))
-            }
+        if (isPermissionGranted(requestCode, grantResults)) {
+            doSetCurrentLocation()
+        } else {
+            locationUpdate(Location(defaultLocation.lat, defaultLocation.lng))
         }
+    }
 
     override fun doActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
         when (requestCode) {
