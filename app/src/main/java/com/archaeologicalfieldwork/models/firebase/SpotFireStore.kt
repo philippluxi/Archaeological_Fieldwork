@@ -2,17 +2,24 @@ package com.archaeologicalfieldwork.models.firebase
 
 
 import android.content.Context
+import android.graphics.Bitmap
+import com.archaeologicalfieldwork.helpers.readImageFromPath
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import org.jetbrains.anko.AnkoLogger
 import com.archaeologicalfieldwork.models.SpotModel
 import com.archaeologicalfieldwork.models.SpotStore
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
+import java.io.ByteArrayOutputStream
+import java.io.File
 
 class SpotFireStore(val context: Context) : SpotStore, AnkoLogger {
 
     val spots = ArrayList<SpotModel>()
     lateinit var userId: String
     lateinit var db: DatabaseReference
+    lateinit var st: StorageReference
 
     override fun findAll(): List<SpotModel> {
         return spots
@@ -29,6 +36,7 @@ class SpotFireStore(val context: Context) : SpotStore, AnkoLogger {
             spot.fbId = key
             spots.add(spot)
             db.child("users").child(userId).child("spots").child(key).setValue(spot)
+            updateImage(spot)
         }
     }
 
@@ -42,7 +50,9 @@ class SpotFireStore(val context: Context) : SpotStore, AnkoLogger {
         }
 
         db.child("users").child(userId).child("spots").child(spot.fbId).setValue(spot)
-
+        if ((spot.image.length) > 0 && (spot.image[0] != 'h')) {
+            updateImage(spot)
+        }
     }
 
     override fun delete(spot: SpotModel) {
@@ -52,6 +62,31 @@ class SpotFireStore(val context: Context) : SpotStore, AnkoLogger {
 
     override fun clear() {
         spots.clear()
+    }
+
+    fun updateImage(spot: SpotModel) {
+        if (spot.image != "") {
+            val fileName = File(spot.image)
+            val imageName = fileName.getName()
+
+            var imageRef = st.child(userId + '/' + imageName)
+            val baos = ByteArrayOutputStream()
+            val bitmap = readImageFromPath(context, spot.image)
+
+            bitmap?.let {
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
+                val data = baos.toByteArray()
+                val uploadTask = imageRef.putBytes(data)
+                uploadTask.addOnFailureListener {
+                    println(it.message)
+                }.addOnSuccessListener { taskSnapshot ->
+                    taskSnapshot.metadata!!.reference!!.downloadUrl.addOnSuccessListener {
+                        spot.image = it.toString()
+                        db.child("users").child(userId).child("spots").child(spot.fbId).setValue(spot)
+                    }
+                }
+            }
+        }
     }
 
     fun fetchSpots(spotsReady: () -> Unit) {
@@ -65,6 +100,7 @@ class SpotFireStore(val context: Context) : SpotStore, AnkoLogger {
         }
         userId = FirebaseAuth.getInstance().currentUser!!.uid
         db = FirebaseDatabase.getInstance().reference
+        st = FirebaseStorage.getInstance().reference
         spots.clear()
         db.child("users").child(userId).child("spots").addListenerForSingleValueEvent(valueEventListener)
     }
