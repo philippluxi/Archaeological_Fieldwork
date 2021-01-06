@@ -17,10 +17,13 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.info
 import org.jetbrains.anko.uiThread
+import java.util.*
 
-class SpotPresenter(view: BaseView) : BasePresenter(view) {
+class SpotPresenter(view: BaseView) : BasePresenter(view), AnkoLogger {
     var locationService: FusedLocationProviderClient =
         LocationServices.getFusedLocationProviderClient(view)
     val locationRequest = createDefaultLocationRequest()
@@ -79,6 +82,18 @@ class SpotPresenter(view: BaseView) : BasePresenter(view) {
                 view?.finish()
             }
         }
+    }
+
+    fun doSetVisited(isChecked: Boolean) {
+        if (isChecked) {
+            spot.visited = true
+            spot.dateVisited = java.text.DateFormat.getDateTimeInstance().format(Calendar.getInstance().getTime())
+            info("Visited Checkbox checked at: ${spot.dateVisited}")
+        } else {
+            spot.visited = false
+            spot.dateVisited = "Not Visited"
+        }
+
     }
 
     fun doSelectImage() {

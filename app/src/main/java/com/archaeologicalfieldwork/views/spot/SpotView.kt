@@ -42,11 +42,17 @@ class SpotView : BaseView(), AnkoLogger {
             presenter.cacheSpot(spotTitle.text.toString(), spotDescription.text.toString())
             presenter.doSelectImage()
         }
+
+        // Handle Visited Checkbox
+        visited_checkBox.setOnClickListener {
+            presenter.doSetVisited(visited_checkBox.isChecked)
+        }
     }
 
     override fun showSpot(spot: SpotModel) {
         if (spotTitle.text.isEmpty()) spotTitle.setText(spot.title)
         if (spotDescription.text.isEmpty()) spotDescription.setText(spot.description)
+        visited_checkBox.isChecked = spot.visited
         Glide.with(this).load(spot.image).into(spotImage)
         if (spot.image != null) {
             btnChooseImage.setText(R.string.change_spot_image)
