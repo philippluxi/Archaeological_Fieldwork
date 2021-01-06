@@ -4,9 +4,12 @@ import android.content.Intent
 import android.os.Parcelable
 import androidx.appcompat.widget.Toolbar
 import androidx.appcompat.app.AppCompatActivity
+import com.google.firebase.auth.FirebaseAuth
 import org.jetbrains.anko.AnkoLogger
+import com.archaeologicalfieldwork.models.Location
 import com.archaeologicalfieldwork.models.SpotModel
 import com.archaeologicalfieldwork.views.spot.SpotView
+import com.archaeologicalfieldwork.views.login.LoginView
 import com.archaeologicalfieldwork.views.map.SpotMapView
 import com.archaeologicalfieldwork.views.spotList.SpotListView
 import com.archaeologicalfieldwork.views.location.EditLocationView
@@ -15,7 +18,7 @@ val IMAGE_REQUEST = 1
 val LOCATION_REQUEST = 2
 
 enum class VIEW {
-    LOCATION, SPOT, MAPS, LIST
+    LOCATION, SPOT, MAPS, LIST, LOGIN
 }
 
 open abstract class BaseView() : AppCompatActivity(), AnkoLogger {
@@ -29,6 +32,7 @@ open abstract class BaseView() : AppCompatActivity(), AnkoLogger {
             VIEW.SPOT -> intent = Intent(this, SpotView::class.java)
             VIEW.MAPS -> intent = Intent(this, SpotMapView::class.java)
             VIEW.LIST -> intent = Intent(this, SpotListView::class.java)
+            VIEW.LOGIN -> intent = Intent(this, LoginView::class.java)
         }
         if (key != "") {
             intent.putExtra(key, value)
@@ -41,9 +45,14 @@ open abstract class BaseView() : AppCompatActivity(), AnkoLogger {
         return presenter
     }
 
-    fun init(toolbar: Toolbar) {
+    fun init(toolbar: Toolbar, upEnabled: Boolean) {
         toolbar.title = title
         setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(upEnabled)
+        val user = FirebaseAuth.getInstance().currentUser
+        if (user != null) {
+            toolbar.title = "${title}: ${user.email}"
+        }
     }
 
     override fun onDestroy() {
@@ -69,4 +78,5 @@ open abstract class BaseView() : AppCompatActivity(), AnkoLogger {
     open fun showSpots(spots: List<SpotModel>) {}
     open fun showProgress() {}
     open fun hideProgress() {}
+    open fun showLocation(location: Location) {}
 }

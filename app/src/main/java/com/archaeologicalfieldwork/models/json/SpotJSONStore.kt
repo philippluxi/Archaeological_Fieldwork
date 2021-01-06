@@ -1,13 +1,16 @@
-package com.archaeologicalfieldwork.models
+package com.archaeologicalfieldwork.models.json
 
 import android.content.Context
-import kotlin.collections.ArrayList
+import com.archaeologicalfieldwork.helpers.exists
+import com.archaeologicalfieldwork.helpers.read
+import com.archaeologicalfieldwork.helpers.write
+import com.archaeologicalfieldwork.models.SpotModel
+import com.archaeologicalfieldwork.models.SpotStore
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.google.gson.reflect.TypeToken
 import org.jetbrains.anko.AnkoLogger
 import java.util.*
-import com.archaeologicalfieldwork.helpers.*
 
 val JSON_FILE = "spots.json"
 val gsonBuilder = GsonBuilder().setPrettyPrinting().create()
@@ -51,9 +54,7 @@ class SpotJSONStore : SpotStore, AnkoLogger {
             foundSpot.title = spot.title
             foundSpot.description = spot.description
             foundSpot.image = spot.image
-            foundSpot.lat = spot.lat
-            foundSpot.lng = spot.lng
-            foundSpot.zoom = spot.zoom
+            foundSpot.location = spot.location
         }
         serialize()
     }
@@ -72,5 +73,9 @@ class SpotJSONStore : SpotStore, AnkoLogger {
     private fun deserialize() {
         val jsonString = read(context, JSON_FILE)
         spots = Gson().fromJson(jsonString, listType)
+    }
+
+    override fun clear() {
+        spots.clear()
     }
 }

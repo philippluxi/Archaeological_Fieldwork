@@ -1,10 +1,10 @@
 package com.archaeologicalfieldwork.main
 
 import android.app.Application
-import org.jetbrains.anko.info
-import org.jetbrains.anko.AnkoLogger
 import com.archaeologicalfieldwork.models.SpotStore
-import com.archaeologicalfieldwork.models.SpotJSONStore
+import com.archaeologicalfieldwork.models.firebase.SpotFireStore
+import org.jetbrains.anko.AnkoLogger
+import org.jetbrains.anko.info
 
 class MainApp : Application(), AnkoLogger {
 
@@ -12,7 +12,9 @@ class MainApp : Application(), AnkoLogger {
 
     override fun onCreate() {
         super.onCreate()
-        spots = SpotJSONStore(applicationContext)
-        info("Archaelogical Fieldwork started")
+        // spots = SpotJSONStore(applicationContext)
+        // spots = SpotStoreRoom(applicationContext)
+        spots = SpotFireStore(applicationContext)
+        info("Archaeological Fieldwork started")
     }
 }

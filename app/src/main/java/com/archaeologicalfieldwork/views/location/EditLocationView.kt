@@ -3,11 +3,12 @@ package com.archaeologicalfieldwork.views.location
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import kotlinx.android.synthetic.main.activity_map.*
+import com.archaeologicalfieldwork.R
+import com.archaeologicalfieldwork.models.Location
+import com.archaeologicalfieldwork.views.BaseView
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.Marker
-import com.archaeologicalfieldwork.R
-import com.archaeologicalfieldwork.views.BaseView
+import kotlinx.android.synthetic.main.activity_map.*
 
 class EditLocationView : BaseView(), GoogleMap.OnMarkerDragListener,
     GoogleMap.OnMarkerClickListener {
@@ -17,7 +18,7 @@ class EditLocationView : BaseView(), GoogleMap.OnMarkerDragListener,
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_map)
-        super.init(toolbar)
+        super.init(toolbar, true)
 
         presenter = initPresenter(EditLocationPresenter(this)) as EditLocationPresenter
 
@@ -41,6 +42,11 @@ class EditLocationView : BaseView(), GoogleMap.OnMarkerDragListener,
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun showLocation(location: Location) {
+        lat.setText("%.6f".format(location.lat))
+        lng.setText("%.6f".format(location.lng))
     }
 
     override fun onMarkerDragStart(marker: Marker) {}

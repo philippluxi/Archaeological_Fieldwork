@@ -1,13 +1,13 @@
 package com.archaeologicalfieldwork.views.map
 
 import android.os.Bundle
-import kotlinx.android.synthetic.main.activity_spot_maps.*
+import com.archaeologicalfieldwork.R
+import com.archaeologicalfieldwork.models.SpotModel
+import com.archaeologicalfieldwork.views.BaseView
+import com.bumptech.glide.Glide
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.Marker
-import com.archaeologicalfieldwork.R
-import com.archaeologicalfieldwork.views.BaseView
-import com.archaeologicalfieldwork.models.SpotModel
-import com.archaeologicalfieldwork.helpers.readImageFromPath
+import kotlinx.android.synthetic.main.activity_spot_maps.*
 
 class SpotMapView : BaseView(), GoogleMap.OnMarkerClickListener {
 
@@ -17,7 +17,7 @@ class SpotMapView : BaseView(), GoogleMap.OnMarkerClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_spot_maps)
-        super.init(toolbar)
+        super.init(toolbar, true)
 
         presenter = initPresenter(SpotMapPresenter(this)) as SpotMapPresenter
 
@@ -32,7 +32,7 @@ class SpotMapView : BaseView(), GoogleMap.OnMarkerClickListener {
     override fun showSpot(spot: SpotModel) {
         currentTitle.text = spot.title
         currentDescription.text = spot.description
-        currentImage.setImageBitmap(readImageFromPath(this, spot.image))
+        Glide.with(this).load(spot.image).into(currentImage)
     }
 
     override fun showSpots(spots: List<SpotModel>) {

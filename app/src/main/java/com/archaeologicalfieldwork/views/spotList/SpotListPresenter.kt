@@ -1,7 +1,12 @@
 package com.archaeologicalfieldwork.views.spotList
 
-import com.archaeologicalfieldwork.views.*
+import com.google.firebase.auth.FirebaseAuth
+import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.uiThread
+import com.archaeologicalfieldwork.views.VIEW
+import com.archaeologicalfieldwork.views.BaseView
 import com.archaeologicalfieldwork.models.SpotModel
+import com.archaeologicalfieldwork.views.BasePresenter
 
 
 class SpotListPresenter(view: BaseView) : BasePresenter(view) {
@@ -18,7 +23,18 @@ class SpotListPresenter(view: BaseView) : BasePresenter(view) {
         view?.navigateTo(VIEW.MAPS)
     }
 
+    fun doLogout() {
+        FirebaseAuth.getInstance().signOut()
+        app.spots.clear()
+        view?.navigateTo(VIEW.LOGIN)
+    }
+
     fun loadSpots() {
-        view?.showSpots(app.spots.findAll())
+        doAsync {
+            val spots = app.spots.findAll()
+            uiThread {
+                view?.showSpots(spots)
+            }
+        }
     }
 }

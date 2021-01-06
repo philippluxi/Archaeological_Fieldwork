@@ -1,14 +1,14 @@
 package com.archaeologicalfieldwork.views.location
 
 import android.content.Intent
+import com.archaeologicalfieldwork.models.Location
+import com.archaeologicalfieldwork.views.BasePresenter
+import com.archaeologicalfieldwork.views.BaseView
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
-import com.archaeologicalfieldwork.views.BaseView
-import com.archaeologicalfieldwork.models.Location
-import com.archaeologicalfieldwork.views.BasePresenter
 
 class EditLocationPresenter(view: BaseView) : BasePresenter(view) {
 
@@ -27,6 +27,7 @@ class EditLocationPresenter(view: BaseView) : BasePresenter(view) {
             .position(loc)
         map.addMarker(options)
         map.moveCamera(CameraUpdateFactory.newLatLngZoom(loc, location.zoom))
+        view?.showLocation(location)
     }
 
     fun doUpdateLocation(lat: Double, lng: Double) {

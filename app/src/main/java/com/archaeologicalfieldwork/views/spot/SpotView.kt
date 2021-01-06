@@ -4,15 +4,15 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import kotlinx.android.synthetic.main.activity_spot.*
-import kotlinx.android.synthetic.main.activity_spot.btnChooseImage
-import org.jetbrains.anko.toast
-import org.jetbrains.anko.AnkoLogger
 import com.archaeologicalfieldwork.R
-import com.archaeologicalfieldwork.views.*
-import com.google.android.gms.maps.GoogleMap
+import com.archaeologicalfieldwork.models.Location
 import com.archaeologicalfieldwork.models.SpotModel
-import com.archaeologicalfieldwork.helpers.readImageFromPath
+import com.archaeologicalfieldwork.views.BaseView
+import com.bumptech.glide.Glide
+import com.google.android.gms.maps.GoogleMap
+import kotlinx.android.synthetic.main.activity_spot.*
+import org.jetbrains.anko.AnkoLogger
+import org.jetbrains.anko.toast
 
 class SpotView : BaseView(), AnkoLogger {
 
@@ -25,7 +25,7 @@ class SpotView : BaseView(), AnkoLogger {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_spot)
 
-        init(toolbarAdd)
+        init(toolbarAdd, true)
 
         presenter = initPresenter(SpotPresenter(this)) as SpotPresenter
 
@@ -47,12 +47,16 @@ class SpotView : BaseView(), AnkoLogger {
     override fun showSpot(spot: SpotModel) {
         if (spotTitle.text.isEmpty()) spotTitle.setText(spot.title)
         if (spotDescription.text.isEmpty()) spotDescription.setText(spot.description)
-        spotImage.setImageBitmap(readImageFromPath(this, spot.image))
+        Glide.with(this).load(spot.image).into(spotImage)
         if (spot.image != null) {
             btnChooseImage.setText(R.string.change_spot_image)
         }
-        lat.setText("%.6f".format(spot.lat))
-        lng.setText("%.6f".format(spot.lng))
+        this.showLocation(spot.location)
+    }
+
+    override fun showLocation(loc: Location) {
+        lat.setText("%.6f".format(loc.lat))
+        lng.setText("%.6f".format(loc.lng))
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {

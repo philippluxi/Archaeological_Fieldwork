@@ -14,7 +14,8 @@ open class BasePresenter(var view: BaseView?) {
         requestCode: Int,
         permissions: Array<String>,
         grantResults: IntArray
-    ) { }
+    ) {
+    }
 
     open fun onDestroy() {
         view = null

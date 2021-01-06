@@ -2,11 +2,28 @@
     <!--General-->
     <string name="app_name">Archaeological Fieldwork</string>
 
+
+    <!--Splashscreen-->
+    <string name="title_splashscreen">Spots</string>
+    <string name="splash_subtitle">Archaeological Fieldwork, 2020</string>
+
+
+
+    <!--Activity Titles-->
+    <string name="title_activity_spot_list">Spots</string>
+    <string name="title_activity_spot">Spot</string>
+    <string name="title_activity_location">Spot Location</string>
+    <string name="title_activity_map">Map</string>
+    <string name="title_activity_spot_maps">Set Location</string>
+    <string name="title_activity_login"> SignUp / Login</string>
+
     <!-- Toolbar-->
     <string name="menu_addSpot">Add</string>
     <string name="menu_cancelNewSpot">Cancel</string>
     <string name="menu_deleteSpot">Delete</string>
     <string name="menu_saveSpot">Save</string>
+    <string name="menu_showMap">Show Map</string>
+    <string name="menu_logout">Logout</string>
 
     <!--Spot Activity-->
     <string name="button_add_spot">Add Spot</string>
@@ -22,11 +39,8 @@
 
     <!--Set Location-->
     <string name="button_set_location">Set Location</string>
-    <string name="title_activity_map">Map</string>
 
     <!--MapView-->
-    <string name="menu_showMap">Show Map</string>
-    <string name="title_spot_maps_activity">Map</string>
     <string name="spot_currentImage_placeholder">Spot Image</string>
     <string name="spot_title_placeholder">Title</string>
     <string name="spot_description_placeholder">Description</string>

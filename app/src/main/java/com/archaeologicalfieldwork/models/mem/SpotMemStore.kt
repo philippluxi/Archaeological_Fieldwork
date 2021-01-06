@@ -1,8 +1,10 @@
-package com.archaeologicalfieldwork.models
+package com.archaeologicalfieldwork.models.mem
 
-import java.util.ArrayList
-import org.jetbrains.anko.info
+import com.archaeologicalfieldwork.models.SpotModel
+import com.archaeologicalfieldwork.models.SpotStore
 import org.jetbrains.anko.AnkoLogger
+import org.jetbrains.anko.info
+import java.util.*
 
 var lastId = 0L
 
@@ -35,15 +37,17 @@ class SpotMemStore : SpotStore, AnkoLogger {
             foundSpot.title = spot.title
             foundSpot.description = spot.description
             foundSpot.image = spot.image
-            foundSpot.lat = spot.lat
-            foundSpot.lng = spot.lng
-            foundSpot.zoom = spot.zoom
+            foundSpot.location = spot.location
             logAll()
         }
     }
 
     override fun delete(spot: SpotModel) {
         spots.remove(spot)
+    }
+
+    override fun clear() {
+        spots.clear()
     }
 
     fun logAll() {

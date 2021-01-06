@@ -2,12 +2,13 @@ package com.archaeologicalfieldwork.views.spotList
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.*
+import android.view.Menu
+import android.view.MenuItem
 import androidx.recyclerview.widget.LinearLayoutManager
-import kotlinx.android.synthetic.main.activity_spot_list.*
 import com.archaeologicalfieldwork.R
-import com.archaeologicalfieldwork.views.BaseView
 import com.archaeologicalfieldwork.models.SpotModel
+import com.archaeologicalfieldwork.views.BaseView
+import kotlinx.android.synthetic.main.activity_spot_list.*
 
 class SpotListView : BaseView(), SpotListener {
 
@@ -16,7 +17,7 @@ class SpotListView : BaseView(), SpotListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_spot_list)
-        setSupportActionBar(toolbar)
+        super.init(toolbar, false)
 
         presenter = initPresenter(SpotListPresenter(this)) as SpotListPresenter
 
@@ -39,6 +40,7 @@ class SpotListView : BaseView(), SpotListener {
         when (item.itemId) {
             R.id.item_add -> presenter.doaddSpot()
             R.id.item_map -> presenter.doShowSpotsMap()
+            R.id.item_logout -> presenter.doLogout()
         }
         return super.onOptionsItemSelected(item)
     }
