@@ -2,9 +2,9 @@ package com.archaeologicalfieldwork.models.mem
 
 import com.archaeologicalfieldwork.models.SpotModel
 import com.archaeologicalfieldwork.models.SpotStore
-import java.util.ArrayList
-import org.jetbrains.anko.info
 import org.jetbrains.anko.AnkoLogger
+import org.jetbrains.anko.info
+import java.util.*
 
 var lastId = 0L
 

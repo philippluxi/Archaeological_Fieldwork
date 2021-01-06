@@ -1,11 +1,11 @@
 package com.archaeologicalfieldwork.views.login
 
-import com.google.firebase.auth.FirebaseAuth
-import org.jetbrains.anko.toast
 import com.archaeologicalfieldwork.models.firebase.SpotFireStore
 import com.archaeologicalfieldwork.views.BasePresenter
 import com.archaeologicalfieldwork.views.BaseView
 import com.archaeologicalfieldwork.views.VIEW
+import com.google.firebase.auth.FirebaseAuth
+import org.jetbrains.anko.toast
 
 class LoginPresenter(view: BaseView) : BasePresenter(view) {
 

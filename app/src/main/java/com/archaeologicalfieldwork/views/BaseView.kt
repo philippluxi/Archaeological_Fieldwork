@@ -4,15 +4,15 @@ import android.content.Intent
 import android.os.Parcelable
 import androidx.appcompat.widget.Toolbar
 import androidx.appcompat.app.AppCompatActivity
-import com.archaeologicalfieldwork.models.Location
+import com.google.firebase.auth.FirebaseAuth
 import org.jetbrains.anko.AnkoLogger
+import com.archaeologicalfieldwork.models.Location
 import com.archaeologicalfieldwork.models.SpotModel
 import com.archaeologicalfieldwork.views.spot.SpotView
+import com.archaeologicalfieldwork.views.login.LoginView
 import com.archaeologicalfieldwork.views.map.SpotMapView
 import com.archaeologicalfieldwork.views.spotList.SpotListView
 import com.archaeologicalfieldwork.views.location.EditLocationView
-import com.archaeologicalfieldwork.views.login.LoginView
-import com.google.firebase.auth.FirebaseAuth
 
 val IMAGE_REQUEST = 1
 val LOCATION_REQUEST = 2

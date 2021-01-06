@@ -1,12 +1,10 @@
 package com.archaeologicalfieldwork.main
 
 import android.app.Application
-import org.jetbrains.anko.info
-import org.jetbrains.anko.AnkoLogger
 import com.archaeologicalfieldwork.models.SpotStore
 import com.archaeologicalfieldwork.models.firebase.SpotFireStore
-import com.archaeologicalfieldwork.models.json.SpotJSONStore
-import com.archaeologicalfieldwork.room.SpotStoreRoom
+import org.jetbrains.anko.AnkoLogger
+import org.jetbrains.anko.info
 
 class MainApp : Application(), AnkoLogger {
 
