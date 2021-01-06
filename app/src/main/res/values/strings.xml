@@ -31,6 +31,9 @@
     <string name="hint_SpotTitle">Spot Title</string>
     <string name="hint_SpotDescription">Spot Description</string>
     <string name="enter_spot_title">Please enter a Spot Title</string>
+    <string name="text_lat">Latitude:</string>
+    <string name="text_lng">Longitude</string>
+    <string name="text_Location">Location</string>
 
     <!--Image Handling-->
     <string name="button_add_image">Add Image</string>
@@ -44,7 +47,6 @@
     <string name="spot_currentImage_placeholder">Spot Image</string>
     <string name="spot_title_placeholder">Title</string>
     <string name="spot_description_placeholder">Description</string>
-    <string name="text_lat">Latitude:</string>
-    <string name="text_lng">Longitude</string>
+    <string name="latlng_zeros">00.000000</string>
 
 </resources>
