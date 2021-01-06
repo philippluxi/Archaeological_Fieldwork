@@ -53,6 +53,8 @@ class SpotJSONStore : SpotStore, AnkoLogger {
         if (foundSpot != null) {
             foundSpot.title = spot.title
             foundSpot.description = spot.description
+            foundSpot.visited = spot.visited
+            foundSpot.dateVisited = spot.dateVisited
             foundSpot.image = spot.image
             foundSpot.location = spot.location
         }
