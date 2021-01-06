@@ -2,12 +2,9 @@
     <!--General-->
     <string name="app_name">Archaeological Fieldwork</string>
 
-
     <!--Splashscreen-->
     <string name="title_splashscreen">Spots</string>
     <string name="splash_subtitle">Archaeological Fieldwork, 2020</string>
-
-
 
     <!--Activity Titles-->
     <string name="title_activity_spot_list">Spots</string>
@@ -34,6 +31,8 @@
     <string name="text_lat">Latitude:</string>
     <string name="text_lng">Longitude</string>
     <string name="text_Location">Location</string>
+    <string name="text_visitedCheckBox">Visited</string>
+    <string name="latlng_zeros">00.000000</string>
 
     <!--Image Handling-->
     <string name="button_add_image">Add Image</string>
@@ -47,6 +46,5 @@
     <string name="spot_currentImage_placeholder">Spot Image</string>
     <string name="spot_title_placeholder">Title</string>
     <string name="spot_description_placeholder">Description</string>
-    <string name="latlng_zeros">00.000000</string>
 
 </resources>
