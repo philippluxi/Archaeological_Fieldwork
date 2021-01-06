@@ -44,5 +44,7 @@
     <string name="spot_currentImage_placeholder">Spot Image</string>
     <string name="spot_title_placeholder">Title</string>
     <string name="spot_description_placeholder">Description</string>
+    <string name="text_lat">Latitude:</string>
+    <string name="text_lng">Longitude</string>
 
 </resources>
