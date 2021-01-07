@@ -2,6 +2,9 @@ package com.archaeologicalfieldwork.views.spot
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.view.View
+import android.widget.TextView
+import com.archaeologicalfieldwork.R
 import com.archaeologicalfieldwork.helpers.checkLocationPermissions
 import com.archaeologicalfieldwork.helpers.createDefaultLocationRequest
 import com.archaeologicalfieldwork.helpers.isPermissionGranted
@@ -88,7 +91,6 @@ class SpotPresenter(view: BaseView) : BasePresenter(view), AnkoLogger {
         if (isChecked) {
             spot.visited = true
             spot.dateVisited = java.text.DateFormat.getDateTimeInstance().format(Calendar.getInstance().getTime())
-            info("Visited Checkbox checked at: ${spot.dateVisited}")
         } else {
             spot.visited = false
             spot.dateVisited = "Not Visited"

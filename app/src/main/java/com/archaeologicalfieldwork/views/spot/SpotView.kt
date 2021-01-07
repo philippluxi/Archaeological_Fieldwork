@@ -4,6 +4,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
+import android.widget.TextView
 import com.archaeologicalfieldwork.R
 import com.archaeologicalfieldwork.models.Location
 import com.archaeologicalfieldwork.models.SpotModel
@@ -12,6 +14,7 @@ import com.bumptech.glide.Glide
 import com.google.android.gms.maps.GoogleMap
 import kotlinx.android.synthetic.main.activity_spot.*
 import org.jetbrains.anko.AnkoLogger
+import org.jetbrains.anko.info
 import org.jetbrains.anko.toast
 
 class SpotView : BaseView(), AnkoLogger {
@@ -46,6 +49,10 @@ class SpotView : BaseView(), AnkoLogger {
         // Handle Visited Checkbox
         visited_checkBox.setOnClickListener {
             presenter.doSetVisited(visited_checkBox.isChecked)
+            if (!visited_checkBox.isChecked) {
+                val dateVisited_textview: TextView = findViewById(R.id.date_visited)
+                dateVisited_textview.visibility = View.INVISIBLE
+            }
         }
     }
 
@@ -53,6 +60,14 @@ class SpotView : BaseView(), AnkoLogger {
         if (spotTitle.text.isEmpty()) spotTitle.setText(spot.title)
         if (spotDescription.text.isEmpty()) spotDescription.setText(spot.description)
         visited_checkBox.isChecked = spot.visited
+        if (spot.visited) {
+            val dateVisited_textview: TextView = findViewById(R.id.date_visited)
+            dateVisited_textview.text = spot.dateVisited
+            dateVisited_textview.visibility = View.VISIBLE
+        } else {
+            val dateVisited_textview: TextView = findViewById(R.id.date_visited)
+            dateVisited_textview.visibility = View.INVISIBLE
+        }
         Glide.with(this).load(spot.image).into(spotImage)
         if (spot.image != null) {
             btnChooseImage.setText(R.string.change_spot_image)
