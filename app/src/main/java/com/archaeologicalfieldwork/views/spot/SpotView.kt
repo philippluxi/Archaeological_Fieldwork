@@ -14,7 +14,6 @@ import com.bumptech.glide.Glide
 import com.google.android.gms.maps.GoogleMap
 import kotlinx.android.synthetic.main.activity_spot.*
 import org.jetbrains.anko.AnkoLogger
-import org.jetbrains.anko.info
 import org.jetbrains.anko.toast
 
 class SpotView : BaseView(), AnkoLogger {
@@ -49,16 +48,25 @@ class SpotView : BaseView(), AnkoLogger {
         // Handle Visited Checkbox
         visited_checkBox.setOnClickListener {
             presenter.doSetVisited(visited_checkBox.isChecked)
+            // Set TextView of Date invisible, if Box is unchecked
             if (!visited_checkBox.isChecked) {
                 val dateVisited_textview: TextView = findViewById(R.id.date_visited)
                 dateVisited_textview.visibility = View.INVISIBLE
             }
         }
+
+        // Handle Rating Click
+        rate_spot.setOnRatingBarChangeListener { ratingBar, rating, fromUser ->
+            presenter.doSetRating(rating)
+        }
     }
 
     override fun showSpot(spot: SpotModel) {
+        //Title and Description
         if (spotTitle.text.isEmpty()) spotTitle.setText(spot.title)
         if (spotDescription.text.isEmpty()) spotDescription.setText(spot.description)
+
+        //CheckBox Visited and Date TextView
         visited_checkBox.isChecked = spot.visited
         if (spot.visited) {
             val dateVisited_textview: TextView = findViewById(R.id.date_visited)
@@ -68,10 +76,17 @@ class SpotView : BaseView(), AnkoLogger {
             val dateVisited_textview: TextView = findViewById(R.id.date_visited)
             dateVisited_textview.visibility = View.INVISIBLE
         }
+
+        // Rating
+        rate_spot.rating = spot.rating
+
+        // Image
         Glide.with(this).load(spot.image).into(spotImage)
         if (spot.image != null) {
             btnChooseImage.setText(R.string.change_spot_image)
         }
+
+        // Location
         this.showLocation(spot.location)
     }
 

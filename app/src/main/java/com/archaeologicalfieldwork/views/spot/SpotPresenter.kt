@@ -95,7 +95,10 @@ class SpotPresenter(view: BaseView) : BasePresenter(view), AnkoLogger {
             spot.visited = false
             spot.dateVisited = "Not Visited"
         }
+    }
 
+    fun doSetRating(rating: Float) {
+        spot.rating = rating
     }
 
     fun doSelectImage() {
