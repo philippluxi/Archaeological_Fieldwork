@@ -33,6 +33,8 @@
     <string name="text_Location">Location</string>
     <string name="text_visitedCheckBox">Visited</string>
     <string name="latlng_zeros">00.000000</string>
+    <string name="text_checkbox">Visited</string>
+    <string name="text_dateVisited">Not visited</string>
 
     <!--Image Handling-->
     <string name="button_add_image">Add Image</string>
