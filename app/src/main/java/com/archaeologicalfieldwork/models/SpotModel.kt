@@ -16,6 +16,7 @@ data class SpotModel(
     var image: String = "",
     var visited: Boolean = false,
     var dateVisited: String = "Not Visited",
+    var favorite: Boolean = false,
     var rating: Float = 0f,
     @Embedded var location: Location = Location()
 ) : Parcelable

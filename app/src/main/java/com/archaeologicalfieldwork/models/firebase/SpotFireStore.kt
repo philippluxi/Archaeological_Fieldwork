@@ -47,6 +47,7 @@ class SpotFireStore(val context: Context) : SpotStore, AnkoLogger {
             foundSpot.image = spot.image
             foundSpot.visited = spot.visited
             foundSpot.dateVisited = spot.dateVisited
+            foundSpot.favorite = spot.favorite
             foundSpot.rating = spot.rating
             foundSpot.location = spot.location
         }

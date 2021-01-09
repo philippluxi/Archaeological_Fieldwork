@@ -7,9 +7,11 @@ import com.archaeologicalfieldwork.views.VIEW
 import com.archaeologicalfieldwork.views.BaseView
 import com.archaeologicalfieldwork.models.SpotModel
 import com.archaeologicalfieldwork.views.BasePresenter
+import org.jetbrains.anko.AnkoLogger
+import org.jetbrains.anko.info
 
 
-class SpotListPresenter(view: BaseView) : BasePresenter(view) {
+class SpotListPresenter(view: BaseView) : BasePresenter(view) , AnkoLogger{
 
     fun doaddSpot() {
         view?.navigateTo(VIEW.SPOT)
@@ -17,6 +19,12 @@ class SpotListPresenter(view: BaseView) : BasePresenter(view) {
 
     fun doeditSpot(spot: SpotModel) {
         view?.navigateTo(VIEW.SPOT, 0, "spot_edit", spot)
+    }
+
+    fun doHandleFavorite(spot: SpotModel, isFavorite: Boolean) {
+        spot.favorite = isFavorite
+        app.spots.update(spot)
+        info("Spot Updated Favorite: ${(app.spots.findById(spot.id))?.favorite}")
     }
 
     fun doShowSpotsMap() {
