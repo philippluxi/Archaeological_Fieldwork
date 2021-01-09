@@ -41,11 +41,21 @@ class SpotAdapter constructor(
         fun bind(spot: SpotModel, listener: SpotListener) {
             itemView.spotTitle_Card.text = spot.title
             itemView.spotDescription_Card.text = spot.description
+            if (spot.favorite) {
+                itemView.favorite.setButtonDrawable(R.drawable.star_filled_orange)
+            } else {
+                itemView.favorite.setButtonDrawable(R.drawable.star_border)
+            }
             Glide.with(itemView.context).load(spot.image).into(itemView.imageIcon)
+
             itemView.setOnClickListener { listener.onSpotClick(spot) }
             itemView.favorite.setOnClickListener {
                 listener.onFavoriteClick(spot, itemView.favorite.isChecked)
-                // Todo Change drawable accordingly
+                if (itemView.favorite.isChecked) {
+                    itemView.favorite.setButtonDrawable(R.drawable.star_filled_orange)
+                } else {
+                    itemView.favorite.setButtonDrawable(R.drawable.star_border)
+                }
             }
         }
     }
