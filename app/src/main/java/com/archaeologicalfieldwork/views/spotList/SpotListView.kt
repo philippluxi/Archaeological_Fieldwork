@@ -49,6 +49,10 @@ class SpotListView : BaseView(), SpotListener {
         presenter.doeditSpot(spot)
     }
 
+    override fun onFavoriteClick(spot: SpotModel) {
+        presenter.doSetFavorite(spot)
+    }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         presenter.loadSpots()
         super.onActivityResult(requestCode, resultCode, data)

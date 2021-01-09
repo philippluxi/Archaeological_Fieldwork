@@ -11,6 +11,7 @@ import kotlinx.android.synthetic.main.card_spot.view.*
 
 interface SpotListener {
     fun onSpotClick(spot: SpotModel)
+    fun onFavoriteClick(spot: SpotModel)
 }
 
 class SpotAdapter constructor(
@@ -42,6 +43,7 @@ class SpotAdapter constructor(
             itemView.spotDescription_Card.text = spot.description
             Glide.with(itemView.context).load(spot.image).into(itemView.imageIcon)
             itemView.setOnClickListener { listener.onSpotClick(spot) }
+            itemView.favorite.setOnClickListener { listener.onFavoriteClick(spot) }
         }
     }
 }

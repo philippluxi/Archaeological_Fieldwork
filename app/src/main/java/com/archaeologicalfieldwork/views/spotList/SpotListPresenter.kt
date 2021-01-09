@@ -19,6 +19,10 @@ class SpotListPresenter(view: BaseView) : BasePresenter(view) {
         view?.navigateTo(VIEW.SPOT, 0, "spot_edit", spot)
     }
 
+    fun doSetFavorite(spot: SpotModel) {
+
+    }
+
     fun doShowSpotsMap() {
         view?.navigateTo(VIEW.MAPS)
     }
