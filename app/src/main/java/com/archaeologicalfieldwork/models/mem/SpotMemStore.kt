@@ -20,6 +20,16 @@ class SpotMemStore : SpotStore, AnkoLogger {
         return spots
     }
 
+    override fun findStarred(): List<SpotModel> {
+        val foundSpots: List<SpotModel> = spots.filter { p -> p.favorite == true }
+        return foundSpots
+    }
+
+    override fun findVisited(): List<SpotModel> {
+        val foundSpots: List<SpotModel> = spots.filter { p -> p.visited == true }
+        return foundSpots
+    }
+
     override fun findById(id: Long): SpotModel? {
         val foundSpot: SpotModel? = spots.find { it.id == id }
         return foundSpot
