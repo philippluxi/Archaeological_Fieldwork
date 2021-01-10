@@ -97,7 +97,10 @@ class SpotView : BaseView(), AnkoLogger {
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_new_spot, menu)
-        if (presenter.edit) menu.getItem(0).setVisible(true)
+        if (presenter.edit) {
+            menu.getItem(0).setVisible(true)
+            menu.getItem(3).setVisible(true)
+        }
         return super.onCreateOptionsMenu(menu)
     }
 
@@ -118,6 +121,9 @@ class SpotView : BaseView(), AnkoLogger {
             }
             R.id.item_cancel -> {
                 presenter.doCancel()
+            }
+            R.id.item_share -> {
+                presenter.doShare()
             }
         }
         return super.onOptionsItemSelected(item)

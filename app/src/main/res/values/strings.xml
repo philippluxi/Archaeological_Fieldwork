@@ -21,6 +21,7 @@
     <string name="menu_saveSpot">Save</string>
     <string name="menu_showMap">Show Map</string>
     <string name="menu_logout">Logout</string>
+    <string name="menu_shareNewSpot">Share</string>
 
     <!--Spot Activity-->
     <string name="button_add_spot">Add Spot</string>
