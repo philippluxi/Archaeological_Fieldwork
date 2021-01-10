@@ -91,15 +91,15 @@ class SpotView : BaseView(), AnkoLogger {
     }
 
     override fun showLocation(loc: Location) {
-        lat.setText("%.6f".format(loc.lat))
-        lng.setText("%.6f".format(loc.lng))
+        lat.text = "%.6f".format(loc.lat)
+        lng.text = "%.6f".format(loc.lng)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_new_spot, menu)
         if (presenter.edit) {
-            menu.getItem(0).setVisible(true)
-            menu.getItem(3).setVisible(true)
+            menu.getItem(0).isVisible = true    // Delete
+            menu.getItem(3).isVisible = true    // Share
         }
         return super.onCreateOptionsMenu(menu)
     }

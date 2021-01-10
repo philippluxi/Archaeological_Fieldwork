@@ -2,17 +2,17 @@ package com.archaeologicalfieldwork.views
 
 import android.content.Intent
 import android.os.Parcelable
-import androidx.appcompat.widget.Toolbar
 import androidx.appcompat.app.AppCompatActivity
-import com.google.firebase.auth.FirebaseAuth
-import org.jetbrains.anko.AnkoLogger
+import androidx.appcompat.widget.Toolbar
 import com.archaeologicalfieldwork.models.Location
 import com.archaeologicalfieldwork.models.SpotModel
-import com.archaeologicalfieldwork.views.spot.SpotView
+import com.archaeologicalfieldwork.views.location.EditLocationView
 import com.archaeologicalfieldwork.views.login.LoginView
 import com.archaeologicalfieldwork.views.map.SpotMapView
+import com.archaeologicalfieldwork.views.spot.SpotView
 import com.archaeologicalfieldwork.views.spotList.SpotListView
-import com.archaeologicalfieldwork.views.location.EditLocationView
+import com.google.firebase.auth.FirebaseAuth
+import org.jetbrains.anko.AnkoLogger
 
 val IMAGE_REQUEST = 1
 val LOCATION_REQUEST = 2
@@ -21,7 +21,7 @@ enum class VIEW {
     LOCATION, SPOT, MAPS, LIST, LOGIN
 }
 
-open abstract class BaseView() : AppCompatActivity(), AnkoLogger {
+open abstract class BaseView : AppCompatActivity(), AnkoLogger {
 
     var basePresenter: BasePresenter? = null
 

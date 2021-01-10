@@ -1,14 +1,14 @@
 package com.archaeologicalfieldwork.helpers
 
-import android.net.Uri
 import android.app.Activity
-import android.content.Intent
 import android.content.Context
+import android.content.Intent
 import android.graphics.Bitmap
-import android.provider.MediaStore
 import android.graphics.BitmapFactory
-import java.io.IOException
+import android.net.Uri
+import android.provider.MediaStore
 import com.archaeologicalfieldwork.R
+import java.io.IOException
 
 
 fun showImagePicker(parent: Activity, id: Int) {
@@ -38,8 +38,8 @@ fun readImageFromPath(context: Context, path: String): Bitmap? {
     val uri = Uri.parse(path)
     if (uri != null) {
         try {
-            val parcelFileDescriptor = context.getContentResolver().openFileDescriptor(uri, "r")
-            val fileDescriptor = parcelFileDescriptor?.getFileDescriptor()
+            val parcelFileDescriptor = context.contentResolver.openFileDescriptor(uri, "r")
+            val fileDescriptor = parcelFileDescriptor?.fileDescriptor
             bitmap = BitmapFactory.decodeFileDescriptor(fileDescriptor)
             parcelFileDescriptor?.close()
         } catch (e: Exception) {
