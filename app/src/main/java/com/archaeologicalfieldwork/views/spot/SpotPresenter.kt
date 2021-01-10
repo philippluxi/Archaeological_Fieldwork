@@ -1,9 +1,11 @@
 package com.archaeologicalfieldwork.views.spot
 
 import android.annotation.SuppressLint
+import android.app.Activity
 import android.content.Intent
 import android.view.View
 import android.widget.TextView
+import androidx.core.content.ContextCompat.startActivity
 import com.archaeologicalfieldwork.R
 import com.archaeologicalfieldwork.helpers.checkLocationPermissions
 import com.archaeologicalfieldwork.helpers.createDefaultLocationRequest
@@ -85,6 +87,21 @@ class SpotPresenter(view: BaseView) : BasePresenter(view), AnkoLogger {
                 view?.finish()
             }
         }
+    }
+
+    fun doShare() {   //parent: Activity) {
+        val sharingIntent = Intent()
+        sharingIntent.type = "text/plain"
+        sharingIntent.action = Intent.ACTION_SEND
+
+        val shareBody = "Hey!\nI found this awesome spot here, its name is: ${spot.title}." +
+                "\nThis is my description:\n${spot.description}" +
+                "\n\nYou can find it here:\nlat: ${spot.location.lat},\nlng: ${spot.location.lng}"
+        sharingIntent.putExtra(Intent.EXTRA_SUBJECT, "I found this cool Spot")
+        sharingIntent.putExtra(Intent.EXTRA_TEXT, shareBody)
+
+        val sharer = (Intent.createChooser(sharingIntent, "Share via..."))
+        view!!.startActivity(sharer)
     }
 
     fun doSetVisited(isChecked: Boolean) {
