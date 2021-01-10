@@ -1,17 +1,17 @@
 package com.archaeologicalfieldwork.views.spotList
 
-import com.google.firebase.auth.FirebaseAuth
-import org.jetbrains.anko.doAsync
-import org.jetbrains.anko.uiThread
-import com.archaeologicalfieldwork.views.VIEW
-import com.archaeologicalfieldwork.views.BaseView
 import com.archaeologicalfieldwork.models.SpotModel
 import com.archaeologicalfieldwork.views.BasePresenter
+import com.archaeologicalfieldwork.views.BaseView
+import com.archaeologicalfieldwork.views.VIEW
+import com.google.firebase.auth.FirebaseAuth
 import org.jetbrains.anko.AnkoLogger
+import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.info
+import org.jetbrains.anko.uiThread
 
 
-class SpotListPresenter(view: BaseView) : BasePresenter(view) , AnkoLogger{
+class SpotListPresenter(view: BaseView) : BasePresenter(view), AnkoLogger {
 
     fun doaddSpot() {
         view?.navigateTo(VIEW.SPOT)

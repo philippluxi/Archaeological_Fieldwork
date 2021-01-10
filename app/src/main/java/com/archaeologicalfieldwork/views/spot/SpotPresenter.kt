@@ -1,12 +1,7 @@
 package com.archaeologicalfieldwork.views.spot
 
 import android.annotation.SuppressLint
-import android.app.Activity
 import android.content.Intent
-import android.view.View
-import android.widget.TextView
-import androidx.core.content.ContextCompat.startActivity
-import com.archaeologicalfieldwork.R
 import com.archaeologicalfieldwork.helpers.checkLocationPermissions
 import com.archaeologicalfieldwork.helpers.createDefaultLocationRequest
 import com.archaeologicalfieldwork.helpers.isPermissionGranted
@@ -24,7 +19,6 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.doAsync
-import org.jetbrains.anko.info
 import org.jetbrains.anko.uiThread
 import java.util.*
 
@@ -107,7 +101,8 @@ class SpotPresenter(view: BaseView) : BasePresenter(view), AnkoLogger {
     fun doSetVisited(isChecked: Boolean) {
         if (isChecked) {
             spot.visited = true
-            spot.dateVisited = java.text.DateFormat.getDateTimeInstance().format(Calendar.getInstance().getTime())
+            spot.dateVisited =
+                java.text.DateFormat.getDateTimeInstance().format(Calendar.getInstance().time)
         } else {
             spot.visited = false
             spot.dateVisited = "Not Visited"

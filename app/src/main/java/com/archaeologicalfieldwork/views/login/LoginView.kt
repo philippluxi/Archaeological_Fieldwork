@@ -38,7 +38,6 @@ class LoginView : BaseView() {
                 presenter.doLogin(email, password)
             }
         }
-
     }
 
     override fun showProgress() {
@@ -48,5 +47,4 @@ class LoginView : BaseView() {
     override fun hideProgress() {
         progressBar.visibility = View.GONE
     }
-
 }
