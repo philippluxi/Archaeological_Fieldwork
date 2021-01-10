@@ -17,4 +17,11 @@
         android:title="@string/menu_cancelNewSpot"
         app:showAsAction="always" />
 
+    <item
+        android:id="@+id/item_share"
+        android:icon = "@drawable/share_spot"
+        android:title="@string/menu_shareNewSpot"
+        android:visible="false"
+        app:showAsAction="always" />
+
 </menu>

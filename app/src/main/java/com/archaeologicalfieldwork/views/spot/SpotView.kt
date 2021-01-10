@@ -4,6 +4,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
+import android.widget.TextView
 import com.archaeologicalfieldwork.R
 import com.archaeologicalfieldwork.models.Location
 import com.archaeologicalfieldwork.models.SpotModel
@@ -42,26 +44,63 @@ class SpotView : BaseView(), AnkoLogger {
             presenter.cacheSpot(spotTitle.text.toString(), spotDescription.text.toString())
             presenter.doSelectImage()
         }
+
+        // Handle Visited Checkbox
+        visited_checkBox.setOnClickListener {
+            presenter.doSetVisited(visited_checkBox.isChecked)
+            // Set TextView of Date invisible, if Box is unchecked
+            if (!visited_checkBox.isChecked) {
+                val dateVisited_textview: TextView = findViewById(R.id.date_visited)
+                dateVisited_textview.visibility = View.INVISIBLE
+            }
+        }
+
+        // Handle Rating Click
+        rate_spot.setOnRatingBarChangeListener { ratingBar, rating, fromUser ->
+            presenter.doSetRating(rating)
+        }
     }
 
     override fun showSpot(spot: SpotModel) {
+        //Title and Description
         if (spotTitle.text.isEmpty()) spotTitle.setText(spot.title)
         if (spotDescription.text.isEmpty()) spotDescription.setText(spot.description)
+
+        //CheckBox Visited and Date TextView
+        visited_checkBox.isChecked = spot.visited
+        if (spot.visited) {
+            val dateVisited_textview: TextView = findViewById(R.id.date_visited)
+            dateVisited_textview.text = spot.dateVisited
+            dateVisited_textview.visibility = View.VISIBLE
+        } else {
+            val dateVisited_textview: TextView = findViewById(R.id.date_visited)
+            dateVisited_textview.visibility = View.INVISIBLE
+        }
+
+        // Rating
+        rate_spot.rating = spot.rating
+
+        // Image
         Glide.with(this).load(spot.image).into(spotImage)
         if (spot.image != null) {
             btnChooseImage.setText(R.string.change_spot_image)
         }
+
+        // Location
         this.showLocation(spot.location)
     }
 
     override fun showLocation(loc: Location) {
-        lat.setText("%.6f".format(loc.lat))
-        lng.setText("%.6f".format(loc.lng))
+        lat.text = "%.6f".format(loc.lat)
+        lng.text = "%.6f".format(loc.lng)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_new_spot, menu)
-        if (presenter.edit) menu.getItem(0).setVisible(true)
+        if (presenter.edit) {
+            menu.getItem(0).isVisible = true    // Delete
+            menu.getItem(3).isVisible = true    // Share
+        }
         return super.onCreateOptionsMenu(menu)
     }
 
@@ -82,6 +121,9 @@ class SpotView : BaseView(), AnkoLogger {
             }
             R.id.item_cancel -> {
                 presenter.doCancel()
+            }
+            R.id.item_share -> {
+                presenter.doShare()
             }
         }
         return super.onOptionsItemSelected(item)

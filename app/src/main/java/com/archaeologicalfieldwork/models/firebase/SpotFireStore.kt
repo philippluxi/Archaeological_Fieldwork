@@ -45,6 +45,10 @@ class SpotFireStore(val context: Context) : SpotStore, AnkoLogger {
             foundSpot.title = spot.title
             foundSpot.description = spot.description
             foundSpot.image = spot.image
+            foundSpot.visited = spot.visited
+            foundSpot.dateVisited = spot.dateVisited
+            foundSpot.favorite = spot.favorite
+            foundSpot.rating = spot.rating
             foundSpot.location = spot.location
         }
 
@@ -66,8 +70,7 @@ class SpotFireStore(val context: Context) : SpotStore, AnkoLogger {
     fun updateImage(spot: SpotModel) {
         if (spot.image != "") {
             val fileName = File(spot.image)
-            val imageName = fileName.getName()
-
+            val imageName = fileName.name
             var imageRef = st.child(userId + '/' + imageName)
             val baos = ByteArrayOutputStream()
             val bitmap = readImageFromPath(context, spot.image)
@@ -91,11 +94,9 @@ class SpotFireStore(val context: Context) : SpotStore, AnkoLogger {
 
     fun fetchSpots(spotsReady: () -> Unit) {
         val valueEventListener = object : ValueEventListener {
-            override fun onCancelled(dataSnapshot: DatabaseError) {
-            }
-
+            override fun onCancelled(dataSnapshot: DatabaseError) {}
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-                dataSnapshot!!.children.mapNotNullTo(spots) { it.getValue<SpotModel>(SpotModel::class.java) }
+                dataSnapshot.children.mapNotNullTo(spots) { it.getValue<SpotModel>(SpotModel::class.java) }
                 spotsReady()
             }
         }

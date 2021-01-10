@@ -56,7 +56,7 @@
                     android:padding="8dp"
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="14sp"
-                    app:layout_constraintEnd_toStartOf="@id/textView"
+                    app:layout_constraintEnd_toStartOf="@id/text_Location"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -71,22 +71,22 @@
                     android:autofillHints=""
                     android:hint="@string/hint_SpotDescription"
                     android:inputType="text"
-                    android:maxLength="25"
+                    android:maxLength="50"
                     android:maxLines="1"
                     android:padding="8dp"
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="14sp"
-                    app:layout_constraintEnd_toStartOf="@id/textView"
+                    app:layout_constraintEnd_toStartOf="@id/text_Location"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/spotTitle" />
 
                 <TextView
-                    android:id="@+id/textView"
+                    android:id="@+id/text_Location"
                     android:layout_width="90dp"
                     android:layout_height="18dp"
                     android:layout_marginTop="12dp"
                     android:layout_marginEnd="8dp"
-                    android:text="Location"
+                    android:text="@string/text_Location"
                     android:textAlignment="textStart"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -96,30 +96,59 @@
                     android:layout_width="92dp"
                     android:layout_height="19dp"
                     android:layout_marginTop="6dp"
-                    android:text="00.000000"
+                    android:text="@string/latlng_zeros"
                     android:textAlignment="viewStart"
-                    app:layout_constraintStart_toStartOf="@id/textView"
-                    app:layout_constraintTop_toBottomOf="@id/textView" />
+                    app:layout_constraintStart_toStartOf="@id/text_Location"
+                    app:layout_constraintTop_toBottomOf="@id/text_Location" />
 
                 <TextView
                     android:id="@+id/lng"
                     android:layout_width="92dp"
                     android:layout_height="19dp"
                     android:layout_marginTop="6dp"
-                    android:layout_marginEnd="8dp"
-                    android:text="00.000000"
+                    android:text="@string/latlng_zeros"
                     android:textAlignment="viewStart"
-                    app:layout_constraintStart_toStartOf="@id/textView"
+                    app:layout_constraintStart_toStartOf="@id/text_Location"
                     app:layout_constraintTop_toBottomOf="@+id/lat" />
+
+                <CheckBox
+                    android:id="@+id/visited_checkBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/text_visitedCheckBox"
+                    app:layout_constraintStart_toStartOf="@id/btnChooseImage"
+                    app:layout_constraintTop_toBottomOf="@+id/spotDescription" />
+
+                <TextView
+                    android:id="@+id/date_visited"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/text_dateVisited"
+                    android:visibility="invisible"
+                    app:layout_constraintBottom_toBottomOf="@id/visited_checkBox"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/visited_checkBox"
+                    app:layout_constraintTop_toTopOf="@id/visited_checkBox" />
+
+                <RatingBar
+                    android:id="@+id/rate_spot"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:numStars="5"
+                    android:saveEnabled="true"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/visited_checkBox" />
 
                 <Button
                     android:id="@+id/btnChooseImage"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_margin="16dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="8dp"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginEnd="24dp"
                     android:background="@color/colorAccent"
                     android:paddingTop="8dp"
                     android:paddingBottom="8dp"
@@ -128,7 +157,7 @@
                     android:textSize="16sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/spotDescription" />
+                    app:layout_constraintTop_toBottomOf="@+id/rate_spot" />
 
                 <ImageView
                     android:id="@+id/spotImage"

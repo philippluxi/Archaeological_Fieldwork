@@ -22,7 +22,7 @@ class EditLocationView : BaseView(), GoogleMap.OnMarkerDragListener,
 
         presenter = initPresenter(EditLocationPresenter(this)) as EditLocationPresenter
 
-        mapView.onCreate(savedInstanceState);
+        mapView.onCreate(savedInstanceState)
         mapView.getMapAsync {
             it.setOnMarkerDragListener(this)
             it.setOnMarkerClickListener(this)
@@ -36,7 +36,7 @@ class EditLocationView : BaseView(), GoogleMap.OnMarkerDragListener,
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item?.itemId) {
+        when (item.itemId) {
             R.id.item_save -> {
                 presenter.doSave()
             }
@@ -45,15 +45,15 @@ class EditLocationView : BaseView(), GoogleMap.OnMarkerDragListener,
     }
 
     override fun showLocation(location: Location) {
-        lat.setText("%.6f".format(location.lat))
-        lng.setText("%.6f".format(location.lng))
+        lat.text = "%.6f".format(location.lat)
+        lng.text = "%.6f".format(location.lng)
     }
 
     override fun onMarkerDragStart(marker: Marker) {}
 
     override fun onMarkerDrag(marker: Marker) {
-        lat.setText("%.6f".format(marker.position.latitude))
-        lng.setText("%.6f".format(marker.position.longitude))
+        lat.text = "%.6f".format(marker.position.latitude)
+        lng.text = "%.6f".format(marker.position.longitude)
     }
 
     override fun onMarkerClick(marker: Marker): Boolean {

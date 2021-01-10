@@ -37,6 +37,10 @@ class SpotMemStore : SpotStore, AnkoLogger {
             foundSpot.title = spot.title
             foundSpot.description = spot.description
             foundSpot.image = spot.image
+            foundSpot.visited = spot.visited
+            foundSpot.dateVisited = spot.dateVisited
+            foundSpot.favorite = spot.favorite
+            foundSpot.rating = spot.rating
             foundSpot.location = spot.location
             logAll()
         }

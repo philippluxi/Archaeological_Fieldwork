@@ -17,10 +17,12 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
+import java.util.*
 
-class SpotPresenter(view: BaseView) : BasePresenter(view) {
+class SpotPresenter(view: BaseView) : BasePresenter(view), AnkoLogger {
     var locationService: FusedLocationProviderClient =
         LocationServices.getFusedLocationProviderClient(view)
     val locationRequest = createDefaultLocationRequest()
@@ -79,6 +81,36 @@ class SpotPresenter(view: BaseView) : BasePresenter(view) {
                 view?.finish()
             }
         }
+    }
+
+    fun doShare() {   //parent: Activity) {
+        val sharingIntent = Intent()
+        sharingIntent.type = "text/plain"
+        sharingIntent.action = Intent.ACTION_SEND
+
+        val shareBody = "Hey!\nI found this awesome spot here, its name is: ${spot.title}." +
+                "\nThis is my description:\n${spot.description}" +
+                "\n\nYou can find it here:\nlat: ${spot.location.lat},\nlng: ${spot.location.lng}"
+        sharingIntent.putExtra(Intent.EXTRA_SUBJECT, "I found this cool Spot")
+        sharingIntent.putExtra(Intent.EXTRA_TEXT, shareBody)
+
+        val sharer = (Intent.createChooser(sharingIntent, "Share via..."))
+        view!!.startActivity(sharer)
+    }
+
+    fun doSetVisited(isChecked: Boolean) {
+        if (isChecked) {
+            spot.visited = true
+            spot.dateVisited =
+                java.text.DateFormat.getDateTimeInstance().format(Calendar.getInstance().time)
+        } else {
+            spot.visited = false
+            spot.dateVisited = "Not Visited"
+        }
+    }
+
+    fun doSetRating(rating: Float) {
+        spot.rating = rating
     }
 
     fun doSelectImage() {

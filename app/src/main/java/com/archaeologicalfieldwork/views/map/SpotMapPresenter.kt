@@ -14,7 +14,7 @@ import org.jetbrains.anko.uiThread
 class SpotMapPresenter(view: BaseView) : BasePresenter(view) {
 
     fun doPopulateMap(map: GoogleMap, spots: List<SpotModel>) {
-        map.uiSettings.setZoomControlsEnabled(true)
+        map.uiSettings.isZoomControlsEnabled = true
         spots.forEach {
             val loc = LatLng(it.location.lat, it.location.lng)
             val options = MarkerOptions().title(it.title).position(loc)

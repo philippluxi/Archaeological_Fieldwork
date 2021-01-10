@@ -17,7 +17,7 @@
 
         android:letterSpacing="0.3"
         android:text="@string/title_splashscreen"
-        android:textSize="38sp"
+        android:textSize="44sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -31,8 +31,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-
-        android:letterSpacing="0.2"
+        android:letterSpacing="0.3"
         android:text="@string/splash_subtitle"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
