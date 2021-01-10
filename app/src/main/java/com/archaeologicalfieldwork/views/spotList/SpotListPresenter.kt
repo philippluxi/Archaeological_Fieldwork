@@ -31,6 +31,10 @@ class SpotListPresenter(view: BaseView) : BasePresenter(view), AnkoLogger {
         view?.navigateTo(VIEW.MAPS)
     }
 
+    fun doShowSettings() {
+        view?.navigateTo(VIEW.SETTINGS)
+    }
+
     fun doLogout() {
         FirebaseAuth.getInstance().signOut()
         app.spots.clear()
