@@ -20,6 +20,14 @@ class SpotStoreRoom(val context: Context) : SpotStore {
         return dao.findAll()
     }
 
+    override fun findStarred(): List<SpotModel> {
+        return dao.findStarred()
+    }
+
+    override fun findVisited(): List<SpotModel> {
+        return dao.findVisited()
+    }
+
     override fun findById(id: Long): SpotModel? {
         return dao.findById(id)
     }

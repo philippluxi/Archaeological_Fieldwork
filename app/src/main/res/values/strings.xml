@@ -12,7 +12,8 @@
     <string name="title_activity_location">Spot Location</string>
     <string name="title_activity_map">Map</string>
     <string name="title_activity_spot_maps">Set Location</string>
-    <string name="title_activity_login"> SignUp / Login</string>
+    <string name="title_activity_login">SignUp / Login</string>
+    <string name="title_activity_settings">Settings</string>
 
     <!-- Toolbar-->
     <string name="menu_addSpot">Add</string>
@@ -22,6 +23,7 @@
     <string name="menu_showMap">Show Map</string>
     <string name="menu_logout">Logout</string>
     <string name="menu_shareNewSpot">Share</string>
+    <string name="menu_showSettings">Settings</string>
 
     <!--Spot Activity-->
     <string name="button_add_spot">Add Spot</string>
@@ -49,5 +51,21 @@
     <string name="spot_currentImage_placeholder">Spot Image</string>
     <string name="spot_title_placeholder">Title</string>
     <string name="spot_description_placeholder">Description</string>
+
+    <!--Settings-->
+    <string name="text_current_mail">Current E-Mail Adress</string>
+    <string name="placeholder_current_email">Placeholder Current E-Mail</string>
+    <string name="text_new_mail">Set new E-Mail</string>
+    <string name="hint_new_e_mail">Enter new E-Mail</string>
+    <string name="btn_set_new_mail">Set new Mail</string>
+
+    <string name="text_new_password">Set new Password</string>
+    <string name="hint_new_password">Enter new Password</string>
+    <string name="btn_set_new_password">Set New Password</string>
+    <string name="text_statistics">Statistics</string>
+    <string name="text_number_of_spots">Number of spots:</string>
+    <string name="text_number_of_favorite_spots">Number of favorite spots:</string>
+    <string name="text_number_of_visited_spots">Number of visited spots:</string>
+    <string name="default_zeros_statistics">000</string>
 
 </resources>
