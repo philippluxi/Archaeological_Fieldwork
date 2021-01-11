@@ -1,10 +1,8 @@
 package com.archaeologicalfieldwork.views.settings
 
 
-import com.archaeologicalfieldwork.models.firebase.SpotFireStore
 import com.archaeologicalfieldwork.views.BasePresenter
 import com.archaeologicalfieldwork.views.BaseView
-import com.archaeologicalfieldwork.views.VIEW
 import com.google.firebase.auth.FirebaseAuth
 import org.jetbrains.anko.toast
 
@@ -19,6 +17,34 @@ class SettingsPresenter(view: BaseView) : BasePresenter(view) {
         } else {
             return ""
             view?.toast("Not User found")
+        }
+    }
+
+    fun doUpdateMail(newMail: String) {
+        if (auth.currentUser != null) {
+            auth.currentUser!!.updateEmail(newMail).addOnCompleteListener(view!!) { task ->
+                if (task.isSuccessful) {
+                    view?.toast("Update Mail Successful")
+                } else {
+                    view?.toast("Update Mail Failed: ${task.exception?.message}")
+                }
+            }
+        } else {
+            view?.toast("No Firebase Session found")
+        }
+    }
+
+    fun doUpdatePassword(newPassword: String) {
+        if (auth.currentUser != null) {
+            auth.currentUser!!.updatePassword(newPassword).addOnCompleteListener(view!!) { task ->
+                if (task.isSuccessful) {
+                    view?.toast("Update Password Successful")
+                } else {
+                    view?.toast("Update Password Failed: ${task.exception?.message}")
+                }
+            }
+        } else {
+            view?.toast("No Firebase Session found")
         }
     }
 
