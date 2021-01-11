@@ -27,6 +27,21 @@ class SpotListPresenter(view: BaseView) : BasePresenter(view), AnkoLogger {
         info("Spot Updated Favorite: ${(app.spots.findById(spot.id))?.favorite}")
     }
 
+    fun doShowAllSpots() {
+        val all_spots = app.spots.findAll()
+        view!!.showSpots(all_spots)
+    }
+
+    fun doShowFavoriteSpots() {
+        val favorite_spots = app.spots.findStarred()
+        view!!.showSpots(favorite_spots)
+    }
+
+    fun doShowVisitedSpots() {
+        val visited_spots = app.spots.findVisited()
+        view!!.showSpots(visited_spots)
+    }
+
     fun doShowSpotsMap() {
         view?.navigateTo(VIEW.MAPS)
     }

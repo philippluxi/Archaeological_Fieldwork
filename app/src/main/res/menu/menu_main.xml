@@ -15,6 +15,21 @@
         app:showAsAction="never"/>
 
     <item
+        android:id="@+id/item_all"
+        android:title="@string/menu_showAllSpots"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/item_favorites"
+        android:title="@string/menu_showFavoriteSpots"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/item_visited"
+        android:title="@string/menu_showVisitedSpots"
+        app:showAsAction="never"/>
+
+    <item
         android:id="@+id/item_settings"
         android:title="@string/menu_showSettings"
         app:showAsAction="never"/>

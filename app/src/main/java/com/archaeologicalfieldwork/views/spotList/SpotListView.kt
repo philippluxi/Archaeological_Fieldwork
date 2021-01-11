@@ -40,6 +40,9 @@ class SpotListView : BaseView(), SpotListener {
         when (item.itemId) {
             R.id.item_add -> presenter.doaddSpot()
             R.id.item_map -> presenter.doShowSpotsMap()
+            R.id.item_all -> presenter.doShowAllSpots()
+            R.id.item_favorites -> presenter.doShowFavoriteSpots()
+            R.id.item_visited -> presenter.doShowVisitedSpots()
             R.id.item_settings -> presenter.doShowSettings()
             R.id.item_logout -> presenter.doLogout()
         }
