@@ -52,6 +52,7 @@ class SpotMemStore : SpotStore, AnkoLogger {
             foundSpot.favorite = spot.favorite
             foundSpot.rating = spot.rating
             foundSpot.location = spot.location
+            foundSpot.notes = spot.notes
             logAll()
         }
     }

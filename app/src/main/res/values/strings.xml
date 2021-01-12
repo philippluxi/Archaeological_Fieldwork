@@ -41,6 +41,14 @@
     <string name="latlng_zeros">00.000000</string>
     <string name="text_checkbox">Visited</string>
     <string name="text_dateVisited">Not visited</string>
+    <string name="btn_Add_Notes">Add Notes</string>
+    <string name="btn_Edit_Notes">Edit Notes</string>
+
+    <!--Notes PopUp-->
+    <string name="text_notespopup_Spot">Spot:</string>
+    <string name="text_notespopup_notes">Notes:</string>
+    <string name="text_notespopup_spottitle_placeholder">Notes Spot Title Placeholder</string>
+    <string name="text_notespopup_notesHint">Enter Notes...</string>
 
     <!--Image Handling-->
     <string name="button_add_image">Add Image</string>

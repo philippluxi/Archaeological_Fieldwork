@@ -5,7 +5,9 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.widget.EditText
 import android.widget.TextView
+import androidx.appcompat.app.AlertDialog
 import com.archaeologicalfieldwork.R
 import com.archaeologicalfieldwork.models.Location
 import com.archaeologicalfieldwork.models.SpotModel
@@ -20,6 +22,8 @@ class SpotView : BaseView(), AnkoLogger {
 
     lateinit var presenter: SpotPresenter
     var spot = SpotModel()
+    var currentSpot_notes = String()
+    var currentSpot_title = String()
 
     lateinit var map: GoogleMap
 
@@ -43,6 +47,11 @@ class SpotView : BaseView(), AnkoLogger {
         btnChooseImage.setOnClickListener {
             presenter.cacheSpot(spotTitle.text.toString(), spotDescription.text.toString())
             presenter.doSelectImage()
+        }
+
+        // Handle Add Notes Button pressed
+        btnAddNotes.setOnClickListener {
+            createNotesPopUp()
         }
 
         // Handle Visited Checkbox
@@ -76,6 +85,13 @@ class SpotView : BaseView(), AnkoLogger {
             val dateVisited_textview: TextView = findViewById(R.id.date_visited)
             dateVisited_textview.visibility = View.INVISIBLE
         }
+
+        // Setup for Notes PopUp
+        if (spot.notes != "") {
+            btnAddNotes.setText(R.string.btn_Edit_Notes)
+        }
+        currentSpot_title = spot.title
+        currentSpot_notes = spot.notes
 
         // Rating
         rate_spot.rating = spot.rating
@@ -134,6 +150,37 @@ class SpotView : BaseView(), AnkoLogger {
         if (data != null) {
             presenter.doActivityResult(requestCode, resultCode, data)
         }
+    }
+
+    fun createNotesPopUp() {
+        val builder = AlertDialog.Builder(this)
+        val inflater = layoutInflater
+        val dialogLayout = inflater.inflate(R.layout.popup_notes, null)
+        val notes = dialogLayout.findViewById<EditText>(R.id.notespopup_notes)
+        var popup_spotTitle = dialogLayout.findViewById<TextView>(R.id.notespopup_NotesSpotTitle)
+
+        with(builder) {
+            setTitle("Notes")
+
+            // Setup with stored values
+            popup_spotTitle.text = spotTitle.text
+            if (currentSpot_notes != "") {
+                notes.setText(currentSpot_notes)
+            }
+
+            // Set Buttons
+            setPositiveButton("Finish") { dialogLayout, which ->
+                val notes = notes.text.toString()
+                presenter.doHandleNotes(notes)
+            }
+            setNegativeButton("Cancel") { dialogLayout, which ->
+                //Do Nothing but close on Cancel
+            }
+
+            setView(dialogLayout)
+            show()
+        }
+
     }
 
     override fun onBackPressed() {

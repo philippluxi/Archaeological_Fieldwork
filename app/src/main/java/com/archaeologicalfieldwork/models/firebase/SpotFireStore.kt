@@ -60,6 +60,7 @@ class SpotFireStore(val context: Context) : SpotStore, AnkoLogger {
             foundSpot.favorite = spot.favorite
             foundSpot.rating = spot.rating
             foundSpot.location = spot.location
+            foundSpot.notes = spot.notes
         }
 
         db.child("users").child(userId).child("spots").child(spot.fbId).setValue(spot)
