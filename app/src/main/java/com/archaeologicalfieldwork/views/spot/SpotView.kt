@@ -87,6 +87,9 @@ class SpotView : BaseView(), AnkoLogger {
         }
 
         // Setup for Notes PopUp
+        if (spot.notes != "") {
+            btnAddNotes.setText(R.string.btn_Edit_Notes)
+        }
         currentSpot_title = spot.title
         currentSpot_notes = spot.notes
 

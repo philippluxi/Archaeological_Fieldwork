@@ -42,6 +42,7 @@
     <string name="text_checkbox">Visited</string>
     <string name="text_dateVisited">Not visited</string>
     <string name="btn_Add_Notes">Add Notes</string>
+    <string name="btn_Edit_Notes">Edit Notes</string>
 
     <!--Notes PopUp-->
     <string name="text_notespopup_Spot">Spot:</string>
