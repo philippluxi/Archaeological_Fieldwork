@@ -1,7 +1,10 @@
 package com.archaeologicalfieldwork.views.spot
 
 import android.annotation.SuppressLint
+import android.app.AlertDialog
+import android.content.Context
 import android.content.Intent
+import android.view.LayoutInflater
 import com.archaeologicalfieldwork.helpers.checkLocationPermissions
 import com.archaeologicalfieldwork.helpers.createDefaultLocationRequest
 import com.archaeologicalfieldwork.helpers.isPermissionGranted
@@ -111,6 +114,10 @@ class SpotPresenter(view: BaseView) : BasePresenter(view), AnkoLogger {
 
     fun doSetRating(rating: Float) {
         spot.rating = rating
+    }
+
+    fun doHandleNotes(entered_notes: String) {
+        spot.notes = entered_notes
     }
 
     fun doSelectImage() {
