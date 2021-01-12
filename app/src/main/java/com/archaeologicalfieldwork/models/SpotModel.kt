@@ -18,6 +18,7 @@ data class SpotModel(
     var dateVisited: String = "Not Visited",
     var favorite: Boolean = false,
     var rating: Float = 0f,
+    var notes: String = "",
     @Embedded var location: Location = Location()
 ) : Parcelable
 
