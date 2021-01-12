@@ -43,6 +43,11 @@
     <string name="text_dateVisited">Not visited</string>
     <string name="btn_Add_Notes">Add Notes</string>
 
+    <!--Notes PopUp-->
+    <string name="text_notespopup_Spot">Spot:</string>
+    <string name="text_notespopup_notes">Notes:</string>
+    <string name="text_notespopup_spottitle_placeholder">Notes Spot Title Placeholder</string>
+    <string name="text_notespopup_notesHint">Enter Notes...</string>
 
     <!--Image Handling-->
     <string name="button_add_image">Add Image</string>
@@ -72,4 +77,5 @@
     <string name="text_number_of_favorite_spots">Number of favorite spots:</string>
     <string name="text_number_of_visited_spots">Number of visited spots:</string>
     <string name="default_zeros_statistics">000</string>
+
 </resources>
