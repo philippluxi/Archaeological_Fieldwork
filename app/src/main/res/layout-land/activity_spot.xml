@@ -107,8 +107,9 @@
 
             <Button
                 android:id="@+id/btnChooseImage"
-                android:layout_width="0dp"
+                android:layout_width="105dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
                 android:background="@color/colorAccent"
                 android:minHeight="30dp"
@@ -119,16 +120,38 @@
                 android:text="@string/button_add_image"
                 android:textColor="@color/colorPrimary"
                 android:textSize="16sp"
+                app:layout_constraintBottom_toTopOf="@+id/rate_spot"
+                app:layout_constraintEnd_toStartOf="@id/btnAddNotes"
+                app:layout_constraintStart_toEndOf="@id/text_Location"
+                app:layout_constraintTop_toBottomOf="@+id/visited_checkBox" />
+
+            <Button
+                android:id="@+id/btnAddNotes"
+                android:layout_width="105dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:background="@color/colorAccent"
+                android:minHeight="30dp"
+                android:paddingStart="6dp"
+                android:paddingTop="0dp"
+                android:paddingEnd="6dp"
+                android:paddingBottom="0dp"
+                android:text="@string/btn_Add_Notes"
+                android:textColor="@color/colorPrimary"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toTopOf="@+id/rate_spot"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@id/text_Location" />
+                app:layout_constraintStart_toEndOf="@+id/btnChooseImage"
+                app:layout_constraintTop_toBottomOf="@+id/visited_checkBox" />
 
             <CheckBox
                 android:id="@+id/visited_checkBox"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
                 android:text="@string/text_checkbox"
-                app:layout_constraintEnd_toStartOf="@+id/btnChooseImage"
+                app:layout_constraintStart_toEndOf="@+id/text_Location"
                 app:layout_constraintTop_toTopOf="@+id/text_Location" />
 
             <ImageView
@@ -161,13 +184,12 @@
                 android:id="@+id/date_visited"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
                 android:text="@string/text_dateVisited"
                 android:visibility="invisible"
-                app:layout_constraintBottom_toTopOf="@id/rate_spot"
+                app:layout_constraintBottom_toBottomOf="@+id/visited_checkBox"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/text_Location"
-                app:layout_constraintTop_toBottomOf="@id/visited_checkBox" />
+                app:layout_constraintStart_toEndOf="@+id/visited_checkBox"
+                app:layout_constraintTop_toTopOf="@+id/visited_checkBox" />
 
             <RatingBar
                 android:id="@+id/rate_spot"
@@ -175,7 +197,7 @@
                 android:layout_height="wrap_content"
                 android:numStars="5"
                 android:saveEnabled="true"
-                app:layout_constraintEnd_toEndOf="@+id/btnChooseImage"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/text_Location"
                 app:layout_constraintTop_toBottomOf="@+id/lng" />
 
