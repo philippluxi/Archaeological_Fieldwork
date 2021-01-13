@@ -37,15 +37,16 @@ class SpotListView : BaseView(), SpotListener {
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_main, menu)
         var menuItemSearch = menu!!.findItem(R.id.searchView)
+
         val searchView = menuItemSearch.getActionView() as SearchView
         searchView.maxWidth = Int.MAX_VALUE
+
         searchView.setOnQueryTextListener(object: SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 return true
             }
-
-            override fun onQueryTextChange(newText: String?): Boolean {
-                Log.e("TAG", "TextChange====> ${newText}")
+            override fun onQueryTextChange(searchString: String?): Boolean {
+                presenter.loadSpotsForSearch(searchString as String)
                 return true
             }
         })

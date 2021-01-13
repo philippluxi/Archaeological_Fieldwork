@@ -21,6 +21,24 @@ class SpotListPresenter(view: BaseView) : BasePresenter(view), AnkoLogger {
         view?.navigateTo(VIEW.SPOT, 0, "spot_edit", spot)
     }
 
+    fun loadSpotsForSearch(search: String) {
+        val searchString = search.toLowerCase()
+
+        doAsync {
+            val spots = app.spots.findAll()
+            var filtered =
+                spots.filter {
+                    it.title.toLowerCase().contains(searchString) ||
+                    it.description.toLowerCase().contains(searchString) ||
+                    it.notes.toLowerCase().contains(searchString)
+                }
+
+            uiThread {
+                view!!.showSpots(filtered)
+            }
+        }
+    }
+
     fun doHandleFavorite(spot: SpotModel, isFavorite: Boolean) {
         spot.favorite = isFavorite
         app.spots.update(spot)
