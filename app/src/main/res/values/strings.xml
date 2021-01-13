@@ -27,6 +27,7 @@
     <string name="menu_logout">Logout</string>
     <string name="menu_shareNewSpot">Share</string>
     <string name="menu_showSettings">Settings</string>
+    <string name="menu_search">Search</string>
 
     <!--Spot Activity-->
     <string name="button_add_spot">Add Spot</string>
