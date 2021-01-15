@@ -1,5 +1,7 @@
 package com.archaeologicalfieldwork.views.spot
 
+import android.R.attr.path
+import android.R.attr.start
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.Bitmap
@@ -16,9 +18,9 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.ValueEventListener
+import com.google.android.gms.tasks.Task
+import com.google.android.gms.tasks.Tasks
+import com.google.firebase.storage.FirebaseStorage
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
@@ -209,6 +211,7 @@ class SpotPresenter(view: BaseView) : BasePresenter(view), AnkoLogger {
             IMAGE_TAKE -> {
                 val picture = data.extras!!.get("data")!! as Bitmap
                 app.spots.updateImageFromCam(picture, spot)
+                view?.showSpot(spot)
             }
         }
     }
