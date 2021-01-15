@@ -2,6 +2,7 @@ package com.archaeologicalfieldwork.models.firebase
 
 import android.content.Context
 import android.graphics.Bitmap
+import android.util.Log
 import com.archaeologicalfieldwork.helpers.readImageFromPath
 import com.archaeologicalfieldwork.models.SpotModel
 import com.archaeologicalfieldwork.models.SpotStore
@@ -97,6 +98,28 @@ class SpotFireStore(val context: Context) : SpotStore, AnkoLogger {
                         spot.image = it.toString()
                         db.child("users").child(userId).child("spots").child(spot.fbId)
                             .setValue(spot)
+                    }
+                }
+            }
+        }
+    }
+
+    override fun updateImageFromCam(bitmap: Bitmap, spot: SpotModel) {
+        if (bitmap != null) {
+            val imageName = bitmap.toString().take(12)
+            var imageRef = st.child(userId + '/' + imageName)
+            val baos = ByteArrayOutputStream()
+
+            bitmap?.let {
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
+                val data = baos.toByteArray()
+                val uploadTask = imageRef.putBytes(data)
+                uploadTask.addOnFailureListener {
+                    println(it.message)
+                }.addOnSuccessListener { taskSnapshot ->
+                    taskSnapshot.metadata!!.reference!!.downloadUrl.addOnSuccessListener {
+                        spot.image = it.toString()
+                        db.child("users").child(userId).child("spots").child(spot.fbId).setValue(spot)
                     }
                 }
             }

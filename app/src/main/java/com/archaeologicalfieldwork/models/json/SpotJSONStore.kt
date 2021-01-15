@@ -1,6 +1,7 @@
 package com.archaeologicalfieldwork.models.json
 
 import android.content.Context
+import android.graphics.Bitmap
 import com.archaeologicalfieldwork.helpers.exists
 import com.archaeologicalfieldwork.helpers.read
 import com.archaeologicalfieldwork.helpers.write
@@ -72,6 +73,9 @@ class SpotJSONStore : SpotStore, AnkoLogger {
             foundSpot.notes = spot.notes
         }
         serialize()
+    }
+
+    override fun updateImageFromCam(bitmap: Bitmap, spot: SpotModel){
     }
 
     override fun delete(spot: SpotModel) {

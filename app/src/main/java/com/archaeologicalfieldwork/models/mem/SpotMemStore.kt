@@ -1,5 +1,6 @@
 package com.archaeologicalfieldwork.models.mem
 
+import android.graphics.Bitmap
 import com.archaeologicalfieldwork.models.SpotModel
 import com.archaeologicalfieldwork.models.SpotStore
 import org.jetbrains.anko.AnkoLogger
@@ -67,5 +68,8 @@ class SpotMemStore : SpotStore, AnkoLogger {
 
     fun logAll() {
         spots.forEach { info("${it}") }
+    }
+
+    override fun updateImageFromCam(bitmap: Bitmap, spot: SpotModel) {
     }
 }

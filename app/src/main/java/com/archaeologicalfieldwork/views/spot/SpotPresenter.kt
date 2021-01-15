@@ -1,14 +1,10 @@
 package com.archaeologicalfieldwork.views.spot
 
 import android.annotation.SuppressLint
-import android.app.AlertDialog
-import android.content.Context
 import android.content.Intent
-import android.view.LayoutInflater
-import com.archaeologicalfieldwork.helpers.checkLocationPermissions
-import com.archaeologicalfieldwork.helpers.createDefaultLocationRequest
-import com.archaeologicalfieldwork.helpers.isPermissionGranted
-import com.archaeologicalfieldwork.helpers.showImagePicker
+import android.graphics.Bitmap
+import android.util.Log
+import com.archaeologicalfieldwork.helpers.*
 import com.archaeologicalfieldwork.models.Location
 import com.archaeologicalfieldwork.models.SpotModel
 import com.archaeologicalfieldwork.views.*
@@ -20,6 +16,9 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ValueEventListener
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
@@ -126,6 +125,10 @@ class SpotPresenter(view: BaseView) : BasePresenter(view), AnkoLogger {
         }
     }
 
+    fun doTakePicture() {
+        view?.let { showPictureTaker(view!!, IMAGE_TAKE) }
+    }
+
     fun doSetLocation() {
         locationManualyChanged = true
         view?.navigateTo(
@@ -202,6 +205,10 @@ class SpotPresenter(view: BaseView) : BasePresenter(view), AnkoLogger {
                 val location = data.extras?.getParcelable<Location>("location")!!
                 spot.location = location
                 locationUpdate(location)
+            }
+            IMAGE_TAKE -> {
+                val picture = data.extras!!.get("data")!! as Bitmap
+                app.spots.updateImageFromCam(picture, spot)
             }
         }
     }
