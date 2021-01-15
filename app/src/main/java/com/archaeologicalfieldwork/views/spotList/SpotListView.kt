@@ -11,7 +11,6 @@ import com.archaeologicalfieldwork.R
 import com.archaeologicalfieldwork.models.SpotModel
 import com.archaeologicalfieldwork.views.BaseView
 import kotlinx.android.synthetic.main.activity_spot_list.*
-import kotlinx.android.synthetic.main.drawer_list_layout.*
 
 class SpotListView : BaseView(), SpotListener {
 

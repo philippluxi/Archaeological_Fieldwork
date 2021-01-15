@@ -18,6 +18,7 @@
     <!-- Nav drawer-->
     <string name="open">Open</string>
     <string name="close">Close</string>
+    <string name="author_year">Philipp Luxi\n2020</string>
 
     <!-- Toolbar-->
     <string name="menu_addSpot">Add</string>
