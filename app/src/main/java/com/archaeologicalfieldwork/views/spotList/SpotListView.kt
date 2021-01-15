@@ -2,13 +2,16 @@ package com.archaeologicalfieldwork.views.spotList
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.archaeologicalfieldwork.R
 import com.archaeologicalfieldwork.models.SpotModel
 import com.archaeologicalfieldwork.views.BaseView
 import kotlinx.android.synthetic.main.activity_spot_list.*
+import org.jetbrains.anko.toast
 
 class SpotListView : BaseView(), SpotListener {
 
@@ -33,6 +36,20 @@ class SpotListView : BaseView(), SpotListener {
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_main, menu)
+        var menuItemSearch = menu!!.findItem(R.id.searchView)
+
+        val searchView = menuItemSearch.getActionView() as SearchView
+        searchView.maxWidth = Int.MAX_VALUE
+
+        searchView.setOnQueryTextListener(object: SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return true
+            }
+            override fun onQueryTextChange(searchString: String?): Boolean {
+                presenter.loadSpotsForSearch(searchString as String)
+                return true
+            }
+        })
         return super.onCreateOptionsMenu(menu)
     }
 
