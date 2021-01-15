@@ -49,6 +49,11 @@ class SpotView : BaseView(), AnkoLogger {
             presenter.doSelectImage()
         }
 
+        // Handle Camera Button Press
+        btnCamera.setOnClickListener {
+            presenter.doTakePicture()
+        }
+
         // Handle Add Notes Button pressed
         btnAddNotes.setOnClickListener {
             createNotesPopUp()
