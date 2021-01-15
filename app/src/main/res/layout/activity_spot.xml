@@ -148,14 +148,15 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="24dp"
-                    android:layout_marginEnd="16dp"
+                    android:layout_marginEnd="8dp"
                     android:background="@color/colorAccent"
                     android:paddingTop="8dp"
                     android:paddingBottom="8dp"
                     android:text="@string/button_add_image"
                     android:textColor="@color/colorPrimary"
                     android:textSize="16sp"
-                    app:layout_constraintEnd_toStartOf="@id/btnAddNotes"
+                    app:layout_constraintEnd_toStartOf="@id/btnCamera"
+                    app:layout_constraintHorizontal_bias="0.4"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/rate_spot" />
 
@@ -163,7 +164,7 @@
                     android:id="@+id/btnAddNotes"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
+                    android:layout_marginStart="64dp"
                     android:layout_marginEnd="24dp"
                     android:background="@color/colorAccent"
                     android:paddingTop="8dp"
@@ -172,7 +173,7 @@
                     android:textColor="@color/colorPrimary"
                     android:textSize="16sp"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/btnChooseImage"
+                    app:layout_constraintStart_toEndOf="@id/btnCamera"
                     app:layout_constraintTop_toBottomOf="@+id/rate_spot" />
 
                 <ImageView
@@ -198,6 +199,17 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/spotImage" />
+
+                <Button
+                    android:id="@+id/btnCamera"
+                    android:layout_width="50dp"
+                    android:layout_height="0dp"
+                    android:background="@color/colorAccent"
+                    android:foreground="@android:drawable/ic_menu_camera"
+                    app:layout_constraintBottom_toBottomOf="@+id/btnChooseImage"
+                    app:layout_constraintEnd_toStartOf="@+id/btnAddNotes"
+                    app:layout_constraintStart_toEndOf="@+id/btnChooseImage"
+                    app:layout_constraintTop_toTopOf="@+id/btnChooseImage" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </RelativeLayout>

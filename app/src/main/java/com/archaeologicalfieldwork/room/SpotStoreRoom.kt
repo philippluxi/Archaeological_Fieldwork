@@ -1,6 +1,7 @@
 package com.archaeologicalfieldwork.room
 
 import android.content.Context
+import android.graphics.Bitmap
 import androidx.room.Room
 import com.archaeologicalfieldwork.models.SpotModel
 import com.archaeologicalfieldwork.models.SpotStore
@@ -45,6 +46,9 @@ class SpotStoreRoom(val context: Context) : SpotStore {
     }
 
     override fun clear() {
+    }
+
+    override fun updateImageFromCam(bitmap: Bitmap, spot: SpotModel) {
     }
 }
 

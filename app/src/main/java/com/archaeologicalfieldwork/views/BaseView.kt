@@ -17,6 +17,7 @@ import org.jetbrains.anko.AnkoLogger
 
 val IMAGE_REQUEST = 1
 val LOCATION_REQUEST = 2
+val IMAGE_TAKE = 3
 
 enum class VIEW {
     LOCATION, SPOT, MAPS, LIST, LOGIN, SETTINGS

@@ -1,5 +1,7 @@
 package com.archaeologicalfieldwork.models
 
+import android.graphics.Bitmap
+
 interface SpotStore {
     fun findAll(): List<SpotModel>
     fun findStarred(): List<SpotModel>
@@ -9,4 +11,5 @@ interface SpotStore {
     fun update(spot: SpotModel)
     fun delete(spot: SpotModel)
     fun clear()
+    open fun updateImageFromCam(bitmap: Bitmap, spot: SpotModel)
 }
