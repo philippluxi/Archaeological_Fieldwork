@@ -1,5 +1,6 @@
 package com.archaeologicalfieldwork.models.mem
 
+import android.graphics.Bitmap
 import com.archaeologicalfieldwork.models.SpotModel
 import com.archaeologicalfieldwork.models.SpotStore
 import org.jetbrains.anko.AnkoLogger
@@ -18,6 +19,16 @@ class SpotMemStore : SpotStore, AnkoLogger {
 
     override fun findAll(): List<SpotModel> {
         return spots
+    }
+
+    override fun findStarred(): List<SpotModel> {
+        val foundSpots: List<SpotModel> = spots.filter { p -> p.favorite == true }
+        return foundSpots
+    }
+
+    override fun findVisited(): List<SpotModel> {
+        val foundSpots: List<SpotModel> = spots.filter { p -> p.visited == true }
+        return foundSpots
     }
 
     override fun findById(id: Long): SpotModel? {
@@ -42,6 +53,7 @@ class SpotMemStore : SpotStore, AnkoLogger {
             foundSpot.favorite = spot.favorite
             foundSpot.rating = spot.rating
             foundSpot.location = spot.location
+            foundSpot.notes = spot.notes
             logAll()
         }
     }
@@ -56,5 +68,8 @@ class SpotMemStore : SpotStore, AnkoLogger {
 
     fun logAll() {
         spots.forEach { info("${it}") }
+    }
+
+    override fun updateImageFromCam(bitmap: Bitmap, spot: SpotModel) {
     }
 }

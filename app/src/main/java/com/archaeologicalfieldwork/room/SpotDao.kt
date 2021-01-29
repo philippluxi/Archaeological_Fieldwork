@@ -13,6 +13,12 @@ interface SpotDao {
     @Query("SELECT * FROM SpotModel")
     fun findAll(): List<SpotModel>
 
+    @Query("select * from SpotModel where favorite = 'true'")
+    fun findStarred(): List<SpotModel>
+
+    @Query("select * from SpotModel where visited = 'true'")
+    fun findVisited(): List<SpotModel>
+
     @Query("select * from SpotModel where id = :id")
     fun findById(id: Long): SpotModel
 

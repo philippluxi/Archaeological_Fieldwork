@@ -24,6 +24,16 @@ class SpotFireStore(val context: Context) : SpotStore, AnkoLogger {
         return spots
     }
 
+    override fun findStarred(): List<SpotModel> {
+        val foundSpots: List<SpotModel> = spots.filter { p -> p.favorite == true }
+        return foundSpots
+    }
+
+    override fun findVisited(): List<SpotModel> {
+        val foundSpots: List<SpotModel> = spots.filter { p -> p.visited == true }
+        return foundSpots
+    }
+
     override fun findById(id: Long): SpotModel? {
         val foundSpot: SpotModel? = spots.find { p -> p.id == id }
         return foundSpot
@@ -50,6 +60,7 @@ class SpotFireStore(val context: Context) : SpotStore, AnkoLogger {
             foundSpot.favorite = spot.favorite
             foundSpot.rating = spot.rating
             foundSpot.location = spot.location
+            foundSpot.notes = spot.notes
         }
 
         db.child("users").child(userId).child("spots").child(spot.fbId).setValue(spot)
@@ -74,6 +85,29 @@ class SpotFireStore(val context: Context) : SpotStore, AnkoLogger {
             var imageRef = st.child(userId + '/' + imageName)
             val baos = ByteArrayOutputStream()
             val bitmap = readImageFromPath(context, spot.image)
+
+            bitmap?.let {
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
+                val data = baos.toByteArray()
+                val uploadTask = imageRef.putBytes(data)
+                uploadTask.addOnFailureListener {
+                    println(it.message)
+                }.addOnSuccessListener { taskSnapshot ->
+                    taskSnapshot.metadata!!.reference!!.downloadUrl.addOnSuccessListener {
+                        spot.image = it.toString()
+                        db.child("users").child(userId).child("spots").child(spot.fbId)
+                            .setValue(spot)
+                    }
+                }
+            }
+        }
+    }
+
+    override fun updateImageFromCam(bitmap: Bitmap, spot: SpotModel) {
+        if (bitmap != null) {
+            val imageName = bitmap.toString().take(12)
+            var imageRef = st.child(userId + '/' + imageName)
+            val baos = ByteArrayOutputStream()
 
             bitmap?.let {
                 bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)

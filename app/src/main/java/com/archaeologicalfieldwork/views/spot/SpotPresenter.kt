@@ -2,10 +2,8 @@ package com.archaeologicalfieldwork.views.spot
 
 import android.annotation.SuppressLint
 import android.content.Intent
-import com.archaeologicalfieldwork.helpers.checkLocationPermissions
-import com.archaeologicalfieldwork.helpers.createDefaultLocationRequest
-import com.archaeologicalfieldwork.helpers.isPermissionGranted
-import com.archaeologicalfieldwork.helpers.showImagePicker
+import android.graphics.Bitmap
+import com.archaeologicalfieldwork.helpers.*
 import com.archaeologicalfieldwork.models.Location
 import com.archaeologicalfieldwork.models.SpotModel
 import com.archaeologicalfieldwork.views.*
@@ -113,10 +111,18 @@ class SpotPresenter(view: BaseView) : BasePresenter(view), AnkoLogger {
         spot.rating = rating
     }
 
+    fun doHandleNotes(entered_notes: String) {
+        spot.notes = entered_notes
+    }
+
     fun doSelectImage() {
         view?.let {
             showImagePicker(view!!, IMAGE_REQUEST)
         }
+    }
+
+    fun doTakePicture() {
+        view?.let { showPictureTaker(view!!, IMAGE_TAKE) }
     }
 
     fun doSetLocation() {
@@ -195,6 +201,11 @@ class SpotPresenter(view: BaseView) : BasePresenter(view), AnkoLogger {
                 val location = data.extras?.getParcelable<Location>("location")!!
                 spot.location = location
                 locationUpdate(location)
+            }
+            IMAGE_TAKE -> {
+                val picture = data.extras!!.get("data")!! as Bitmap
+                app.spots.updateImageFromCam(picture, spot)
+                view?.showSpot(spot)
             }
         }
     }

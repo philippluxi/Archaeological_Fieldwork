@@ -1,6 +1,7 @@
 package com.archaeologicalfieldwork.room
 
 import android.content.Context
+import android.graphics.Bitmap
 import androidx.room.Room
 import com.archaeologicalfieldwork.models.SpotModel
 import com.archaeologicalfieldwork.models.SpotStore
@@ -20,6 +21,14 @@ class SpotStoreRoom(val context: Context) : SpotStore {
         return dao.findAll()
     }
 
+    override fun findStarred(): List<SpotModel> {
+        return dao.findStarred()
+    }
+
+    override fun findVisited(): List<SpotModel> {
+        return dao.findVisited()
+    }
+
     override fun findById(id: Long): SpotModel? {
         return dao.findById(id)
     }
@@ -37,6 +46,9 @@ class SpotStoreRoom(val context: Context) : SpotStore {
     }
 
     override fun clear() {
+    }
+
+    override fun updateImageFromCam(bitmap: Bitmap, spot: SpotModel) {
     }
 }
 

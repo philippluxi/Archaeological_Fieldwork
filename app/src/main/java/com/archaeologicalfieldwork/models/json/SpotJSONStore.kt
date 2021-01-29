@@ -1,6 +1,7 @@
 package com.archaeologicalfieldwork.models.json
 
 import android.content.Context
+import android.graphics.Bitmap
 import com.archaeologicalfieldwork.helpers.exists
 import com.archaeologicalfieldwork.helpers.read
 import com.archaeologicalfieldwork.helpers.write
@@ -36,6 +37,16 @@ class SpotJSONStore : SpotStore, AnkoLogger {
         return spots
     }
 
+    override fun findStarred(): List<SpotModel> {
+        val foundSpots: List<SpotModel> = spots.filter { p -> p.favorite == true }
+        return foundSpots
+    }
+
+    override fun findVisited(): List<SpotModel> {
+        val foundSpots: List<SpotModel> = spots.filter { p -> p.visited == true }
+        return foundSpots
+    }
+
     override fun findById(id: Long): SpotModel? {
         val foundSpot: SpotModel? = spots.find { it.id == id }
         return foundSpot
@@ -59,8 +70,12 @@ class SpotJSONStore : SpotStore, AnkoLogger {
             foundSpot.favorite = spot.favorite
             foundSpot.rating = spot.rating
             foundSpot.location = spot.location
+            foundSpot.notes = spot.notes
         }
         serialize()
+    }
+
+    override fun updateImageFromCam(bitmap: Bitmap, spot: SpotModel) {
     }
 
     override fun delete(spot: SpotModel) {

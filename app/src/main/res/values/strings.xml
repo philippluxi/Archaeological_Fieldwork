@@ -12,16 +12,27 @@
     <string name="title_activity_location">Spot Location</string>
     <string name="title_activity_map">Map</string>
     <string name="title_activity_spot_maps">Set Location</string>
-    <string name="title_activity_login"> SignUp / Login</string>
+    <string name="title_activity_login">SignUp / Login</string>
+    <string name="title_activity_settings">Settings</string>
+
+    <!-- Nav drawer-->
+    <string name="open">Open</string>
+    <string name="close">Close</string>
+    <string name="author_year">Philipp Luxi\n2020</string>
 
     <!-- Toolbar-->
     <string name="menu_addSpot">Add</string>
     <string name="menu_cancelNewSpot">Cancel</string>
     <string name="menu_deleteSpot">Delete</string>
     <string name="menu_saveSpot">Save</string>
+    <string name="menu_showAllSpots">Show All Spots</string>
+    <string name="menu_showFavoriteSpots">Show Favorite Spots</string>
+    <string name="menu_showVisitedSpots">Show Visited Spots</string>
     <string name="menu_showMap">Show Map</string>
     <string name="menu_logout">Logout</string>
     <string name="menu_shareNewSpot">Share</string>
+    <string name="menu_showSettings">Settings</string>
+    <string name="menu_search">Search</string>
 
     <!--Spot Activity-->
     <string name="button_add_spot">Add Spot</string>
@@ -36,6 +47,14 @@
     <string name="latlng_zeros">00.000000</string>
     <string name="text_checkbox">Visited</string>
     <string name="text_dateVisited">Not visited</string>
+    <string name="btn_Add_Notes">Add Notes</string>
+    <string name="btn_Edit_Notes">Edit Notes</string>
+
+    <!--Notes PopUp-->
+    <string name="text_notespopup_Spot">Spot:</string>
+    <string name="text_notespopup_notes">Notes:</string>
+    <string name="text_notespopup_spottitle_placeholder">Notes Spot Title Placeholder</string>
+    <string name="text_notespopup_notesHint">Enter Notes...</string>
 
     <!--Image Handling-->
     <string name="button_add_image">Add Image</string>
@@ -49,5 +68,21 @@
     <string name="spot_currentImage_placeholder">Spot Image</string>
     <string name="spot_title_placeholder">Title</string>
     <string name="spot_description_placeholder">Description</string>
+
+    <!--Settings-->
+    <string name="text_current_mail">Current E-Mail Adress</string>
+    <string name="placeholder_current_email">Placeholder Current E-Mail</string>
+    <string name="text_new_mail">Set new E-Mail</string>
+    <string name="hint_new_e_mail">Enter new E-Mail</string>
+    <string name="btn_set_new_mail">Set new Mail</string>
+
+    <string name="text_new_password">Set new Password</string>
+    <string name="hint_new_password">Enter new Password</string>
+    <string name="btn_set_new_password">Set New Password</string>
+    <string name="text_statistics">Statistics</string>
+    <string name="text_number_of_spots">Number of spots:</string>
+    <string name="text_number_of_favorite_spots">Number of favorite spots:</string>
+    <string name="text_number_of_visited_spots">Number of visited spots:</string>
+    <string name="default_zeros_statistics">000</string>
 
 </resources>

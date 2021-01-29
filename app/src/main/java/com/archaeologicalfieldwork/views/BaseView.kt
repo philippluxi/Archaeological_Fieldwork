@@ -9,6 +9,7 @@ import com.archaeologicalfieldwork.models.SpotModel
 import com.archaeologicalfieldwork.views.location.EditLocationView
 import com.archaeologicalfieldwork.views.login.LoginView
 import com.archaeologicalfieldwork.views.map.SpotMapView
+import com.archaeologicalfieldwork.views.settings.SettingsView
 import com.archaeologicalfieldwork.views.spot.SpotView
 import com.archaeologicalfieldwork.views.spotList.SpotListView
 import com.google.firebase.auth.FirebaseAuth
@@ -16,9 +17,10 @@ import org.jetbrains.anko.AnkoLogger
 
 val IMAGE_REQUEST = 1
 val LOCATION_REQUEST = 2
+val IMAGE_TAKE = 3
 
 enum class VIEW {
-    LOCATION, SPOT, MAPS, LIST, LOGIN
+    LOCATION, SPOT, MAPS, LIST, LOGIN, SETTINGS
 }
 
 open abstract class BaseView : AppCompatActivity(), AnkoLogger {
@@ -33,6 +35,7 @@ open abstract class BaseView : AppCompatActivity(), AnkoLogger {
             VIEW.MAPS -> intent = Intent(this, SpotMapView::class.java)
             VIEW.LIST -> intent = Intent(this, SpotListView::class.java)
             VIEW.LOGIN -> intent = Intent(this, LoginView::class.java)
+            VIEW.SETTINGS -> intent = Intent(this, SettingsView::class.java)
         }
         if (key != "") {
             intent.putExtra(key, value)
