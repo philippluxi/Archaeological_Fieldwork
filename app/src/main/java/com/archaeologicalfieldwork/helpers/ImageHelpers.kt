@@ -21,7 +21,7 @@ fun showImagePicker(parent: Activity, id: Int) {
     parent.startActivityForResult(chooser, id)
 }
 
-fun showPictureTaker(parent: Activity, id: Int){
+fun showPictureTaker(parent: Activity, id: Int) {
     val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
     parent.startActivityForResult(intent, id)
 }

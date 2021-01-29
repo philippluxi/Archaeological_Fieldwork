@@ -29,8 +29,8 @@ class SpotListPresenter(view: BaseView) : BasePresenter(view), AnkoLogger {
             var filtered =
                 spots.filter {
                     it.title.toLowerCase().contains(searchString) ||
-                    it.description.toLowerCase().contains(searchString) ||
-                    it.notes.toLowerCase().contains(searchString)
+                            it.description.toLowerCase().contains(searchString) ||
+                            it.notes.toLowerCase().contains(searchString)
                 }
 
             uiThread {

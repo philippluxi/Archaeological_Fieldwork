@@ -5,8 +5,7 @@
     android:id="@+id/drawerLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".views.spotList.SpotListView"
-   >
+    tools:context=".views.spotList.SpotListView">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -48,7 +47,7 @@
         android:layout_height="match_parent"
         app:headerLayout="@layout/nav_header"
         app:menu="@menu/menu_drawer"
-        android:layout_gravity= "start"
+        android:layout_gravity="start"
         android:fitsSystemWindows="true">
 
     </com.google.android.material.navigation.NavigationView>
