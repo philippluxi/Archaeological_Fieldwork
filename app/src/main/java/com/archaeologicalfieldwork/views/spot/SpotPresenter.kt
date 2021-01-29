@@ -1,11 +1,8 @@
 package com.archaeologicalfieldwork.views.spot
 
-import android.R.attr.path
-import android.R.attr.start
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.Bitmap
-import android.util.Log
 import com.archaeologicalfieldwork.helpers.*
 import com.archaeologicalfieldwork.models.Location
 import com.archaeologicalfieldwork.models.SpotModel
@@ -18,9 +15,6 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
-import com.google.android.gms.tasks.Task
-import com.google.android.gms.tasks.Tasks
-import com.google.firebase.storage.FirebaseStorage
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread

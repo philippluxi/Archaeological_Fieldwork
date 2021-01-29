@@ -75,7 +75,7 @@ class SpotJSONStore : SpotStore, AnkoLogger {
         serialize()
     }
 
-    override fun updateImageFromCam(bitmap: Bitmap, spot: SpotModel){
+    override fun updateImageFromCam(bitmap: Bitmap, spot: SpotModel) {
     }
 
     override fun delete(spot: SpotModel) {

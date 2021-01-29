@@ -2,7 +2,6 @@ package com.archaeologicalfieldwork.models.firebase
 
 import android.content.Context
 import android.graphics.Bitmap
-import android.util.Log
 import com.archaeologicalfieldwork.helpers.readImageFromPath
 import com.archaeologicalfieldwork.models.SpotModel
 import com.archaeologicalfieldwork.models.SpotStore
@@ -119,7 +118,8 @@ class SpotFireStore(val context: Context) : SpotStore, AnkoLogger {
                 }.addOnSuccessListener { taskSnapshot ->
                     taskSnapshot.metadata!!.reference!!.downloadUrl.addOnSuccessListener {
                         spot.image = it.toString()
-                        db.child("users").child(userId).child("spots").child(spot.fbId).setValue(spot)
+                        db.child("users").child(userId).child("spots").child(spot.fbId)
+                            .setValue(spot)
                     }
                 }
             }
